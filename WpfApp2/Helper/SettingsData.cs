@@ -8,4 +8,3 @@
         public static int NumberOfIncludedSamples { get; set; } = 4;
     }
 }
-    

@@ -23,7 +23,7 @@ namespace Lib
 
         public double Length => EndsAt - BeginsAt;
 
-        public double EndsAt => BeginsAt + (SamplingPeriod * Points.Count);
+        public double EndsAt => BeginsAt + SamplingPeriod * Points.Count;
 
         public void SaveToFile(string path)
         {
@@ -32,10 +32,7 @@ namespace Lib
                 sw.WriteLine(nameof(ComplexSignal));
                 sw.WriteLine(BeginsAt);
                 sw.WriteLine(SamplingFrequency);
-                foreach (var complex in Points)
-                {
-                    sw.Write($"{complex.Real}/{complex.Imaginary} ");
-                }
+                foreach (var complex in Points) sw.Write($"{complex.Real}/{complex.Imaginary} ");
             }
         }
     }

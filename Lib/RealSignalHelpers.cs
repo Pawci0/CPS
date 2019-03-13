@@ -20,16 +20,13 @@ namespace Lib
                         double.TryParse(sr.ReadLine(), out var realBeginsAt);
                         double? period;
                         if (!double.TryParse(sr.ReadLine(), out var p))
-                        {
                             period = null;
-                        }
                         else
-                        {
                             period = p;
-                        }
 
                         double.TryParse(sr.ReadLine(), out var realSamplingFrequency);
-                        var realPoints = sr.ReadLine()?.Split(" ".ToArray(), StringSplitOptions.RemoveEmptyEntries).Select(double.Parse).ToList();
+                        var realPoints = sr.ReadLine()?.Split(" ".ToArray(), StringSplitOptions.RemoveEmptyEntries)
+                            .Select(double.Parse).ToList();
                         signal = new RealSignal(realBeginsAt, period, realSamplingFrequency, realPoints);
                         break;
                     case nameof(ComplexSignal):
@@ -78,19 +75,13 @@ namespace Lib
 
             var list = new List<double>();
 
-            for (var i = 0; i < length1 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length1 * samplingFrequency; i++) list.Add(0.0);
 
             var leftSignalPoints = leftSignal.Points.Concat(list).ToList();
 
             list = new List<double>();
 
-            for (var i = 0; i < length2 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length2 * samplingFrequency; i++) list.Add(0.0);
 
             var rightSignalPoints = list.Concat(rightSignal.Points).ToList();
 
@@ -133,23 +124,19 @@ namespace Lib
 
             var list = new List<double>();
 
-            for (var i = 0; i < length1 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length1 * samplingFrequency; i++) list.Add(0.0);
 
             var leftSignalPoints = leftSignal.Points.Concat(list).ToList();
 
             list = new List<double>();
 
-            for (var i = 0; i < length2 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length2 * samplingFrequency; i++) list.Add(0.0);
 
             var rightSignalPoints = list.Concat(rightSignal.Points).ToList();
 
-            var resultSignalPoints = subtrahend ? rightSignalPoints.Select((t, i) => leftSignalPoints[i] - t).ToList() : leftSignalPoints.Select((t, i) => rightSignalPoints[i] - t).ToList();
+            var resultSignalPoints = subtrahend
+                ? rightSignalPoints.Select((t, i) => leftSignalPoints[i] - t).ToList()
+                : leftSignalPoints.Select((t, i) => rightSignalPoints[i] - t).ToList();
 
             result = new RealSignal(from, null, samplingFrequency, resultSignalPoints);
 
@@ -185,19 +172,13 @@ namespace Lib
 
             var list = new List<double>();
 
-            for (var i = 0; i < length1 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length1 * samplingFrequency; i++) list.Add(0.0);
 
             var leftSignalPoints = leftSignal.Points.Concat(list).ToList();
 
             list = new List<double>();
 
-            for (var i = 0; i < length2 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length2 * samplingFrequency; i++) list.Add(0.0);
 
             var rightSignalPoints = list.Concat(rightSignal.Points).ToList();
 
@@ -241,23 +222,22 @@ namespace Lib
 
             var list = new List<double>();
 
-            for (var i = 0; i < length1 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length1 * samplingFrequency; i++) list.Add(0.0);
 
             var leftSignalPoints = leftSignal.Points.Concat(list).ToList();
 
             list = new List<double>();
 
-            for (var i = 0; i < length2 * samplingFrequency; i++)
-            {
-                list.Add(0.0);
-            }
+            for (var i = 0; i < length2 * samplingFrequency; i++) list.Add(0.0);
 
 
             var rightSignalPoints = list.Concat(rightSignal.Points).ToList();
-            var resultSignalPoints = dividend ? rightSignalPoints.Select((t, i) => (Math.Abs(leftSignalPoints[i]) < 1e-10 || Math.Abs(t) < 1e-10) ? 0 : leftSignalPoints[i] / t).ToList() : leftSignalPoints.Select((t, i) => (Math.Abs(rightSignalPoints[i]) < 1e-10 || Math.Abs(t) < 1e-10) ? 0 : rightSignalPoints[i] / t).ToList();
+            var resultSignalPoints = dividend
+                ? rightSignalPoints.Select((t, i) =>
+                    Math.Abs(leftSignalPoints[i]) < 1e-10 || Math.Abs(t) < 1e-10 ? 0 : leftSignalPoints[i] / t).ToList()
+                : leftSignalPoints.Select((t, i) =>
+                        Math.Abs(rightSignalPoints[i]) < 1e-10 || Math.Abs(t) < 1e-10 ? 0 : rightSignalPoints[i] / t)
+                    .ToList();
 
             result = new RealSignal(from, null, samplingFrequency, resultSignalPoints);
 

@@ -7,75 +7,54 @@
         Title="Signal generator" Height="800" Width="1000" ResizeMode="NoResize">
     <Grid DataContext="{StaticResource BaseViewModel}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.6*"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="1.3*"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="1.3*" />
 
         </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Row="0" Grid.ColumnSpan="4" Background="#FF303032"/>
-        <TextBlock Text="Signal generator" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Margin="30, 0, 0, 0" HorizontalAlignment="Left" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="48" VerticalAlignment="Center" Foreground="#FF2698BF"/>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="4" Background="#FF303032" />
+        <TextBlock Text="Signal generator" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Margin="30, 0, 0, 0"
+                   HorizontalAlignment="Left" FontFamily="Segoe UI Black" FontWeight="Bold" FontSize="48"
+                   VerticalAlignment="Center" Foreground="#FF2698BF" />
 
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding GoToTransformationPage}" HorizontalAlignment="Center" Margin="0, 15, 200, 10">
+     
+
+        <Button Grid.Row="0" Grid.Column="3" Command="{Binding GoToMenuPage}" HorizontalAlignment="Center"
+                Margin="100, 0, 25, 0">
             <Button.Template>
                 <ControlTemplate>
-                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <Image Source="/WpfApp2;component/Resources/dd.png"
-                               Width="60" 
-                               Height="60"
-                               />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding GoToAntennaPage}" HorizontalAlignment="Center" Margin="0, 0, 55, 10">
-            <Button.Template>
-                <ControlTemplate>
-                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <Image Source="/WpfApp2;component/Resources/antenna.png"
-                               Width="40" 
-                               Height="40"
-                               />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding GoToMenuPage}" HorizontalAlignment="Center" Margin="100, 0, 25, 0">
-            <Button.Template>
-                <ControlTemplate>
-                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Source="/WpfApp2;component/Resources/home.png"
-                               Width="60" 
-                               Height="60"
-                               />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding GoToSettings}" HorizontalAlignment="Right" Margin="0, 0, 20, 0">
-            <Button.Template>
-                <ControlTemplate>
-                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <Image Source="/WpfApp2;component/Resources/settings.png"
-                               Width="60" 
-                               Height="60"
-                               />
+                               Width="60"
+                               Height="60" />
                     </Border>
                 </ControlTemplate>
             </Button.Template>
         </Button>
 
-        <ContentControl Grid.Row="1" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="4" Content="{Binding CurrentPageViewModel}" />
+        <Button Grid.Row="0" Grid.Column="3" Command="{Binding GoToSettings}" HorizontalAlignment="Right"
+                Margin="0, 0, 20, 0">
+            <Button.Template>
+                <ControlTemplate>
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="/WpfApp2;component/Resources/settings.png"
+                               Width="60"
+                               Height="60" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <ContentControl Grid.Row="1" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="4"
+                        Content="{Binding CurrentPageViewModel}" />
     </Grid>
 </Window>

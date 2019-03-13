@@ -5,70 +5,61 @@
              xmlns:viewModel="clr-namespace:WpfApp2.ViewModel"
              StartupUri="BaseWindow.xaml">
     <Application.Resources>
-        <viewModel:ChartViewModel x:Key="ViewModel"/>
-        <viewModel:BaseViewModel x:Key="BaseViewModel"/>
+        <viewModel:ChartViewModel x:Key="ViewModel" />
+        <viewModel:BaseViewModel x:Key="BaseViewModel" />
 
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="40, 10, 40, 10" />
-            <Setter Property="SelectionBrush" Value="#FF303032"/>
-            <Setter Property="Foreground" Value="#979095"/>
-            <Setter Property="Background" Value="#FF303032"/>
-            <Setter Property="BorderBrush" Value="#1C1C1E"/>
-            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="SelectionBrush" Value="#FF303032" />
+            <Setter Property="Foreground" Value="#979095" />
+            <Setter Property="Background" Value="#FF303032" />
+            <Setter Property="BorderBrush" Value="#1C1C1E" />
+            <Setter Property="FontSize" Value="19" />
         </Style>
 
         <Style TargetType="{x:Type ComboBox}">
             <Setter Property="Margin" Value="40, 10, 40, 10" />
-            <Setter Property="Foreground" Value="#979095"/>
-            <Setter Property="Background" Value="#FF303032"/>
-            <Setter Property="BorderBrush" Value="#1C1C1E"/>
-            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="Foreground" Value="#979095" />
+            <Setter Property="Background" Value="#FF303032" />
+            <Setter Property="BorderBrush" Value="#1C1C1E" />
+            <Setter Property="FontSize" Value="19" />
         </Style>
 
         <Style TargetType="{x:Type ComboBoxItem}">
-            <Setter Property="Foreground" Value="#979095"/>
-            <Setter Property="Background" Value="#FF303032"/>
-            <Setter Property="BorderBrush" Value="#1C1C1E"/>
-            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="Foreground" Value="#979095" />
+            <Setter Property="Background" Value="#FF303032" />
+            <Setter Property="BorderBrush" Value="#1C1C1E" />
+            <Setter Property="FontSize" Value="19" />
         </Style>
 
         <Style TargetType="{x:Type Label}">
             <Setter Property="Margin" Value="1,1" />
-            <Setter Property="Foreground" Value="#979095"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="Foreground" Value="#979095" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="19" />
         </Style>
 
         <DataTemplate DataType="{x:Type viewModel:DetailsViewModel1}">
-            <views:DetailsUserControl1/>
+            <views:DetailsUserControl1 />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:DetailsViewModel2}">
-            <views:DetailsUserControl2/>
+            <views:DetailsUserControl2 />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:DetailsViewModel3}">
-            <views:DetailsUserControl3/>
+            <views:DetailsUserControl3 />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:DetailsViewModel4}">
-            <views:DetailsUserControl4/>
+            <views:DetailsUserControl4 />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:DetailsViewModel}">
-            <views:DetailsUserControl/>
+            <views:DetailsUserControl />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:OperationsDetailsViewModel}">
-            <views:OperationsDetailsUserControl/>
+            <views:OperationsDetailsUserControl />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:MenuViewModel}">
-            <views:MenuUserControl/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:LoadViewModel}">
-            <views:LoadUserControl/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:AntennaViewModel}">
-            <views:AntennaUserControl/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:TransformationsViewModel}">
-            <views:TransformationUserControl/>
+            <views:MenuUserControl />
         </DataTemplate>
     </Application.Resources>
 </Application>

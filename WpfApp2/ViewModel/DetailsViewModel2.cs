@@ -258,10 +258,10 @@ namespace WpfApp2.ViewModel
             chartViewModel4.GenerateReconstructionBasedOnTheSincFunctionChart(Signal, acModel.ReconstructionBasedOnTheSincFunction.Signal);
             window4.DataContext = chartViewModel4;
 
-            window4.Show();
-            window3.Show();
-            window2.Show();
-            window1.Show();
+            // window4.Show();
+            //  window3.Show();
+            //  window2.Show();
+            //  window1.Show();
             window.Show();
         }
 

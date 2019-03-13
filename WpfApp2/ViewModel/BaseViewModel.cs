@@ -45,9 +45,6 @@ namespace WpfApp2.ViewModel
             PageViewModels.Add(new DetailsViewModel3());
             PageViewModels.Add(new DetailsViewModel4());
             PageViewModels.Add(new OperationsDetailsViewModel());
-            PageViewModels.Add(new LoadViewModel());
-            PageViewModels.Add(new AntennaViewModel());
-            PageViewModels.Add(new TransformationsViewModel());
 
             PageViewModels.Add(new MenuViewModel(this));
 

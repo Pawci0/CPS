@@ -27,7 +27,7 @@ namespace Lib
 
         public double Length => EndsAt - BeginsAt;
 
-        public double EndsAt => BeginsAt + (SamplingPeriod * Points.Count);
+        public double EndsAt => BeginsAt + SamplingPeriod * Points.Count;
 
         public double AverageValue => GetOnlyFullPeriods.Sum() / GetOnlyFullPeriods.Count;
 
@@ -67,10 +67,7 @@ namespace Lib
                 sw.WriteLine(BeginsAt);
                 sw.WriteLine(Period);
                 sw.WriteLine(SamplingFrequency);
-                foreach (var y in Points)
-                {
-                    sw.Write($"{y} ");
-                }
+                foreach (var y in Points) sw.Write($"{y} ");
             }
         }
 
@@ -105,11 +102,11 @@ namespace Lib
             {
                 var to = from + span;
                 var number = GetOnlyFullPeriods.Count(x => x >= from && x < to);
-                result.Add((from + (span / 2.0), number));
+                result.Add((from + span / 2.0, number));
                 from = to;
             }
 
-            result.Add((from + (span / 2.0), GetOnlyFullPeriods.Count(x => x >= from)));
+            result.Add((from + span / 2.0, GetOnlyFullPeriods.Count(x => x >= from)));
 
             return result;
         }
@@ -119,7 +116,8 @@ namespace Lib
             var result = new List<(int n, double y)>();
             var xyPoints = Points.Select((x, i) => (t: i * SamplingPeriod, y: x, n: i)).ToList();
 
-            var leftPoints = xyPoints.Where(x => x.t < t).OrderByDescending(x => x.t).Take(numberOfPointsNearT / 2).ToList();
+            var leftPoints = xyPoints.Where(x => x.t < t).OrderByDescending(x => x.t).Take(numberOfPointsNearT / 2)
+                .ToList();
             var rightPoints = xyPoints.Where(x => x.t >= t).Take(numberOfPointsNearT / 2).ToList();
 
             result.AddRange(leftPoints.OrderBy(x => x.n).Select(x => (x.n, x.y)));

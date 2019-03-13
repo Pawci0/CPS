@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "WpfApp2\View.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{E3C04F3B-D29E-4093-8230-870EFD51F67C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibTests", "LibTests\LibTests.csproj", "{2B292405-F9E6-4BD6-8C6B-A70C4CE5F8C3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{E3C04F3B-D29E-4093-8230-870EFD51F67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3C04F3B-D29E-4093-8230-870EFD51F67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3C04F3B-D29E-4093-8230-870EFD51F67C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B292405-F9E6-4BD6-8C6B-A70C4CE5F8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B292405-F9E6-4BD6-8C6B-A70C4CE5F8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B292405-F9E6-4BD6-8C6B-A70C4CE5F8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B292405-F9E6-4BD6-8C6B-A70C4CE5F8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

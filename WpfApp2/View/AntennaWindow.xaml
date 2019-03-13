@@ -1,0 +1,51 @@
+﻿<Window x:Class="WpfApp2.View.AntennaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Antenna" Height="600" Width="650">
+    <Grid Background="#1C1C1E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="Antenna results" FontWeight="Bold" FontSize="35"/>
+        
+        <Label Grid.Row="1" Grid.Column="0" Content="Original distance:"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="Calculated distance:"/>
+        <Label Grid.Row="1" Grid.Column="2" Content="Difference&#x0a;between distances:"/>
+
+        <ListBox Grid.Row="2" Grid.Column="0" Margin="15, 15, 15, 15" VerticalAlignment="Stretch" ItemsSource="{Binding OriginalDistance}" Background="#1C1C1E" BorderBrush="#1C1C1E" Foreground="#979095">
+        </ListBox>
+
+        <ListBox Grid.Row="2" Grid.Column="1" Margin="15, 15, 15, 15" VerticalAlignment="Stretch" ItemsSource="{Binding CalculatedDistance}" Background="#1C1C1E" BorderBrush="#1C1C1E" Foreground="#979095">
+        </ListBox>
+
+        <ListBox Grid.Row="2" Grid.Column="2" Margin="15, 15, 15, 15" VerticalAlignment="Stretch" ItemsSource="{Binding DiffrenceBetweenDistances}" Background="#1C1C1E" BorderBrush="#1C1C1E" Foreground="#979095">
+        </ListBox>
+
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding ChartIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Delay=1000}"/>
+
+        <Button Content="Generate chart" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="30, 0, 30, 5" Command="{Binding GenerateChart}">
+            <Button.Template>
+                <ControlTemplate>
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Image Source="/WpfApp2;component/Resources/chart.png"
+                               Width="100" 
+                               Height="100"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+    </Grid>
+</Window>

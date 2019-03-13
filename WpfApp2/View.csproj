@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B12736E-F4CB-4F62-AEF7-B1D2061CDC24}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WpfApp2</RootNamespace>
+    <AssemblyName>WpfApp2</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Charting, Version=5.1.0.11347, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.1.0.11347\lib\net47\SciChart.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Core, Version=5.1.0.11347, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.1.0.11347\lib\net47\SciChart.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Data, Version=5.1.0.11347, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.1.0.11347\lib\net47\SciChart.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Drawing, Version=5.1.0.11347, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.5.1.0.11347\lib\net47\SciChart.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="View\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Helper\ChartDetailsEnum.cs" />
+    <Compile Include="Helper\DelegateCommand.cs" />
+    <Compile Include="Helper\ImpulseResponseEnum.cs" />
+    <Compile Include="Helper\IPageViewModel.cs" />
+    <Compile Include="Helper\PageEnum.cs" />
+    <Compile Include="Helper\RelayCommand.cs" />
+    <Compile Include="Helper\SettingsData.cs" />
+    <Compile Include="Helper\WindowFunctionEnum.cs" />
+    <Compile Include="Model\ImpulseResponseModel.cs" />
+    <Compile Include="Model\SignalEnum.cs" />
+    <Compile Include="Model\TransformationEnum.cs" />
+    <Compile Include="Model\WindowFunctionModel.cs" />
+    <Compile Include="ViewModel\AntennaViewModel.cs" />
+    <Compile Include="ViewModel\AntennaWindowViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ChartViewModel.cs" />
+    <Compile Include="ViewModel\ChartViewModel1.cs" />
+    <Compile Include="ViewModel\DetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModel1.cs" />
+    <Compile Include="ViewModel\DetailsViewModel2.cs" />
+    <Compile Include="ViewModel\DetailsViewModel3.cs" />
+    <Compile Include="ViewModel\DetailsViewModel4.cs" />
+    <Compile Include="ViewModel\LoadViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\OperationsDetailsViewModel.cs" />
+    <Compile Include="ViewModel\PointChartViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\TransformationsViewModel.cs" />
+    <Compile Include="View\AntennaUserControl.xaml.cs">
+      <DependentUpon>AntennaUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AntennaWindow.xaml.cs">
+      <DependentUpon>AntennaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChartWindow1.xaml.cs">
+      <DependentUpon>ChartWindow1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailsUserControl.xaml.cs">
+      <DependentUpon>DetailsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailsUserControl1.xaml.cs">
+      <DependentUpon>DetailsUserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailsUserControl2.xaml.cs">
+      <DependentUpon>DetailsUserControl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailsUserControl3.xaml.cs">
+      <DependentUpon>DetailsUserControl3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailsUserControl4.xaml.cs">
+      <DependentUpon>DetailsUserControl4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoadUserControl.xaml.cs">
+      <DependentUpon>LoadUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MenuUserControl.xaml.cs">
+      <DependentUpon>MenuUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BaseWindow.xaml.cs">
+      <DependentUpon>BaseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OperationsDetailsUserControl.xaml.cs">
+      <DependentUpon>OperationsDetailsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TransformationUserControl.xaml.cs">
+      <DependentUpon>TransformationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AntennaUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AntennaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChartWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="View\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\ChartWindow.xaml.cs">
+      <DependentUpon>ChartWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\ChartWindow1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailsUserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailsUserControl2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailsUserControl3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailsUserControl4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoadUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MenuUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BaseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OperationsDetailsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TransformationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\Lib.csproj">
+      <Project>{e3c04f3b-d29e-4093-8230-870efd51f67c}</Project>
+      <Name>Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\S1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\S2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\S10.PNG" />
+    <Resource Include="Resources\S11.PNG" />
+    <Resource Include="Resources\S3.PNG" />
+    <Resource Include="Resources\S4.PNG" />
+    <Resource Include="Resources\S6.PNG" />
+    <Resource Include="Resources\S7.PNG" />
+    <Resource Include="Resources\S8.PNG" />
+    <Resource Include="Resources\S9.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\statistic.png" />
+    <Resource Include="Resources\save.png" />
+    <Resource Include="Resources\upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\division.png" />
+    <Resource Include="Resources\minus.png" />
+    <Resource Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\chart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\multiply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\S5.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\antenna.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -21,5 +21,20 @@ namespace Lib
 
             set => Points[index] = value;
         }
+
+        public List<(double x, double y)> ToDrawGraph()
+        {
+            var x = Begin;
+            var span = 1.0 / SamplingFrequency;
+            var result = new List<(double x, double y)>();
+
+            foreach (var y in Points)
+            {
+                result.Add((x, y));
+                x += span;
+            }
+
+            return result;
+        }
     }
 }

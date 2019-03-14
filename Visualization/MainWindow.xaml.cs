@@ -2,6 +2,7 @@
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts.Defaults;
 
 namespace Visualization
 {
@@ -34,7 +36,13 @@ namespace Visualization
 
         public void UpdateGraph(object sender, RoutedEventArgs e)
         {
-            Series.Values = new ChartValues<double>(EnumToSignalConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency));
+
+            var points = new List<ObservablePoint>();
+            foreach (var (x,y) in (EnumToSignalConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency).ToDrawGraph()))
+            {
+                points.Add(new ObservablePoint(x, y));
+            }
+            Series.Values = new ChartValues<ObservablePoint>(points);
         }
 
         public MainWindow()
@@ -50,8 +58,6 @@ namespace Visualization
         }
 
         public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> YFormatter { get; set; }
     
     }
 }

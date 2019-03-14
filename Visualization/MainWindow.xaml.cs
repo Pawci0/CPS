@@ -20,30 +20,21 @@ namespace Visualization
 {
     public partial class MainWindow : Window
     {
+        public double Amplitude { get; set; }
+
+        public double BeginsAt { get; set; }
+
+        public double Duration { get; set; }
+
+        public double SamplingFrequency { get; set; }
 
         LineSeries Series = new LineSeries();
 
-        public SignalEnum SelectedSignal
-        {
-            get { return SignalEnum.GaussianNoise; }
-            set
-            {
-                Series.Values = UpdateGraph(value);
-            }
-        }
+        public SignalEnum SelectedSignal { get; set; }
 
-        private IChartValues UpdateGraph(SignalEnum value)
+        public void UpdateGraph(object sender, RoutedEventArgs e)
         {
-            return new ChartValues<double>(EnumToSignalConverter.ConvertTo(value));
-            if (value.Equals(SignalEnum.GaussianNoise))
-            {
-                return new ChartValues<double>(SignalGenerator.GaussianNoise(2, 0, 5, 20).Points);
-            }
-            else if (value.Equals(SignalEnum.UniformNoise))
-            {
-                return new ChartValues<double>(SignalGenerator.UniformNoise(2, 0, 5, 20).Points);
-            }
-            else return new ChartValues<double>();
+            Series.Values = new ChartValues<double>(EnumToSignalConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency));
         }
 
         public MainWindow()

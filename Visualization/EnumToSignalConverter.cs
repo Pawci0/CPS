@@ -7,16 +7,16 @@ namespace Visualization
 {
     public class EnumToSignalConverter
     {
-        public static IEnumerable<double> ConvertTo(SignalEnum value)
+        public static IEnumerable<double> ConvertTo(SignalEnum value, double amplitude, double beginsAt, double duration, double samplingFrequency)
         {
             switch (value)
             {
                 case SignalEnum.GaussianNoise:
-                    return SignalGenerator.GaussianNoise(2, 0, 5, 20).Points;
+                    return SignalGenerator.GaussianNoise(amplitude, beginsAt, duration, samplingFrequency).Points;
                 case SignalEnum.UniformNoise:
-                    return SignalGenerator.UniformNoise(2, 0, 5, 20).Points;
+                    return SignalGenerator.UniformNoise(amplitude, beginsAt, duration, samplingFrequency).Points;
                 case SignalEnum.Sinus:
-                    return SignalGenerator.Sinus(2, 1, 0, 5, 20).Points;
+                    return SignalGenerator.Sinus(amplitude, 1,beginsAt, duration, samplingFrequency).Points;
                 default:
                     return new List<double>();
 

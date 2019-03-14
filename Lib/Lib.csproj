@@ -33,19 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.7.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ACModel.cs" />
-    <Compile Include="AnalogAndDigitalConverter.cs" />
-    <Compile Include="ComplexSignal.cs" />
-    <Compile Include="ConvertedSignalModel.cs" />
     <Compile Include="RealSignal.cs" />
-    <Compile Include="RealSignalHelpers.cs" />
+    <Compile Include="Signal.cs" />
     <Compile Include="SignalGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

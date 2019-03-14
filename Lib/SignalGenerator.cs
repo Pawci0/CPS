@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathNet.Numerics.Distributions;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -6,59 +7,31 @@ namespace Lib
 {
     public static class SignalGenerator
     {
-        public static RealSignal NoiseWithUniformDistribution(double amplitude, double beginsAt, double duration,
-            double samplingFrequency)
+        public static RealSignal UniformNoise(double amplitude, double beginsAt, 
+                                              double duration, double samplingFrequency)
         {
             var points = new List<double>();
             var howManyPoints = duration * samplingFrequency;
-            var r = new Random();
+            var generator = new Random();
 
-            for (var i = 0; i <= howManyPoints; i++) points.Add(amplitude * (r.NextDouble() * 2.0 - 1.0));
+            for (var i = 0; i <= howManyPoints; i++)
+            {
+                points.Add(amplitude * (generator.NextDouble() * 2.0 - 1.0));
+            }
 
             return new RealSignal(beginsAt, null, samplingFrequency, points);
         }
 
-        public static ComplexSignal SignalForTask4S1(double beginsAt, double duration, double samplingFrequency)
-        {
-            var points = new List<Complex>();
-            var period = 1.0 / samplingFrequency;
-            for (var i = beginsAt; i < duration; i += period)
-                points.Add(new Complex(
-                    2 * Math.Sin(Math.PI * i + Math.PI / 2) + 5 * Math.Sin(4 * Math.PI * i + Math.PI / 2), 0));
-
-            return new ComplexSignal(beginsAt, samplingFrequency, points);
-        }
-
-        public static ComplexSignal SignalForTask4S2(double beginsAt, double duration, double samplingFrequency)
-        {
-            var points = new List<Complex>();
-            var period = 1.0 / samplingFrequency;
-            for (var i = beginsAt; i < duration; i += period)
-                points.Add(new Complex(
-                    2 * Math.Sin(Math.PI * i) + Math.Sin(2 * Math.PI * i) + 5 * Math.Sin(4 * Math.PI * i), 0));
-
-            return new ComplexSignal(beginsAt, samplingFrequency, points);
-        }
-
-        public static ComplexSignal SignalForTask4S3(double beginsAt, double duration, double samplingFrequency)
-        {
-            var points = new List<Complex>();
-            var period = 1.0 / samplingFrequency;
-            for (var i = beginsAt; i < duration; i += period)
-                points.Add(new Complex(5 * Math.Sin(Math.PI * i) + 5 * Math.Sin(8 * Math.PI * i), 0));
-
-            return new ComplexSignal(beginsAt, samplingFrequency, points);
-        }
-
-        public static RealSignal NoiseWithGaussianDistribution(double amplitude, double beginsAt, double duration,
-            double samplingFrequency)
+        public static RealSignal GaussianNoise(double amplitude, double beginsAt, 
+                                               double duration, double samplingFrequency)
         {
             var points = new List<double>();
             var howManyPoints = duration * samplingFrequency;
-            var r = new Random();
-
-            for (var i = 0; i <= howManyPoints; i++) points.Add(amplitude * r.NextGaussian());
-
+            
+            for(var i = 0; i <= howManyPoints; i++)
+            {
+                points.Add(amplitude * (Normal.Sample(0.5, 0.1) * 2.0 - 1.0));
+            }
             return new RealSignal(beginsAt, null, samplingFrequency, points);
         }
 
@@ -73,20 +46,6 @@ namespace Lib
             var j = 0;
             for (; j < howManyPoints; i += span, j++)
                 points.Add(amplitude * Math.Sin(Math.PI * 2.0 / period * (i - beginsAt)));
-
-            return new RealSignal(beginsAt, period, samplingFrequency, points);
-        }
-
-        public static RealSignal SinusForAntenna(double amplitude, double period, double beginsAt, double duration,
-            double samplingFrequency)
-        {
-            var points = new List<double>();
-            var howManyPoints = duration * samplingFrequency;
-            var span = 1.0 / samplingFrequency;
-
-            var i = beginsAt;
-            var j = 0;
-            for (; j < howManyPoints; i += span, j++) points.Add(amplitude * Math.Sin(Math.PI * 2.0 / period * i));
 
             return new RealSignal(beginsAt, period, samplingFrequency, points);
         }
@@ -237,19 +196,6 @@ namespace Lib
             for (; j < howManyPoints; j++) points.Add(r.NextDouble() < probability ? amplitude : 0.0);
 
             return new RealSignal(beginsAt, null, samplingFrequency, points);
-        }
-
-        public static double NextGaussian(this Random r, double mu = 0, double sigma = 1)
-        {
-            var u1 = r.NextDouble();
-            var u2 = r.NextDouble();
-
-            var randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) *
-                                Math.Sin(2.0 * Math.PI * u2);
-
-            var randNormal = mu + sigma * randStdNormal;
-
-            return randNormal;
         }
     }
 }

@@ -116,9 +116,9 @@ namespace WpfApp2.ViewModel
             windows.ShowDialog();
 
             if (ChartDetailName == ChartDetailsEnum.NoiseWithUniformDistribution)
-                Signal = SignalGenerator.NoiseWithUniformDistribution(Amplitude, BeginsAt, Duration, SamplingFrequency);
+                Signal = SignalGenerator.UniformNoise(Amplitude, BeginsAt, Duration, SamplingFrequency);
             else if(ChartDetailName == ChartDetailsEnum.NoiseWithGaussianDistribution)
-                Signal = SignalGenerator.NoiseWithGaussianDistribution(Amplitude, BeginsAt, Duration, SamplingFrequency);
+                Signal = SignalGenerator.GaussianNoise(Amplitude, BeginsAt, Duration, SamplingFrequency);
 
             var acModel = new AcModel(Signal, SettingsData.SamplingFrequency, SettingsData.NumberOfLevels, SettingsData.NumberOfIncludedSamples);
 

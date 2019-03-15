@@ -10,6 +10,10 @@ namespace Visualization
     {
         UniformNoise,
         GaussianNoise,
-        Sinus
+        Sinus,
+        HalfRectifiedSinus,
+        FullRectifiedSinus,
+        Rectangular,
+        SymetricalRectangular,
     }
 }

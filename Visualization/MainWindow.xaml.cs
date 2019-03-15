@@ -30,7 +30,13 @@ namespace Visualization
 
         public double SamplingFrequency { get; set; }
 
-        LineSeries Series = new LineSeries();
+        public double Period { get; set; }
+
+        LineSeries Series = new LineSeries()
+        {
+            Fill = Brushes.Transparent,
+            PointGeometrySize = 5
+        };
 
         public SignalEnum SelectedSignal { get; set; }
 
@@ -38,7 +44,7 @@ namespace Visualization
         {
 
             var points = new List<ObservablePoint>();
-            foreach (var (x,y) in (EnumToSignalConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency).ToDrawGraph()))
+            foreach (var (x,y) in (EnumToSignalConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period).ToDrawGraph()))
             {
                 points.Add(new ObservablePoint(x, y));
             }

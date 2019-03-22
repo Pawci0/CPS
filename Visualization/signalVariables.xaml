@@ -1,0 +1,72 @@
+﻿<Page x:Class="Visualization.SignalVariables"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Visualization"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="signalVariables">
+
+    <Page.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:SignalEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ComboBox Grid.Row="0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                    SelectedItem="{Binding Path=SelectedSignal}" VerticalContentAlignment="Center">
+        </ComboBox>
+        <StackPanel Grid.Row="1" Margin="0,0,-0.4,0" >
+
+            <Label Content="Basic:" FontWeight="Bold"/>
+
+            <Label Content="Amplitude" Margin="5" />
+            <TextBox Name="amplitude" Margin="5"
+                            Text="{Binding Amplitude, Mode=TwoWay}"/>
+
+            <Label Content="Begin At" Margin="5" />
+            <TextBox Name="beginsAt" Margin="5"
+                     Text="{Binding BeginsAt, Mode=TwoWay}"/>
+
+            <Label Content="Duration" Margin="5" />
+            <TextBox Name="duration" Margin="5"
+                     Text="{Binding Duration, Mode=TwoWay}"/>
+
+            <Label Content="Sampling frequency" Margin="5" />
+            <TextBox Name="samplingFrequency" Margin="5"
+                     Text="{Binding SamplingFrequency, Mode=TwoWay}"/>
+
+            <Separator/>
+
+            <Label Content="Periodic:" FontWeight="Bold"/>
+
+            <Label Content="Period" Margin="5" />
+            <TextBox Name="period" Margin="5"
+                     Text="{Binding Period, Mode=TwoWay}"/>
+
+            <Label Content="Fill factor" Margin="5" />
+            <TextBox Name="fillFactor" Margin="5"
+                     Text="{Binding FillFactor, Mode=TwoWay}"/>
+
+            <Separator/>
+
+            <Label Content="Histogram:" FontWeight="Bold"/>
+
+            <Label Content="Interval" Margin="5" />
+            <TextBox Name="interval" Margin="5"
+                     Text="{Binding Interval, Mode=TwoWay}"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

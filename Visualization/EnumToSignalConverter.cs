@@ -29,7 +29,6 @@ namespace Visualization
                     return SignalGenerator.Triangular(amplitude, period, beginsAt, duration, fillFactor, samplingFrequency);
                 default:
                     return null;
-
             }
         }
     }

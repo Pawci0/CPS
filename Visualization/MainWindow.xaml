@@ -12,78 +12,41 @@
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
                         ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:SignalEnum"/>
+                <x:Type TypeName="local:OperationEnum"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1 1 1 1"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="2" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="1 1 1 1"/>
 
-        <Grid>
+        <Frame Grid.Column="0" x:Name="signalOneVariables"/>
+        <Frame Grid.Column="1" x:Name="signalTwoVariables"/>
+        <Button Grid.Column="0" Grid.Row="1" Content="Update" Click="UpdateGraph"/>
+
+        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                    SelectedItem="{Binding Path=SelectedOperation}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Grid Grid.Column="2" Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="18*"/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
-            <ComboBox Grid.Row="0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
-                    SelectedItem="{Binding Path=SelectedSignal}">
-            </ComboBox>
-            <StackPanel Grid.Row="1" Margin="0,0,-0.4,0" >
-
-                <Label Content="Basic:" FontWeight="Bold"/>
-
-                <Label Content="Amplitude" Margin="5" />
-                <TextBox Name="amplitude" Margin="5"
-                            Text="{Binding Amplitude, Mode=TwoWay}"/>
-
-                <Label Content="Begin At" Margin="5" />
-                <TextBox Name="beginsAt" Margin="5"
-                     Text="{Binding BeginsAt, Mode=TwoWay}"/>
-
-                <Label Content="Duration" Margin="5" />
-                <TextBox Name="duration" Margin="5"
-                     Text="{Binding Duration, Mode=TwoWay}"/>
-
-                <Label Content="Sampling frequency" Margin="5" />
-                <TextBox Name="samplingFrequency" Margin="5"
-                     Text="{Binding SamplingFrequency, Mode=TwoWay}"/>
-
-                <Separator/>
-                
-                <Label Content="Periodic:" FontWeight="Bold"/>
-
-                <Label Content="Period" Margin="5" />
-                <TextBox Name="period" Margin="5"
-                     Text="{Binding Period, Mode=TwoWay}"/>
-
-                <Label Content="Fill factor" Margin="5" />
-                <TextBox Name="fillFactor" Margin="5"
-                     Text="{Binding FillFactor, Mode=TwoWay}"/>
-
-                <Separator/>
-
-                <Label Content="Histogram:" FontWeight="Bold"/>
-
-                <Label Content="Interval" Margin="5" />
-                <TextBox Name="interval" Margin="5"
-                     Text="{Binding Interval, Mode=TwoWay}"/>
-
-            </StackPanel>
-            
-            <Button Grid.Row="2" Content="Update" Click="UpdateGraph"/>
-        </Grid>
-        <DockPanel Grid.Column="1">
-            <StackPanel VerticalAlignment="Top" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button Click="toChart" Content="Line chart" Padding="20 7 20 7"/>
                 <Button Click="toHistogram" Content="Histogram" Padding="20 7 20 7"/>
             </StackPanel>
-            <Frame Grid.Column="1" x:Name="chart" NavigationUIVisibility="Hidden" />
+            <Frame Grid.Row="1" x:Name="chart" NavigationUIVisibility="Hidden" />
             
-        </DockPanel>
+        </Grid>
     </Grid>
 
 

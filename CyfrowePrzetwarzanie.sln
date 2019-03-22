@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "WpfApp2\View.csproj", "{0B12736E-F4CB-4F62-AEF7-B1D2061CDC24}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{E3C04F3B-D29E-4093-8230-870EFD51F67C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualization", "Visualization\Visualization.csproj", "{390FB878-3FA1-4F99-BF87-0252F8B3D73F}"
@@ -18,10 +16,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0B12736E-F4CB-4F62-AEF7-B1D2061CDC24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B12736E-F4CB-4F62-AEF7-B1D2061CDC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B12736E-F4CB-4F62-AEF7-B1D2061CDC24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B12736E-F4CB-4F62-AEF7-B1D2061CDC24}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3C04F3B-D29E-4093-8230-870EFD51F67C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3C04F3B-D29E-4093-8230-870EFD51F67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3C04F3B-D29E-4093-8230-870EFD51F67C}.Release|Any CPU.ActiveCfg = Release|Any CPU

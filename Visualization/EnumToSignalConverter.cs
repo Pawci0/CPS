@@ -7,7 +7,7 @@ namespace Visualization
 {
     public class EnumToSignalConverter
     {
-        public static RealSignal ConvertTo(SignalEnum value, double amplitude, double beginsAt, double duration, double samplingFrequency, double period=1)
+        public static RealSignal ConvertTo(SignalEnum value, double amplitude, double beginsAt, double duration, double samplingFrequency, double period=1, double fillFactor=1)
         {
             switch (value)
             {
@@ -22,9 +22,11 @@ namespace Visualization
                 case SignalEnum.FullRectifiedSinus:
                     return SignalGenerator.FullRectifiedSinus(amplitude, period, beginsAt, duration, samplingFrequency);
                 case SignalEnum.Rectangular:
-                    return SignalGenerator.Rectangular(amplitude, period, beginsAt, duration, samplingFrequency);
-                case SignalEnum.SymetricalRectangular:
-                    return SignalGenerator.SymetricalRectangular(amplitude, period, beginsAt, duration, samplingFrequency);
+                    return SignalGenerator.Rectangular(amplitude, period, beginsAt, duration, fillFactor, samplingFrequency);
+                case SignalEnum.SymmetricalRectangular:
+                    return SignalGenerator.SymmetricalRectangular(amplitude, period, beginsAt, duration, fillFactor, samplingFrequency);
+                case SignalEnum.Triangular:
+                    return SignalGenerator.Triangular(amplitude, period, beginsAt, duration, fillFactor, samplingFrequency);
                 default:
                     return null;
 

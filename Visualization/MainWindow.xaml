@@ -7,7 +7,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="800">
+        Title="MainWindow" Height="700" Width="1000">
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
                         ObjectType="{x:Type sys:Enum}">
@@ -17,54 +17,74 @@
         </ObjectDataProvider>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="6*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
-                      SelectedItem="{Binding Path=SelectedSignal}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1 1 1 1"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="18*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ComboBox Grid.Row="0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                    SelectedItem="{Binding Path=SelectedSignal}">
             </ComboBox>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Margin="0,0,-0.4,0" >
+
+                <Label Content="Basic:" FontWeight="Bold"/>
+
+                <Label Content="Amplitude" Margin="5" />
+                <TextBox Name="amplitude" Margin="5"
+                            Text="{Binding Amplitude, Mode=TwoWay}"/>
+
+                <Label Content="Begin At" Margin="5" />
+                <TextBox Name="beginsAt" Margin="5"
+                     Text="{Binding BeginsAt, Mode=TwoWay}"/>
+
+                <Label Content="Duration" Margin="5" />
+                <TextBox Name="duration" Margin="5"
+                     Text="{Binding Duration, Mode=TwoWay}"/>
+
+                <Label Content="Sampling frequency" Margin="5" />
+                <TextBox Name="samplingFrequency" Margin="5"
+                     Text="{Binding SamplingFrequency, Mode=TwoWay}"/>
+
+                <Separator/>
                 
-                <Label Grid.Column="0" Grid.Row="0" Content="Amplitude" Margin="5" />
-                <TextBox Grid.Column="0" Grid.Row="1" Name="amplitude" Margin="5"
-                         Text="{Binding Amplitude, Mode=TwoWay}"/>
+                <Label Content="Periodic:" FontWeight="Bold"/>
 
-                <Label Grid.Column="1" Grid.Row="0" Content="Begin At" Margin="5" />
-                <TextBox Grid.Column="1" Grid.Row="1" Name="beginsAt" Margin="5"
-                         Text="{Binding BeginsAt, Mode=TwoWay}"/>
+                <Label Content="Period" Margin="5" />
+                <TextBox Name="period" Margin="5"
+                     Text="{Binding Period, Mode=TwoWay}"/>
 
-                <Label Grid.Column="2" Grid.Row="0" Content="Duration" Margin="5" />
-                <TextBox Grid.Column="2" Grid.Row="1" Name="duration" Margin="5"
-                         Text="{Binding Duration, Mode=TwoWay}"/>
+                <Label Content="Fill factor" Margin="5" />
+                <TextBox Name="fillFactor" Margin="5"
+                     Text="{Binding FillFactor, Mode=TwoWay}"/>
 
-                <Label Grid.Column="3" Grid.Row="0" Content="Sampling frequency" Margin="5" />
-                <TextBox Grid.Column="3" Grid.Row="1" Name="samplingFrequency" Margin="5"
-                         Text="{Binding SamplingFrequency, Mode=TwoWay}"/>
+                <Separator/>
 
-                <Label Grid.Column="4" Grid.Row="0" Content="Period" Margin="5" />
-                <TextBox Grid.Column="4" Grid.Row="1" Name="period" Margin="5"
-                         Text="{Binding Period, Mode=TwoWay}"/>
+                <Label Content="Histogram:" FontWeight="Bold"/>
 
-                <Button Grid.Column="5" Grid.Row="1" Content="Update" Click="UpdateGraph"/>
+                <Label Content="Interval" Margin="5" />
+                <TextBox Name="interval" Margin="5"
+                     Text="{Binding Interval, Mode=TwoWay}"/>
 
-            </Grid>
-        </StackPanel>
-        <lvc:CartesianChart Grid.Row="1" Series="{Binding SeriesCollection}" LegendLocation="Right" />
+            </StackPanel>
+            
+            <Button Grid.Row="2" Content="Update" Click="UpdateGraph"/>
+        </Grid>
+        <DockPanel Grid.Column="1">
+            <StackPanel VerticalAlignment="Top" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Click="toChart" Content="Line chart" Padding="20 7 20 7"/>
+                <Button Click="toHistogram" Content="Histogram" Padding="20 7 20 7"/>
+            </StackPanel>
+            <Frame Grid.Column="1" x:Name="chart" NavigationUIVisibility="Hidden" />
+            
+        </DockPanel>
     </Grid>
-       
-    
+
+
 </Window>

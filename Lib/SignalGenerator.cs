@@ -81,41 +81,82 @@ namespace Lib
             return signal;
         }
 
-        public static RealSignal Rectangular(double amplitude, double period, double beginsAt, double duration,
-            double samplingFrequency)
+        public static RealSignal Rectangular(double amplitude, double period, double beginsAt, double duration, double fillFactor, double samplingFrequency)
         {
-            var signal = Sinus(amplitude, period, beginsAt, duration, samplingFrequency);
+            var points = new List<double>();
+            var howManyPoints = duration * samplingFrequency;
+            var span = 1.0 / samplingFrequency;
+            var k = 0;
 
-            for (int i = 0; i < signal.Points.Count; i++)
+            var i = beginsAt;
+            var j = 0;
+            for (; j < howManyPoints; i += span, j++)
             {
-                if (signal.Points[i] < 0)
+                if (i >= beginsAt + (k + 1) * period)
+                    k++;
+                if (i >= k * period + beginsAt && i < fillFactor * period + k * period + beginsAt)
                 {
-                    signal.Points[i] = 0;
+                    points.Add(amplitude);
                 }
-                else
+                else if (i >= fillFactor * period + k * period + beginsAt && i < period + k * period + beginsAt)
                 {
-                    signal.Points[i] = amplitude;
+                    points.Add(0.0);
                 }
             }
-            return signal;
+
+            return new RealSignal(beginsAt, period, samplingFrequency, points);
         }
-        public static RealSignal SymetricalRectangular(double amplitude, double period, double beginsAt, double duration,
-            double samplingFrequency)
-        {
-            var signal = Sinus(amplitude, period, beginsAt, duration, samplingFrequency);
 
-            for (int i = 0; i < signal.Points.Count; i++)
+        public static RealSignal SymmetricalRectangular(double amplitude, double period, double beginsAt, double duration, double fillFactor, double samplingFrequency)
+        {
+            var points = new List<double>();
+            var howManyPoints = duration * samplingFrequency;
+            var span = 1.0 / samplingFrequency;
+            var k = 0;
+
+            var i = beginsAt;
+            var j = 0;
+            for (; j < howManyPoints; i += span, j++)
             {
-                if (signal.Points[i] < 0)
+                if (i >= beginsAt + (k + 1) * period)
+                    k++;
+                if (i >= k * period + beginsAt && i < fillFactor * period + k * period + beginsAt)
                 {
-                    signal.Points[i] = -amplitude;
+                    points.Add(amplitude);
                 }
-                else
+                if (i >= fillFactor * period + k * period + beginsAt && i < period + k * period + beginsAt)
                 {
-                    signal.Points[i] = amplitude;
+                    points.Add(-amplitude);
                 }
             }
-            return signal;
+
+            return new RealSignal(beginsAt, period, samplingFrequency, points);
+        }
+
+        public static RealSignal Triangular(double amplitude, double period, double beginsAt, double duration, double fillFactor, double samplingFrequency)
+        {
+            var points = new List<double>();
+            var howManyPoints = duration * samplingFrequency;
+            var span = 1.0 / samplingFrequency;
+            var k = 0;
+
+            var i = beginsAt;
+            var j = 0;
+            for (; j < howManyPoints; i += span, j++)
+            {
+                if (i >= beginsAt + (k + 1) * period)
+                    k++;
+                if (i >= k * period + beginsAt && i < fillFactor * period + k * period + beginsAt)
+                {
+                    points.Add((amplitude / (fillFactor * period)) * (i - k * period - beginsAt));
+                }
+                if (i >= fillFactor * period + k * period + beginsAt && i < period + k * period + beginsAt)
+                {
+                    points.Add((((-amplitude) / (period * (1 - fillFactor))) * (i - k * period - beginsAt)) + (amplitude / (1 - fillFactor)));
+                }
+            }
+
+            return new RealSignal(beginsAt, period, samplingFrequency, points);
         }
     }
 }

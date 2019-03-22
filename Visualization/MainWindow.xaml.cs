@@ -22,6 +22,8 @@ namespace Visualization
 {
     public partial class MainWindow : Window
     {
+        private RealSignal signal;
+        private bool chartSwitch = true;
         public double Amplitude { get; set; }
 
         public double BeginsAt { get; set; }
@@ -32,38 +34,42 @@ namespace Visualization
 
         public double Period { get; set; }
 
-        LineSeries Series = new LineSeries()
-        {
-            Fill = Brushes.Transparent,
-            PointGeometrySize = 5
-        };
+        public int Interval { get; set; }
+
+        public double FillFactor { get; set; }
 
         public SignalEnum SelectedSignal { get; set; }
 
+        public void toChart(object sender, RoutedEventArgs e)
+        {
+            chartSwitch = true;
+            chart.Content = new Chart(signal);
+        }
+
+        public void toHistogram(object sender, RoutedEventArgs e)
+        {
+            chartSwitch = false;
+            chart.Content = new Histogram(signal, Interval);
+        }
+
         public void UpdateGraph(object sender, RoutedEventArgs e)
         {
-
-            var points = new List<ObservablePoint>();
-            foreach (var (x,y) in (EnumToSignalConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period).ToDrawGraph()))
+            signal = EnumToSignalConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor);
+            if (chartSwitch)
             {
-                points.Add(new ObservablePoint(x, y));
+                chart.Content = new Chart(signal);
             }
-            Series.Values = new ChartValues<ObservablePoint>(points);
+            else
+            {
+                chart.Content = new Histogram(signal, Interval);
+            }
         }
 
         public MainWindow()
         {
             InitializeComponent();
-
-            SeriesCollection = new SeriesCollection
-            {
-                Series
-            };
-
+       //     chart.Content = new Chart();
             DataContext = this;
         }
-
-        public SeriesCollection SeriesCollection { get; set; }
-    
     }
 }

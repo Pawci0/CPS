@@ -36,5 +36,38 @@ namespace Lib
 
             return result;
         }
+
+        public List<(double begin, double end, int value)> ToDrawHistogram(int numberOfIntervals)
+        {
+            List<(double, double, int)> result = new List<(double, double, int)>(numberOfIntervals);
+            double max = Points.Max();
+            double min = Points.Min();
+
+            double range = max - min;
+            double interval = range / numberOfIntervals;
+
+            for (int i = 0; i < numberOfIntervals - 1; i++)
+            {
+                int points = Points.Count(n => n >= min + interval * i && n < min + interval * (i + 1));
+                result.Add((Math.Round(min + interval * i, 2), Math.Round(min + interval * (i + 1), 2), points));
+            }
+            int lastPoints = Points.Count(n => n >= min + interval * (numberOfIntervals - 1) && n <= min + interval * numberOfIntervals);
+            result.Add((Math.Round(min + interval * (numberOfIntervals - 1), 2), Math.Round(min + interval * numberOfIntervals, 2), lastPoints));
+
+            return result;
+        }
+
+        public List<double> GetOnlyFullPeriods
+        {
+            get
+            {
+                if (Period == null) return Points;
+
+                var howManyPeriods = (int)(Length / Period);
+                var length = (int)(howManyPeriods * Period * SamplingFrequency);
+
+                return Points.GetRange(0, length);
+            }
+        }
     }
 }

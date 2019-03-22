@@ -14,6 +14,7 @@ namespace Visualization
         HalfRectifiedSinus,
         FullRectifiedSinus,
         Rectangular,
-        SymetricalRectangular,
+        SymmetricalRectangular,
+        Triangular
     }
 }

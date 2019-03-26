@@ -46,6 +46,7 @@
     <Compile Include="Signal.cs" />
     <Compile Include="SignalGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

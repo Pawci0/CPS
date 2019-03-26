@@ -1,12 +1,16 @@
 ﻿using Lib;
+using System;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace Visualization
 {
     public partial class MainWindow : Window
     {
-        private RealSignal signalOne;
+        private RealSignal Signal { get; set; }
         private bool chartSwitch = true;
+        private int Interval { get; set; }
+        public OperationEnum SelectedOperation { get; set; }
 
         public MainWindow()
         {
@@ -20,29 +24,49 @@ namespace Visualization
         public void toChart(object sender, RoutedEventArgs e)
         {
             chartSwitch = true;
-            chart.Content = new Chart(signalOne);
+            chart.Content = new Chart(Signal);
         }
 
         public void toHistogram(object sender, RoutedEventArgs e)
         {
-            var s = (signalOneVariables.Content as SignalVariables);
             chartSwitch = false;
-            chart.Content = new Histogram(signalOne, s.Interval);
+            chart.Content = new Histogram(Signal, Interval);
         }
 
         public void UpdateGraph(object sender, RoutedEventArgs e)
         {
-            var s = (signalOneVariables.Content as SignalVariables);
-            signalOne = EnumToSignalConverter.ConvertTo(s.SelectedSignal, s.Amplitude, s.BeginsAt, s.Duration, s.SamplingFrequency, s.Period, s.FillFactor);
-            if (chartSwitch)
+            if (PrepateSignal())
             {
-                chart.Content = new Chart(signalOne);
-            }
-            else
-            {
-                chart.Content = new Histogram(signalOne, s.Interval);
+                if (chartSwitch)
+                {
+                    chart.Content = new Chart(Signal);
+                }
+                else
+                {
+                    chart.Content = new Histogram(Signal, Interval);
+                }
             }
         }
 
+        private bool PrepateSignal()
+        {
+            var s1 = (signalOneVariables.Content as SignalVariables);
+            var s2 = (signalTwoVariables.Content as SignalVariables);
+            try
+            {
+                Signal = s1.GetSignal();
+                if (s2.IsValid())
+                {
+                    Signal = EnumConverter.Operation(SelectedOperation, Signal, s2.GetSignal());
+                }
+                Interval = s1.Interval;
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
     }
 }

@@ -21,8 +21,6 @@ namespace Visualization
     /// </summary>
     public partial class SignalVariables : Page
     {
-        public RealSignal Signal { get; set; }
-
         public double Amplitude { get; set; }
 
         public double BeginsAt { get; set; }
@@ -43,6 +41,40 @@ namespace Visualization
         {
             DataContext = this;
             InitializeComponent();
+        }
+
+        public RealSignal GetSignal()
+        {
+            if(IsValid())
+            {
+                return EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor);
+            }
+            throw new Exception("Please check signal parameters");
+        }
+
+        public bool IsValid()
+        {
+            if(Amplitude != 0 && Duration != 0 && SamplingFrequency != 0)
+            {
+                if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise)
+                {
+                    return true;
+                }
+                if(Period != 0)
+                {
+                    if(SelectedSignal == SignalEnum.Triangular || SelectedSignal == SignalEnum.Rectangular)
+                    {
+                        if(Interval != 0 && FillFactor != 0)
+                        {
+                            return true;
+                        }
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
+            return false;
         }
     }
 }

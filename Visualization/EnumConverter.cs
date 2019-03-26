@@ -5,7 +5,7 @@ using Visualization;
 
 namespace Visualization
 {
-    public class EnumToSignalConverter
+    public class EnumConverter
     {
         public static RealSignal ConvertTo(SignalEnum value, double amplitude, double beginsAt, double duration, double samplingFrequency, double period=1, double fillFactor=1)
         {
@@ -29,6 +29,24 @@ namespace Visualization
                     return SignalGenerator.Triangular(amplitude, period, beginsAt, duration, fillFactor, samplingFrequency);
                 default:
                     return null;
+            }
+        }
+
+        public static RealSignal Operation(OperationEnum value, RealSignal one, RealSignal two)
+        {
+            switch(value)
+            {
+                case OperationEnum.Add:
+                    return SignalOperations.AddSignals(one, two);
+                case OperationEnum.Subtract:
+                    return SignalOperations.SubtractSignals(one, two);
+                case OperationEnum.Mulltiply:
+                    return SignalOperations.MultiplySignals(one, two);
+                case OperationEnum.Divide:
+                    return SignalOperations.DivideSignals(one, two);
+                case OperationEnum.None:
+                default:
+                    return one;
             }
         }
     }

@@ -89,7 +89,10 @@ namespace Visualization
                     {
                         reader.ReadLine();
                         var begins = Convert.ToDouble(reader.ReadLine());
-                        var period = Convert.ToDouble(reader.ReadLine());
+                        var periodStr = reader.ReadLine();
+                        double? period = null;
+                        if (periodStr != String.Empty)
+                            period = Convert.ToDouble(periodStr);
                         var samplingFreq = Convert.ToDouble(reader.ReadLine());
                         var pointsLine = reader.ReadLine();
                         var points = pointsLine.Split(' ');

@@ -13,6 +13,12 @@ namespace Lib
 
         public double? Period { get; protected set; }
 
+        public double Step { get; set; }
+
+        public double Probability { get; set; }
+
+        public int Interval { get; set; }
+
         public double SamplingPeriod => 1.0 / SamplingFrequency;
 
         public double Length => EndsAt - Begin;

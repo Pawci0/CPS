@@ -158,5 +158,63 @@ namespace Lib
 
             return new RealSignal(beginsAt, period, samplingFrequency, points);
         }
+
+        public static RealSignal HeavisideStep(double amplitude, double beginsAt, double duration, double samplingFrequency, double jump)
+        {
+            var points = new List<double>();
+            var howManyPoints = duration * samplingFrequency;
+            var span = 1.0 / samplingFrequency;
+
+            var i = beginsAt;
+            var j = 0;
+            for (; j < howManyPoints; i += span, j++)
+            {
+                if (Math.Abs(i - jump) < 1e-6)
+                {
+                    points.Add(0.5);
+                }
+                else if (i < jump)
+                {
+                    points.Add(0.0);
+                }
+                else
+                {
+                    points.Add(amplitude);
+                }
+            }
+
+            return new RealSignal(beginsAt, null, samplingFrequency, points);
+        }
+        
+        public static RealSignal KroneckerDelta(double amplitude, double beginsAt, double duration, double samplingFrequency, double jump)
+        {
+            var points = new List<double>();
+            var howManyPoints = duration * samplingFrequency;
+            var span = 1.0 / samplingFrequency;
+
+            var i = beginsAt;
+            var j = 0;
+            for (; j < howManyPoints; i += span, j++)
+            {
+                points.Add(Math.Abs(i - jump) > 1e-6 ? 0.0 : amplitude);
+            }
+
+            return new RealSignal(beginsAt, null, samplingFrequency, points);
+        }
+
+        public static RealSignal ImpulsiveNoise(double amplitude, double beginsAt, double duration, double samplingFrequency, double probability)
+        {
+            var points = new List<double>();
+            var howManyPoints = duration * samplingFrequency;
+            var r = new Random();
+
+            var j = 0;
+            for (; j < howManyPoints; j++)
+            {
+                points.Add(r.NextDouble() < probability ? amplitude : 0.0);
+            }
+
+            return new RealSignal(beginsAt, null, samplingFrequency, points);
+        }
     }
 }

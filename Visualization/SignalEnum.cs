@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Visualization
+﻿namespace Visualization
 {
     public enum SignalEnum
     {
@@ -15,6 +9,9 @@ namespace Visualization
         FullRectifiedSinus,
         Rectangular,
         SymmetricalRectangular,
-        Triangular
+        Triangular,
+        HeavisideStep,
+        KroneckerDelta,
+        ImpulsiveNoise
     }
 }

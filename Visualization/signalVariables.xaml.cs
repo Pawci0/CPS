@@ -35,6 +35,10 @@ namespace Visualization
 
         public double FillFactor { get; set; }
 
+        public double Jump { get; set; }
+
+        public double Probability { get; set; }
+
         public SignalEnum SelectedSignal { get; set; }
 
         public SignalVariables()
@@ -48,7 +52,9 @@ namespace Visualization
         {
             if(IsValid())
             {
-                return EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor);
+                var signal = EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor, Jump, Probability);
+                signal.Interval = Interval;
+                return signal;
             }
             throw new Exception("Please check signal parameters");
         }
@@ -57,7 +63,9 @@ namespace Visualization
         {
             if(Amplitude != 0 && Duration != 0 && SamplingFrequency != 0)
             {
-                if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise)
+                if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise 
+                    || SelectedSignal == SignalEnum.HeavisideStep || SelectedSignal == SignalEnum.KroneckerDelta
+                    || SelectedSignal == SignalEnum.ImpulsiveNoise)
                 {
                     return true;
                 }

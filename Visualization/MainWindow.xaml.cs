@@ -16,6 +16,7 @@ namespace Visualization
         private bool chartSwitch = true;
         private int Interval { get; set; }
         public OperationEnum SelectedOperation { get; set; }
+        public bool ConnectPoints { get; set; } = false;
 
         public MainWindow()
         {
@@ -29,13 +30,13 @@ namespace Visualization
         public void toChart(object sender, RoutedEventArgs e)
         {
             chartSwitch = true;
-            chart.Content = new Chart(Signal);
+            chart.Content = new Chart(Signal, ConnectPoints);
         }
 
         public void toHistogram(object sender, RoutedEventArgs e)
         {
             chartSwitch = false;
-            chart.Content = new Histogram(Signal, Interval);
+            chart.Content = new Histogram(Signal);
         }
         public void save(object sender, RoutedEventArgs e)
         {
@@ -107,11 +108,11 @@ namespace Visualization
                         Signal = new RealSignal(begins, period, samplingFreq, pts);
                             if (chartSwitch)
                             {
-                                chart.Content = new Chart(Signal);
+                                chart.Content = new Chart(Signal, ConnectPoints);
                             }
                             else
                             {
-                                chart.Content = new Histogram(Signal, Interval);
+                                chart.Content = new Histogram(Signal);
                             }
                       }
                 }
@@ -128,11 +129,11 @@ namespace Visualization
             {
                 if (chartSwitch)
                 {
-                    chart.Content = new Chart(Signal);
+                    chart.Content = new Chart(Signal, ConnectPoints);
                 }
                 else
                 {
-                    chart.Content = new Histogram(Signal, Interval);
+                    chart.Content = new Histogram(Signal);
                 }
             }
         }
@@ -148,7 +149,7 @@ namespace Visualization
                 {
                     Signal = EnumConverter.Operation(SelectedOperation, Signal, s2.GetSignal());
                 }
-                Interval = s1.Interval;
+                ConnectPoints = (s1.SelectedSignal == SignalEnum.KroneckerDelta || s1.SelectedSignal == SignalEnum.ImpulsiveNoise) ? false : true;
                 return true;
             }
             catch (Exception e)

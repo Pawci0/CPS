@@ -7,7 +7,7 @@ namespace Visualization
 {
     public class EnumConverter
     {
-        public static RealSignal ConvertTo(SignalEnum value, double amplitude, double beginsAt, double duration, double samplingFrequency, double period=1, double fillFactor=1)
+        public static RealSignal ConvertTo(SignalEnum value, double amplitude, double beginsAt, double duration, double samplingFrequency, double period=1, double fillFactor=1, double jump=1, double probability=1)
         {
             switch (value)
             {
@@ -27,6 +27,12 @@ namespace Visualization
                     return SignalGenerator.SymmetricalRectangular(amplitude, period, beginsAt, duration, fillFactor, samplingFrequency);
                 case SignalEnum.Triangular:
                     return SignalGenerator.Triangular(amplitude, period, beginsAt, duration, fillFactor, samplingFrequency);
+                case SignalEnum.HeavisideStep:
+                    return SignalGenerator.HeavisideStep(amplitude, beginsAt, duration, samplingFrequency, jump);
+                case SignalEnum.KroneckerDelta:
+                    return SignalGenerator.KroneckerDelta(amplitude, beginsAt, duration, samplingFrequency, jump);
+                case SignalEnum.ImpulsiveNoise:
+                    return SignalGenerator.ImpulsiveNoise(amplitude, beginsAt, duration, samplingFrequency, probability);
                 default:
                     return null;
             }

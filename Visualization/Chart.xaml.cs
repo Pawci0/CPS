@@ -25,31 +25,43 @@ namespace Visualization
 
         public SeriesCollection SeriesCollection { get; set; }
 
-        public LineSeries Series = new LineSeries()
-        {
-            Fill = Brushes.Transparent,
-            PointGeometrySize = 5
-        };
+        public Series Series;
 
         public Chart()
         {
             InitializeComponent();
             DataContext = this;
-            SeriesCollection = new SeriesCollection
-            {
-                Series
-            };
         }
 
-        public Chart(RealSignal signal) : this()
+        public Chart(RealSignal signal, bool connectPoints) : this()
         {
             Signal = signal;
+            if (connectPoints)
+            {
+                Series = new LineSeries()
+                {
+                    Fill = Brushes.Transparent,
+                    PointGeometrySize = 5
+                };
+            }
+            else
+            {
+                Series = new ScatterSeries()
+                {
+                    Fill = Brushes.Transparent,
+                    StrokeThickness = 5
+                };
+            }
             var points = new List<ObservablePoint>();
             foreach (var (x, y) in Signal.ToDrawGraph())
             {
                 points.Add(new ObservablePoint(x, y));
             }
             Series.Values = new ChartValues<ObservablePoint>(points);
+            SeriesCollection = new SeriesCollection
+            {
+                Series
+            };
         }
     }
 }

@@ -69,5 +69,20 @@ namespace Lib
                 return Points.GetRange(0, length);
             }
         }
+
+        public void SaveToFile(string path)
+        {
+            using (var sw = new StreamWriter(path))
+            {
+                sw.WriteLine(nameof(RealSignal));
+                sw.WriteLine(Begin);
+                sw.WriteLine(Period);
+                sw.WriteLine(SamplingFrequency);
+                foreach (var y in Points)
+                {
+                    sw.Write($"{y} ");
+                }
+            }
+        }
     }
 }

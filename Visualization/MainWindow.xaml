@@ -43,6 +43,8 @@
             <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button Click="toChart" Content="Line chart" Padding="20 7 20 7"/>
                 <Button Click="toHistogram" Content="Histogram" Padding="20 7 20 7"/>
+                <Button Click="save" Content="Save To file" Padding="20 7 20 7"/>
+                <Button Click="load" Content="Load from file" Padding="20 7 20 7"/>
             </StackPanel>
             <Frame Grid.Row="1" x:Name="chart" NavigationUIVisibility="Hidden" />
             

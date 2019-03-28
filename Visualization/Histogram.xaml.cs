@@ -29,10 +29,13 @@ namespace Visualization
 
         public Histogram(RealSignal signal, int intervals) : this()
         {
-            Signal = signal;
-            var points = Signal.ToDrawHistogram(intervals);
-            Series.Values = new ChartValues<int>(points.Select(x => x.value));
-            Labels = points.Select(n => n.begin + ", " + n.end).ToArray();
+            if (signal != null)
+            {
+                Signal = signal;
+                var points = Signal.ToDrawHistogram(intervals);
+                Series.Values = new ChartValues<int>(points.Select(x => x.value));
+                Labels = points.Select(n => n.begin + ", " + n.end).ToArray();
+            }
         }
     }
 }

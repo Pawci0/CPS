@@ -40,6 +40,7 @@ namespace Visualization
         public SignalVariables()
         {
             DataContext = this;
+            SamplingFrequency = 1.0;
             InitializeComponent();
         }
 

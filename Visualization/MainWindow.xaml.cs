@@ -160,13 +160,17 @@ namespace Visualization
 
         public void moreInfo(object sender, RoutedEventArgs e)
         {
-            string s = String.Format("Average value: {0} \n" +
-                                     "Absolute average value: {1} \n" +
-                                     "Root mean square: {2} \n" +
-                                     "Variance: {3} \n" +
-                                     "Average power: {4}"
-                                     , AverageValue(Signal), AbsoluteAverateValue(Signal), RootMeanSquare(Signal), Variance(Signal), AveragePower(Signal));
-            MessageBox.Show(s,"Info");
+            if (Signal != null)
+            {
+                string s = String.Format("Average value: {0} \n" +
+                                         "Absolute average value: {1} \n" +
+                                         "Root mean square: {2} \n" +
+                                         "Variance: {3} \n" +
+                                         "Average power: {4}"
+                    , AverageValue(Signal), AbsoluteAverateValue(Signal), RootMeanSquare(Signal), Variance(Signal),
+                    AveragePower(Signal));
+                MessageBox.Show(s, "Info");
+            }
         }
     }
 }

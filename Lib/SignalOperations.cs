@@ -86,5 +86,36 @@ namespace Lib
 
             return new RealSignal(from, null, samplingFrequency, resultSignalPoints);
         }
+
+        public static double AverageValue(RealSignal signal)
+        {
+            var points = signal.GetOnlyFullPeriods;
+            return Math.Round(points.Sum() / points.Count, 3);
+        }
+
+        public static double AbsoluteAverateValue(RealSignal signal)
+        {
+            var points = signal.GetOnlyFullPeriods;
+            return Math.Round(points.Sum(x => Math.Abs(x)) / points.Count, 3);
+        }
+
+        public static double AveragePower(RealSignal signal)
+        {
+            var points = signal.GetOnlyFullPeriods;
+            return Math.Round(points.Sum(x => x * x) / points.Count, 3);
+        }
+
+        public static double Variance(RealSignal signal)
+        {
+            var points = signal.GetOnlyFullPeriods;
+            var average = AverageValue(signal);
+            return Math.Round(points.Sum(x => (x - average) * (x - average)) / points.Count, 3);
+        }
+
+        public static double RootMeanSquare(RealSignal signal)
+        {
+            return Math.Round(Math.Sqrt(AveragePower(signal)), 3);
+        }
     }
+
 }

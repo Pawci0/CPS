@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using Microsoft.Win32;
+using static Lib.SignalOperations;
 
 namespace Visualization
 {
@@ -155,6 +156,17 @@ namespace Visualization
                 MessageBox.Show(e.Message);
                 return false;
             }
+        }
+
+        public void moreInfo(object sender, RoutedEventArgs e)
+        {
+            string s = String.Format("Average value: {0} \n" +
+                                     "Absolute average value: {1} \n" +
+                                     "Root mean square: {2} \n" +
+                                     "Variance: {3} \n" +
+                                     "Average power: {4}"
+                                     , AverageValue(Signal), AbsoluteAverateValue(Signal), RootMeanSquare(Signal), Variance(Signal), AveragePower(Signal));
+            MessageBox.Show(s,"Info");
         }
     }
 }

@@ -51,6 +51,7 @@
                 <Button Click="moreInfo">
                     <Image Source="icon.png" Stretch="Fill"/>
                 </Button>
+                <Button Click="toAC" Content="A/C" Padding="20 7 20 7"/>
                 <Button Click="toChart" Content="Line chart" Padding="20 7 20 7"/>
                 <Button Click="toHistogram" Content="Histogram" Padding="20 7 20 7"/>
                 <Button Click="save" Content="Save To file" Padding="20 7 20 7"/>

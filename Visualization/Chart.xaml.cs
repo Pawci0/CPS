@@ -45,10 +45,7 @@ namespace Visualization
 
         public override void Update(RealSignal newSignal, bool connectPoints)
         {
-            if(SeriesCollection.Count != 0)
-            {
-                SeriesCollection.RemoveAt(0);
-            }
+            TruncateSeries();
             if (connectPoints)
             {
                 Series = new LineSeries()
@@ -74,6 +71,16 @@ namespace Visualization
             }
             Series.Values = new ChartValues<ObservablePoint>(points);
             SeriesCollection.Add(Series);
+        }
+
+        private void TruncateSeries()
+        {
+            try
+            {
+                SeriesCollection.Remove(Series);
+            }
+            catch (Exception e) { }
+
         }
     }
 }

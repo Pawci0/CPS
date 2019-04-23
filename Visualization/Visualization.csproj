@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AC.xaml.cs">
+      <DependentUpon>AC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Chart.xaml.cs">
       <DependentUpon>Chart.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
     <Compile Include="SignalVariables.xaml.cs">
       <DependentUpon>SignalVariables.xaml</DependentUpon>
     </Compile>
+    <Page Include="AC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Chart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

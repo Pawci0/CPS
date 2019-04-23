@@ -38,6 +38,11 @@ namespace Visualization
             chartSwitch = false;
             chart.Content = new Histogram(Signal);
         }
+
+        public void toAC(object sender, RoutedEventArgs e)
+        {
+            chart.Content = new AC(Signal);
+        }
         public void save(object sender, RoutedEventArgs e)
         {
             if (Signal == null)

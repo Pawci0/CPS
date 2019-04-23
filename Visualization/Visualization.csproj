@@ -65,6 +65,9 @@
     <Compile Include="AC.xaml.cs">
       <DependentUpon>AC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CA.xaml.cs">
+      <DependentUpon>CA.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Chart.xaml.cs">
       <DependentUpon>Chart.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,10 @@
       <DependentUpon>SignalVariables.xaml</DependentUpon>
     </Compile>
     <Page Include="AC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -43,6 +43,12 @@ namespace Visualization
         {
             chart.Content = new AC(Signal);
         }
+
+        public void toCA(object sender, RoutedEventArgs e)
+        {
+            chart.Content = new CA(Signal);
+        }
+
         public void save(object sender, RoutedEventArgs e)
         {
             if (Signal == null)

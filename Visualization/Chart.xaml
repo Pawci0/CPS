@@ -1,4 +1,4 @@
-﻿<Page x:Class="Visualization.Chart"
+﻿<local:SignalPage x:Class="Visualization.Chart"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,10 +7,11 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Graph">
+      Title="Graph"
+>
 
     <Grid>
-        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="None" Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4" 
+        <lvc:CartesianChart Series="{Binding SeriesCollection, Mode=OneWay}" LegendLocation="None" Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4" 
                             DisableAnimations="True" IsManipulationEnabled="False" Hoverable="False" DataTooltip="{x:Null}"/>
     </Grid>
-</Page>
+</local:SignalPage>

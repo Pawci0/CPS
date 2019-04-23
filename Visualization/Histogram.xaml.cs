@@ -6,12 +6,10 @@ using System.Windows.Controls;
 
 namespace Visualization
 {
-    public partial class Histogram : Page
+    public partial class Histogram : SignalPage
     {
-        public RealSignal Signal { get; set; }
-
         public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; }
+        public string[] Labels { get; set; }
 
         public ColumnSeries Series = new ColumnSeries()
         {
@@ -20,7 +18,7 @@ namespace Visualization
         public Histogram()
         {
             InitializeComponent();
-            DataContext = this;
+            base.DataContext = this;
             SeriesCollection = new SeriesCollection
             {
                 Series
@@ -31,11 +29,16 @@ namespace Visualization
         {
             if (signal != null)
             {
-                Signal = signal;
-                var points = Signal.ToDrawHistogram(signal.Interval);
-                Series.Values = new ChartValues<int>(points.Select(x => x.value));
-                Labels = points.Select(n => n.begin + ", " + n.end).ToArray();
+                base.Signal = signal;
+                Update(signal);
             }
+        }
+
+        public override void Update(RealSignal newSignal, bool connectPoints=false)
+        {
+            var points = newSignal.ToDrawHistogram(newSignal.Interval);
+            Series.Values = new ChartValues<int>(points.Select(x => x.value));
+            Labels = points.Select(n => n.begin + ", " + n.end).ToArray();
         }
     }
 }

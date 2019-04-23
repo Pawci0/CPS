@@ -123,22 +123,31 @@ namespace Visualization
             }
         }
 
-        public void UpdateGraph(object sender, RoutedEventArgs e)
+        public void ShowFirst(object sender, RoutedEventArgs e)
         {
-            if (PrepateSignal())
-            {
-                if (chartSwitch)
-                {
-                    chart.Content = new Chart(Signal, ConnectPoints);
-                }
-                else
-                {
-                    chart.Content = new Histogram(Signal);
-                }
-            }
+            var s1 = (signalOneVariables.Content as SignalVariables);
+            ShowSignal(s1.GetSignal(), s1.SelectedSignal);
+        }
+        public void ShowSecond(object sender, RoutedEventArgs e)
+        {
+            var s2 = (signalTwoVariables.Content as SignalVariables);
+            ShowSignal(s2.GetSignal(), s2.SelectedSignal);
         }
 
-        private bool PrepateSignal()
+        public void UpdateGraph()
+        {
+            (chart.Content as SignalPage).Update(Signal, ConnectPoints);
+            //if (chartSwitch)
+            //{
+            //    chart.Content = new Chart(Signal, ConnectPoints);
+            //}
+            //else
+            //{
+            //    chart.Content = new Histogram(Signal);
+            //}
+        }
+
+        private void ShowResult(object sender, RoutedEventArgs e)
         {
             var s1 = (signalOneVariables.Content as SignalVariables);
             var s2 = (signalTwoVariables.Content as SignalVariables);
@@ -149,14 +158,19 @@ namespace Visualization
                 {
                     Signal = EnumConverter.Operation(SelectedOperation, Signal, s2.GetSignal());
                 }
-                ConnectPoints = (s1.SelectedSignal == SignalEnum.KroneckerDelta || s1.SelectedSignal == SignalEnum.ImpulsiveNoise) ? false : true;
-                return true;
+                ShowSignal(Signal, s1.SelectedSignal);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.Message);
-                return false;
+                MessageBox.Show(ex.Message);
             }
+        }
+
+        public void ShowSignal(RealSignal signal, SignalEnum signalType)
+        {
+            Signal = signal;
+            ConnectPoints = (signalType == SignalEnum.KroneckerDelta || signalType == SignalEnum.ImpulsiveNoise) ? false : true;
+            UpdateGraph();
         }
 
         public void moreInfo(object sender, RoutedEventArgs e)

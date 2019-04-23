@@ -73,7 +73,7 @@ namespace Visualization
                 {
                     if(SelectedSignal == SignalEnum.Triangular || SelectedSignal == SignalEnum.Rectangular)
                     {
-                        if(Interval != 0 && FillFactor != 0)
+                        if(FillFactor != 0)
                         {
                             return true;
                         }

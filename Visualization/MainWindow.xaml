@@ -24,19 +24,25 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="18*"/>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="2" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="1 1 1 1"/>
+        <Border Grid.Column="2" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1 1 1 1"/>
 
         <Frame Grid.Column="0" x:Name="signalOneVariables"/>
         <Frame Grid.Column="1" x:Name="signalTwoVariables"/>
-        <Button Grid.Column="0" Grid.Row="1" Content="Update" Click="UpdateGraph"/>
+       
+        <Button Grid.Column="0" Grid.Row="2" Content="Show result" Click="ShowResult"/>
 
-        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
                     SelectedItem="{Binding Path=SelectedOperation}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
-        <Grid Grid.Column="2" Grid.RowSpan="2">
+        <Button Grid.Column="0" Grid.Row="1" Content="Show first signal" Click="ShowFirst"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Show second signal" Click="ShowSecond"/>
+
+
+        <Grid Grid.Column="2" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="18*"/>

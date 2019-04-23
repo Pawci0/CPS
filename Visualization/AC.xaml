@@ -16,11 +16,12 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Content="Sampling" HorizontalAlignment="Center"/>
-        <lvc:CartesianChart Series="{Binding SamplingCollection, Mode=OneWay}" Grid.Row="0" LegendLocation="None" Margin="0,0,-0.4,0.4" 
+        <lvc:CartesianChart Series="{Binding SamplingCollection, Mode=OneWay}" Grid.Row="0" LegendLocation="None" Margin="10,10,10,10" 
                             DisableAnimations="True" IsManipulationEnabled="False" Hoverable="False" DataTooltip="{x:Null}"/>
 
+
         <Label Grid.Row="1" Content="Quantization" HorizontalAlignment="Center"/>
-        <lvc:CartesianChart Series="{Binding QuantisationCollection, Mode=OneWay}" Grid.Row="1" LegendLocation="None" Margin="0,0,-0.4,0.4" 
+        <lvc:CartesianChart Series="{Binding QuantisationCollection, Mode=OneWay}" Grid.Row="1" LegendLocation="None" Margin="10,10,10,10" 
                             DisableAnimations="True" IsManipulationEnabled="False" Hoverable="False" DataTooltip="{x:Null}"/>
 
 

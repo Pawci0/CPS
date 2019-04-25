@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using Microsoft.Win32;
 using static Lib.SignalOperations;
+using static Lib.Signals;
 
 namespace Visualization
 {
@@ -188,7 +187,8 @@ namespace Visualization
         public void ShowSignal(RealSignal signal, SignalEnum signalType)
         {
             Signal = signal;
-            ConnectPoints = (signalType == SignalEnum.KroneckerDelta || signalType == SignalEnum.ImpulsiveNoise) ? false : true;
+            real = Signal;
+            ConnectPoints = (signalType != SignalEnum.KroneckerDelta && signalType != SignalEnum.ImpulsiveNoise);
             UpdateGraph();
         }
 
@@ -196,13 +196,20 @@ namespace Visualization
         {
             if (Signal != null)
             {
+                real = Signal;
                 string s = String.Format("Average value: {0} \n" +
                                          "Absolute average value: {1} \n" +
                                          "Root mean square: {2} \n" +
                                          "Variance: {3} \n" +
-                                         "Average power: {4}"
-                    , AverageValue(Signal), AbsoluteAverateValue(Signal), RootMeanSquare(Signal), Variance(Signal),
-                    AveragePower(Signal));
+                                         "Average power: {4} \n\n" +
+                                         "Mean squared error: {5} \n" +
+                                         "Signal to noise ratio: {6} \n" +
+                                         "Peak signal to noise ratio: {7} \n" +
+                                         "Maximum Difference: {8} \n" +
+                                         "Effective number of bits: {9}"
+                    , AverageValue(Signal), AbsoluteAverageValue(Signal), RootMeanSquare(Signal), Variance(Signal),
+                    AveragePower(Signal), MeanSquaredError(Signal, quantized), SignalToNoiseRatio(Signal, quantized),
+                    PeakSignalToNoiseRatio(Signal, quantized), MaximumDifference(Signal, quantized), EffectiveNumberOfBits(Signal, quantized));
                 MessageBox.Show(s, "Info");
             }
         }

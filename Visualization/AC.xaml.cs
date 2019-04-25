@@ -68,14 +68,18 @@ namespace Visualization
                 return;
             var step = SignalVariables.SamplingFrequency / SignalVariables.QuantizationFreq;
             var points = new List<ObservablePoint>();
-            for (int i = 0; i<SignalVariables.SamplingFrequency; i+= (int)step)
+            var values = new List<double>();
+            for (int i = 0; i<newSignal.Points.Count(); i+= (int)step)
             {
                     var xy = newSignal.ToDrawGraph()[i];
                     points.Add(new ObservablePoint(xy.x, xy.y));
+                values.Add(xy.y);
                 
             }
             Sampling.Values = new ChartValues<ObservablePoint>(points);
             Quantisation.Values = new ChartValues<ObservablePoint>(points);
+            Signals.quantized = new RealSignal(values);
+
         }
 
 

@@ -55,40 +55,25 @@ namespace Visualization
 
         public RealSignal GetSignal()
         {
-            if(IsValid())
-            {
-                var signal = EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor, Jump, Probability);
-                signal.Interval = Interval;
-                return signal;
-            }
-            throw new Exception("Please check signal parameters");
+            if (!IsValid()) throw new Exception("Please check signal parameters");
+            var signal = EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor, Jump, Probability);
+            signal.Interval = Interval;
+            return signal;
         }
 
         public bool IsValid()
         {
-            if(Amplitude != 0 && Duration != 0 && SamplingFrequency != 0)
+            if (Amplitude == 0 || Duration == 0 || SamplingFrequency == 0) return false;
+            if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise 
+                                                          || SelectedSignal == SignalEnum.HeavisideStep || SelectedSignal == SignalEnum.KroneckerDelta
+                                                          || SelectedSignal == SignalEnum.ImpulsiveNoise)
             {
-                if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise 
-                    || SelectedSignal == SignalEnum.HeavisideStep || SelectedSignal == SignalEnum.KroneckerDelta
-                    || SelectedSignal == SignalEnum.ImpulsiveNoise)
-                {
-                    return true;
-                }
-                if(Period != 0)
-                {
-                    if(SelectedSignal == SignalEnum.Triangular || SelectedSignal == SignalEnum.Rectangular)
-                    {
-                        if(FillFactor != 0)
-                        {
-                            return true;
-                        }
-                        return false;
-                    }
-                    return true;
-                }
-                return false;
+                return true;
             }
-            return false;
+
+            if (Period == 0) return false;
+            if (SelectedSignal != SignalEnum.Triangular && SelectedSignal != SignalEnum.Rectangular) return true;
+            return FillFactor != 0;
         }
     }
 }

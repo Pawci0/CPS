@@ -1,11 +1,9 @@
-﻿using Lib;
-
-namespace Visualization
+﻿namespace Lib
 {
     public struct Signals
     {
         public static RealSignal quantized;
-        public static RealSignal sampled;
+        public static RealSignal real;
 
     }
 }

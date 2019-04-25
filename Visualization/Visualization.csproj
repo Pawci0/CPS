@@ -77,6 +77,7 @@
     <Compile Include="OperationEnum.cs" />
     <Compile Include="SignalEnum.cs" />
     <Compile Include="SignalPage.cs" />
+    <Compile Include="Signals.cs" />
     <Compile Include="SignalVariables.xaml.cs">
       <DependentUpon>SignalVariables.xaml</DependentUpon>
     </Compile>

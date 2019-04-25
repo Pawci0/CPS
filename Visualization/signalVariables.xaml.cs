@@ -21,23 +21,27 @@ namespace Visualization
     /// </summary>
     public partial class SignalVariables : Page
     {
-        public double Amplitude { get; set; }
+        public static double Amplitude { get; set; }
 
-        public double BeginsAt { get; set; }
+        public static double BeginsAt { get; set; }
 
-        public double Duration { get; set; }
+        public static double Duration { get; set; }
 
-        public double SamplingFrequency { get; set; }
+        public static double SamplingFrequency { get; set; }
 
-        public double Period { get; set; }
+        public static double Period { get; set; }
 
-        public int Interval { get; set; }
+        public static int Interval { get; set; }
 
-        public double FillFactor { get; set; }
+        public static double FillFactor { get; set; }
 
-        public double Jump { get; set; }
+        public static double Jump { get; set; }
 
-        public double Probability { get; set; }
+        public static double Probability { get; set; }
+
+        public static double QuantizationFreq { get; set; }
+
+        public static double RecFreq { get; set; }
 
         public SignalEnum SelectedSignal { get; set; }
 
@@ -46,6 +50,7 @@ namespace Visualization
             DataContext = this;
             SamplingFrequency = 1.0;
             InitializeComponent();
+     
         }
 
         public RealSignal GetSignal()

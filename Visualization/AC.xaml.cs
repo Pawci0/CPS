@@ -29,6 +29,7 @@ namespace Visualization
         public SeriesCollection QuantisationCollection { get; set; }
         public Series Sampling { get; set; }
         public Series Quantisation { get; set; }
+
         public AC()
         {
             InitializeComponent();
@@ -63,10 +64,15 @@ namespace Visualization
 
         public override void Update(RealSignal newSignal, bool connectPoints = false)
         {
+            if (newSignal == null ||   SignalVariables.SamplingFrequency % SignalVariables.QuantizationFreq != 0)
+                return;
+            var step = SignalVariables.SamplingFrequency / SignalVariables.QuantizationFreq;
             var points = new List<ObservablePoint>();
-            foreach (var (x, y) in newSignal.ToDrawGraph())
+            for (int i = 0; i<SignalVariables.SamplingFrequency; i+= (int)step)
             {
-                points.Add(new ObservablePoint(x, y));
+                    var xy = newSignal.ToDrawGraph()[i];
+                    points.Add(new ObservablePoint(xy.x, xy.y));
+                
             }
             Sampling.Values = new ChartValues<ObservablePoint>(points);
             Quantisation.Values = new ChartValues<ObservablePoint>(points);

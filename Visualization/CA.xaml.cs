@@ -64,13 +64,16 @@ namespace Visualization
 
         public override void Update(RealSignal newSignal, bool connectPoints = false)
         {
+            if (newSignal == null || SignalVariables.SamplingFrequency % SignalVariables.RecFreq != 0)
+                return;
+            var step = SignalVariables.SamplingFrequency / SignalVariables.RecFreq;
             var interpolationPoints = new List<ObservablePoint>();
             var sincPoints = new List<ObservablePoint>();
 
             List<(double x, double y)> signalPoints = newSignal.ToDrawGraph();
             List<double> reconstructedPoints = ACUtils.SincReconstruction(newSignal);
 
-            for(int i=0; i < signalPoints.Count; i++)
+            for (int i = 0; i < signalPoints.Count; i += (int) step )
             {
                 var x = signalPoints[i].x;
                 var yInt = signalPoints[i].y;

@@ -136,8 +136,16 @@ namespace Visualization
 
         public void ShowFirst(object sender, RoutedEventArgs e)
         {
-            var s1 = (signalOneVariables.Content as SignalVariables);
-            ShowSignal(s1.GetSignal(), s1.SelectedSignal);
+            try
+            {
+                var s1 = (signalOneVariables.Content as SignalVariables);
+                ShowSignal(s1.GetSignal(), s1.SelectedSignal);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+
         }
         public void ShowSecond(object sender, RoutedEventArgs e)
         {

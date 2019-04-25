@@ -116,6 +116,24 @@ namespace Lib
         {
             return Math.Round(Math.Sqrt(AveragePower(signal)), 3);
         }
+
+       /* public static double MeanSquareError(RealSignal original, RealSignal sampled)
+        {
+         List<double> quantizedSignal = QuantizedSignal(orignalSignal.Count(), sampledSignal);
+
+            int N = quantizedSignal.Count;
+            double fraction = 1.0 / N;
+            double sum = 0;
+
+            for (int i = 0; i < N; i++)
+            {
+                sum += Math.Pow((orignalSignal[i] - quantizedSignal[i]), 2);
+            }
+
+            double result = fraction * sum;
+
+            return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+        }*/
     }
 
 }

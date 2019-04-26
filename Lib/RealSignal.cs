@@ -14,6 +14,10 @@ namespace Lib
             SamplingFrequency = samplingFrequency;
             Points = points;
         }
+        public RealSignal(List<double> points)
+        {
+            Points = points;
+        }
 
         public double this[int index]
         {

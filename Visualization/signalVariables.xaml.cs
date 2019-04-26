@@ -21,23 +21,27 @@ namespace Visualization
     /// </summary>
     public partial class SignalVariables : Page
     {
-        public double Amplitude { get; set; }
+        public static double Amplitude { get; set; }
 
-        public double BeginsAt { get; set; }
+        public static double BeginsAt { get; set; }
 
-        public double Duration { get; set; }
+        public static double Duration { get; set; }
 
-        public double SamplingFrequency { get; set; }
+        public static double SamplingFrequency { get; set; }
 
-        public double Period { get; set; }
+        public static double Period { get; set; }
 
-        public int Interval { get; set; }
+        public static int Interval { get; set; }
 
-        public double FillFactor { get; set; }
+        public static double FillFactor { get; set; }
 
-        public double Jump { get; set; }
+        public static double Jump { get; set; }
 
-        public double Probability { get; set; }
+        public static double Probability { get; set; }
+
+        public static double QuantizationFreq { get; set; }
+
+        public static double RecFreq { get; set; }
 
         public SignalEnum SelectedSignal { get; set; }
 
@@ -46,44 +50,30 @@ namespace Visualization
             DataContext = this;
             SamplingFrequency = 1.0;
             InitializeComponent();
+     
         }
 
         public RealSignal GetSignal()
         {
-            if(IsValid())
-            {
-                var signal = EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor, Jump, Probability);
-                signal.Interval = Interval;
-                return signal;
-            }
-            throw new Exception("Please check signal parameters");
+            if (!IsValid()) throw new Exception("Please check signal parameters");
+            var signal = EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor, Jump, Probability);
+            signal.Interval = Interval;
+            return signal;
         }
 
         public bool IsValid()
         {
-            if(Amplitude != 0 && Duration != 0 && SamplingFrequency != 0)
+            if (Amplitude == 0 || Duration == 0 || SamplingFrequency == 0) return false;
+            if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise 
+                                                          || SelectedSignal == SignalEnum.HeavisideStep || SelectedSignal == SignalEnum.KroneckerDelta
+                                                          || SelectedSignal == SignalEnum.ImpulsiveNoise)
             {
-                if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise 
-                    || SelectedSignal == SignalEnum.HeavisideStep || SelectedSignal == SignalEnum.KroneckerDelta
-                    || SelectedSignal == SignalEnum.ImpulsiveNoise)
-                {
-                    return true;
-                }
-                if(Period != 0)
-                {
-                    if(SelectedSignal == SignalEnum.Triangular || SelectedSignal == SignalEnum.Rectangular)
-                    {
-                        if(Interval != 0 && FillFactor != 0)
-                        {
-                            return true;
-                        }
-                        return false;
-                    }
-                    return true;
-                }
-                return false;
+                return true;
             }
-            return false;
+
+            if (Period == 0) return false;
+            if (SelectedSignal != SignalEnum.Triangular && SelectedSignal != SignalEnum.Rectangular) return true;
+            return FillFactor != 0;
         }
     }
 }

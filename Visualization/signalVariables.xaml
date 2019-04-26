@@ -27,9 +27,9 @@
         <ComboBox Grid.Row="0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
                     SelectedItem="{Binding Path=SelectedSignal}" VerticalContentAlignment="Center">
         </ComboBox>
-        <StackPanel Grid.Row="1" Margin="0,0,-0.4,0" >
+        <StackPanel Grid.Row="1" Margin="0,0,0,-273" Grid.RowSpan="2" >
 
-            <Label Content="Basic:" FontWeight="Bold"/>
+            <!--<Label Content="Basic:" FontWeight="Bold"/>-->
 
             <Label Content="Amplitude" Margin="5" />
             <TextBox Name="amplitude" Margin="5"
@@ -49,7 +49,7 @@
 
             <Separator/>
 
-            <Label Content="Periodic:" FontWeight="Bold"/>
+            <!--<Label Content="Periodic:" FontWeight="Bold"/>-->
 
             <Label Content="Period" Margin="5" />
             <TextBox Name="period" Margin="5"
@@ -61,7 +61,7 @@
 
             <Separator/>
 
-            <Label Content="Discreet:" FontWeight="Bold"/>
+            <!--<Label Content="Discreet:" FontWeight="Bold"/>-->
 
             <Label Content="Jump" Margin="5" />
             <TextBox Name="jump" Margin="5"
@@ -73,11 +73,15 @@
 
             <Separator/>
 
-            <Label Content="Histogram:" FontWeight="Bold"/>
+            <!--<Label Content="Histogram:" FontWeight="Bold"/>-->
 
-            <Label Content="Interval" Margin="5" />
-            <TextBox Name="interval" Margin="5"
-                     Text="{Binding Interval, Mode=TwoWay}"/>
+            <Label Content="Quantization Freq" Margin="5" />
+            <TextBox Name="quantizationFreq" Margin="5"
+                     Text="{Binding QuantizationFreq, Mode=TwoWay}"/>
+
+            <Label Content="Reconstruction Freq" Margin="5" />
+            <TextBox Name="recFreq" Margin="5"
+                     Text="{Binding RecFreq, Mode=TwoWay}"/>
 
         </StackPanel>
     </Grid>

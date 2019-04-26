@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lib
 {
@@ -93,7 +91,7 @@ namespace Lib
             return Math.Round(points.Sum() / points.Count, 3);
         }
 
-        public static double AbsoluteAverateValue(RealSignal signal)
+        public static double AbsoluteAverageValue(RealSignal signal)
         {
             var points = signal.GetOnlyFullPeriods;
             return Math.Round(points.Sum(x => Math.Abs(x)) / points.Count, 3);
@@ -115,6 +113,153 @@ namespace Lib
         public static double RootMeanSquare(RealSignal signal)
         {
             return Math.Round(Math.Sqrt(AveragePower(signal)), 3);
+        }
+
+         public static double MeanSquaredError(RealSignal original, RealSignal sampled)
+         {
+             if (original == null || sampled == null)
+                 return 0;
+          List<double> quantizedSignal = QuantizedSignal(original.Points.Count(), sampled.Points);
+
+             int N = quantizedSignal.Count;
+             double fraction = 1.0 / N;
+             double sum = 0;
+
+             for (int i = 0; i < N; i++)
+             {
+                 sum += Math.Pow((original.Points[i] - quantizedSignal[i]), 2);
+             }
+
+             double result = fraction * sum;
+
+             return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+         }
+
+        private static double MeanSquaredError(RealSignal original, List<Double> sampled)
+        {
+            List<double> quantizedSignal = QuantizedSignal(original.Points.Count(), sampled);
+
+            int N = quantizedSignal.Count;
+            double fraction = 1.0 / N;
+            double sum = 0;
+
+            for (int i = 0; i < N; i++)
+            {
+                sum += Math.Pow((original.Points[i] - quantizedSignal[i]), 2);
+            }
+
+            double result = fraction * sum;
+
+            return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+        }
+
+
+        public static double SignalToNoiseRatio(RealSignal orignalSignal, RealSignal sampledSignal)
+        {
+            if (orignalSignal == null || sampledSignal == null)
+                return 0;
+            List<double> quantizedSignal = QuantizedSignal(orignalSignal.Points.Count(), sampledSignal.Points);
+
+            double numerator = 0;
+            double denominator = 0;
+            int N = quantizedSignal.Count;
+
+            for (int i = 0; i < N; i++)
+            {
+                numerator += Math.Pow(orignalSignal.Points[i], 2);
+            }
+
+            for (int i = 0; i < N; i++)
+            {
+                denominator += Math.Pow(orignalSignal.Points[i] - quantizedSignal[i], 2);
+            }
+
+            double result = 10 * Math.Log10(numerator / denominator);
+
+            return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+        }
+
+        private static double SignalToNoiseRatio(RealSignal orignalSignal, List<double> sampledSignal)
+        {
+            List<double> quantizedSignal = QuantizedSignal(orignalSignal.Points.Count(), sampledSignal);
+
+            double numerator = 0;
+            double denominator = 0;
+            int N = quantizedSignal.Count;
+
+            for (int i = 0; i < N; i++)
+            {
+                numerator += Math.Pow(orignalSignal.Points[i], 2);
+            }
+
+            for (int i = 0; i < N; i++)
+            {
+                denominator += Math.Pow(orignalSignal.Points[i] - quantizedSignal[i], 2);
+            }
+
+            double result = 10 * Math.Log10(numerator / denominator);
+
+            return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+        }
+
+        public static double PeakSignalToNoiseRatio(RealSignal orignalSignal, RealSignal sampledSignal)
+        {
+            if (orignalSignal == null || sampledSignal == null)
+                return 0;
+            List<double> quantizedSignal = QuantizedSignal(orignalSignal.Points.Count(), sampledSignal.Points);
+
+            double mse = MeanSquaredError(orignalSignal, quantizedSignal);
+            double numerator = quantizedSignal.Max();
+
+            double result = 10 * Math.Log10(numerator / mse);
+
+            return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+        }
+
+        public static double MaximumDifference(RealSignal orignalSignal, RealSignal sampledSignal)
+        {
+            if (orignalSignal == null || sampledSignal == null)
+                return 0;
+            List<double> quantizedSignal = QuantizedSignal(orignalSignal.Points.Count(), sampledSignal.Points);
+
+            int N = quantizedSignal.Count;
+            List<double> differences = new List<double>(N);
+
+            for (int i = 0; i < N; i++)
+            {
+                differences.Add(Math.Abs(orignalSignal.Points[i] - quantizedSignal[i]));
+            }
+
+            double result = differences.Max();
+
+            return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+        }
+
+        public static double EffectiveNumberOfBits(RealSignal orignalSignal, RealSignal sampledSignal)
+        {
+            if (orignalSignal == null || sampledSignal == null)
+                return 0;
+            List<double> quantizedSignal = QuantizedSignal(orignalSignal.Points.Count(), sampledSignal.Points);
+
+            double snr = SignalToNoiseRatio(orignalSignal, quantizedSignal);
+
+            double result = (snr - 1.76) / 6.02;
+
+            return Math.Round(result, 4, MidpointRounding.AwayFromZero);
+        }
+
+
+        private static List<double> QuantizedSignal(int orignalSignalCount, List<double> sampledSignal)
+        {
+            var result = new List<double>();
+
+            for (int i = 0; i < sampledSignal.Count(); i++)
+            {
+                for (int j = 0; j < orignalSignalCount / sampledSignal.Count(); j++)
+                    result.Add(sampledSignal[i]);
+            }
+
+            return result;
         }
     }
 

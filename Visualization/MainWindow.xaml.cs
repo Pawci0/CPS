@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using Microsoft.Win32;
 using static Lib.SignalOperations;
+using static Lib.Signals;
 
 namespace Visualization
 {
@@ -38,6 +37,17 @@ namespace Visualization
             chartSwitch = false;
             chart.Content = new Histogram(Signal);
         }
+
+        public void toAC(object sender, RoutedEventArgs e)
+        {
+            chart.Content = new AC(Signal);
+        }
+
+        public void toCA(object sender, RoutedEventArgs e)
+        {
+            chart.Content = new CA(Signal);
+        }
+
         public void save(object sender, RoutedEventArgs e)
         {
             if (Signal == null)
@@ -123,22 +133,39 @@ namespace Visualization
             }
         }
 
-        public void UpdateGraph(object sender, RoutedEventArgs e)
+        public void ShowFirst(object sender, RoutedEventArgs e)
         {
-            if (PrepateSignal())
+            try
             {
-                if (chartSwitch)
-                {
-                    chart.Content = new Chart(Signal, ConnectPoints);
-                }
-                else
-                {
-                    chart.Content = new Histogram(Signal);
-                }
+                var s1 = (signalOneVariables.Content as SignalVariables);
+                ShowSignal(s1.GetSignal(), s1.SelectedSignal);
             }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+
+        }
+        public void ShowSecond(object sender, RoutedEventArgs e)
+        {
+            var s2 = (signalTwoVariables.Content as SignalVariables);
+            ShowSignal(s2.GetSignal(), s2.SelectedSignal);
         }
 
-        private bool PrepateSignal()
+        public void UpdateGraph()
+        {
+            (chart.Content as SignalPage).Update(Signal, ConnectPoints);
+            //if (chartSwitch)
+            //{
+            //    chart.Content = new Chart(Signal, ConnectPoints);
+            //}
+            //else
+            //{
+            //    chart.Content = new Histogram(Signal);
+            //}
+        }
+
+        private void ShowResult(object sender, RoutedEventArgs e)
         {
             var s1 = (signalOneVariables.Content as SignalVariables);
             var s2 = (signalTwoVariables.Content as SignalVariables);
@@ -149,27 +176,40 @@ namespace Visualization
                 {
                     Signal = EnumConverter.Operation(SelectedOperation, Signal, s2.GetSignal());
                 }
-                ConnectPoints = (s1.SelectedSignal == SignalEnum.KroneckerDelta || s1.SelectedSignal == SignalEnum.ImpulsiveNoise) ? false : true;
-                return true;
+                ShowSignal(Signal, s1.SelectedSignal);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.Message);
-                return false;
+                MessageBox.Show(ex.Message);
             }
+        }
+
+        public void ShowSignal(RealSignal signal, SignalEnum signalType)
+        {
+            Signal = signal;
+            real = Signal;
+            ConnectPoints = (signalType != SignalEnum.KroneckerDelta && signalType != SignalEnum.ImpulsiveNoise);
+            UpdateGraph();
         }
 
         public void moreInfo(object sender, RoutedEventArgs e)
         {
             if (Signal != null)
             {
+                real = Signal;
                 string s = String.Format("Average value: {0} \n" +
                                          "Absolute average value: {1} \n" +
                                          "Root mean square: {2} \n" +
                                          "Variance: {3} \n" +
-                                         "Average power: {4}"
-                    , AverageValue(Signal), AbsoluteAverateValue(Signal), RootMeanSquare(Signal), Variance(Signal),
-                    AveragePower(Signal));
+                                         "Average power: {4} \n\n" +
+                                         "Mean squared error: {5} \n" +
+                                         "Signal to noise ratio: {6} \n" +
+                                         "Peak signal to noise ratio: {7} \n" +
+                                         "Maximum Difference: {8} \n" +
+                                         "Effective number of bits: {9}"
+                    , AverageValue(Signal), AbsoluteAverageValue(Signal), RootMeanSquare(Signal), Variance(Signal),
+                    AveragePower(Signal), MeanSquaredError(Signal, quantized), SignalToNoiseRatio(Signal, quantized),
+                    PeakSignalToNoiseRatio(Signal, quantized), MaximumDifference(Signal, quantized), EffectiveNumberOfBits(Signal, quantized));
                 MessageBox.Show(s, "Info");
             }
         }

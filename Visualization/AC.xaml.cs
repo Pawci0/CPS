@@ -66,13 +66,21 @@ namespace Visualization
         {
             if (newSignal == null ||   SignalVariables.SamplingFrequency % SignalVariables.QuantizationFreq != 0)
                 return;
+            var levelStep = SignalVariables.Amplitude*2/8;
+            List<double> qvalues= new List<double>();
+            for (int i = 0; i < 8; i++){
+            qvalues.Add(i*levelStep-SignalVariables.Amplitude);
+            }
+            
+            
             var step = SignalVariables.SamplingFrequency / SignalVariables.QuantizationFreq;
             var points = new List<ObservablePoint>();
             var values = new List<double>();
             for (int i = 0; i<newSignal.Points.Count(); i+= (int)step)
             {
                     var xy = newSignal.ToDrawGraph()[i];
-                    points.Add(new ObservablePoint(xy.x, xy.y));
+                    double closest = qvalues.Aggregate((x,y) => Math.Abs(x-xy.y) < Math.Abs(y-number) ? x : y);
+                    points.Add(new ObservablePoint(xy.x, closest));
                 values.Add(xy.y);
                 
             }

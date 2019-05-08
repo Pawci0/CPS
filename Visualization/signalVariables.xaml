@@ -83,6 +83,10 @@
             <TextBox Name="recFreq" Margin="5"
                      Text="{Binding RecFreq, Mode=TwoWay}"/>
 
+            <Label Content="Quantization Level" Margin="5" />
+            <TextBox Name="quantLvl" Margin="5"
+                     Text="{Binding QuantizationLevel, Mode=TwoWay}"/>
+
         </StackPanel>
     </Grid>
 </Page>

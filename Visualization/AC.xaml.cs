@@ -64,24 +64,39 @@ namespace Visualization
 
         public override void Update(RealSignal newSignal, bool connectPoints = false)
         {
-            if (newSignal == null ||   SignalVariables.SamplingFrequency % SignalVariables.QuantizationFreq != 0)
+            if (newSignal == null ||   Math.Abs(SignalVariables.SamplingFrequency % SignalVariables.QuantizationFreq) > 0.00001)
                 return;
+            int level = SignalVariables.QuantizationLevel;
+            List<double> qvalues= new List<double>();
+            qvalues.Add(SignalVariables.Amplitude);
+            qvalues.Add(-1*SignalVariables.Amplitude);
+            if (level > 2)
+            {
+                double stepVal = SignalVariables.Amplitude*2 / (level - 1);
+                for (int i = 1; i <= level - 2; i++)
+                {
+                    qvalues.Add(SignalVariables.Amplitude - stepVal*i);
+                }
+            }
+
+
             var step = SignalVariables.SamplingFrequency / SignalVariables.QuantizationFreq;
             var points = new List<ObservablePoint>();
+            var realPoints = new List<ObservablePoint>();
             var values = new List<double>();
             for (int i = 0; i<newSignal.Points.Count(); i+= (int)step)
             {
-                    var xy = newSignal.ToDrawGraph()[i];
-                    points.Add(new ObservablePoint(xy.x, xy.y));
-                values.Add(xy.y);
+                var xy = newSignal.ToDrawGraph()[i];
+                double closest = qvalues.Aggregate((x, y) => Math.Abs(x - xy.y) < Math.Abs(y - xy.y) ? x : y);
+                points.Add(new ObservablePoint(xy.x, closest));
+                realPoints.Add(new ObservablePoint(xy.x, xy.y));
+                values.Add(closest);
                 
             }
-            Sampling.Values = new ChartValues<ObservablePoint>(points);
+            Sampling.Values = new ChartValues<ObservablePoint>(realPoints);
             Quantisation.Values = new ChartValues<ObservablePoint>(points);
             Signals.quantized = new RealSignal(values);
 
         }
-
-
     }
 }

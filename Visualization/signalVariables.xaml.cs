@@ -21,15 +21,15 @@ namespace Visualization
     /// </summary>
     public partial class SignalVariables : Page
     {
-        public static double Amplitude { get; set; }
+        public static double Amplitude { get; set; } = 1.0;
 
         public static double BeginsAt { get; set; }
 
-        public static double Duration { get; set; }
+        public static double Duration { get; set; } = 2.0;
 
-        public static double SamplingFrequency { get; set; }
+        public static double SamplingFrequency { get; set; } = 100.0;
 
-        public static double Period { get; set; }
+        public static double Period { get; set; } = 0.5;
 
         public static int Interval { get; set; }
 
@@ -39,9 +39,11 @@ namespace Visualization
 
         public static double Probability { get; set; }
 
-        public static double QuantizationFreq { get; set; }
+        public static double QuantizationFreq { get; set; } = 20.0;
 
-        public static double RecFreq { get; set; }
+        public static double RecFreq { get; set; } = 20.0;
+
+        public static int QuantizationLevel { get; set; } = 4;
 
         public SignalEnum SelectedSignal { get; set; }
 

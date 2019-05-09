@@ -8,6 +8,8 @@ namespace Lib
 {
     public static class ACUtils
     {
+        public static int N_OF_POINTS = 2;
+
         public static List<(double, double)> SincReconstruction(RealSignal signal, double frequency)
         {
             List<(double, double)> result = new List<(double, double)>();
@@ -16,21 +18,37 @@ namespace Lib
             double time = signal.Begin;
             for (int i = 0; i < pointCount; i++)
             {
-                result.Add((time, ReconstructPoint(signal.Points, time, signal.SamplingFrequency)));
+                List<(int i, double y)> sampledPoints = signal.GetPointsNear(time, N_OF_POINTS);
+                (double time, double value) item = (time: time, ReconstructPoint(sampledPoints, time, signal.SamplingFrequency));
+                result.Add(item);
                 time += 1/frequency;
             }
             return result;
         }
 
-        private static double ReconstructPoint(List<double> sampledY, double time, double frequency)
+        private static double ReconstructPoint(List<(int i, double y)> sampledPoints, double time, double frequency)
         {
             double result = 0;
 
             double T_s = 1 / frequency;
 
-            for (int n = 0; n < sampledY.Count(); n++)
+            foreach(var sample in sampledPoints)
             {
-                result += sampledY[n] * SinusCardinalis(time / T_s - n);
+                result += sample.y * SinusCardinalis(time / T_s - sample.i);
+            }
+
+            return result;
+        }
+
+        private static double ReconstructPoint(List<double> allPoints, double time, double frequency)
+        {
+            double result = 0;
+
+            double T_s = 1 / frequency;
+
+            for (int n = 0; n < allPoints.Count(); n++)
+            {
+                result += allPoints[n] * SinusCardinalis(time / T_s - n);
             }
 
             return result;

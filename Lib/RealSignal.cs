@@ -41,6 +41,26 @@ namespace Lib
             return result;
         }
 
+        internal List<(int i, double y)> GetPointsNear(double time, int nOfPoints)
+        {
+            var points = ToDrawGraph();
+            var left = points.Select((point, index) => (i: index, x: point.x, y: point.y))
+                            .Where(point => point.x <= time)
+                            .Reverse()
+                            .Take(nOfPoints)
+                            .Reverse()
+                            .ToList();
+
+            var right = points.Select((point, index) => (i: index, x: point.x, y: point.y))
+                            .Where(point => point.x > time)
+                            .Take(nOfPoints)
+                            .ToList();
+
+            return left.Concat(right)
+                       .Select(point => (point.i, point.y))
+                       .ToList();
+        }
+
         public List<(double begin, double end, int value)> ToDrawHistogram(int numberOfIntervals)
         {
             List<(double, double, int)> result = new List<(double, double, int)>(numberOfIntervals);

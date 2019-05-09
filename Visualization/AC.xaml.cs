@@ -66,13 +66,13 @@ namespace Visualization
             };
             SamplingCollection = new SeriesCollection
             {
-                Sampling,
-                OriginalSignal
+                OriginalSignal,
+                Sampling
             };
             QuantisationCollection = new SeriesCollection
             {
-                Quantisation,
-                OriginalSignal2
+                OriginalSignal2,
+                Quantisation
             };
         }
 

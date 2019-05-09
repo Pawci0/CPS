@@ -88,14 +88,15 @@ namespace Visualization
                 return;
             int level = SignalVariables.QuantizationLevel;
             List<double> qvalues= new List<double>();
-            qvalues.Add(SignalVariables.Amplitude);
-            qvalues.Add(-1*SignalVariables.Amplitude);
+            qvalues.Add(newSignal.Points.Max<double>());
+            qvalues.Add(newSignal.Points.Min<double>());
+            double scope = newSignal.Points.Max<double>() - newSignal.Points.Min<double>();
             if (level > 2)
             {
-                double stepVal = SignalVariables.Amplitude*2 / (level - 1);
+                double stepVal = scope / (level - 1);
                 for (int i = 1; i <= level - 2; i++)
                 {
-                    qvalues.Add(SignalVariables.Amplitude - stepVal*i);
+                    qvalues.Add(newSignal.Points.Max<double>() - stepVal*i);
                 }
             }
 
@@ -118,7 +119,7 @@ namespace Visualization
             {
                 originalPoints.Add(new ObservablePoint(x, y));
             }
-
+            Signals.quantized = new RealSignal(values);
             Sampling.Values = new ChartValues<ObservablePoint>(realPoints);
             Quantisation.Values = new ChartValues<ObservablePoint>(points);
             OriginalSignal.Values = new ChartValues<ObservablePoint>(originalPoints);

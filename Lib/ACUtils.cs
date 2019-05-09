@@ -8,15 +8,16 @@ namespace Lib
 {
     public static class ACUtils
     {
-        public static List<double> SincReconstruction(RealSignal signal)
+        public static List<(double, double)> SincReconstruction(RealSignal signal, double frequency)
         {
-            List<double> result = new List<double>();
-            var pointCount = signal.Points.Count;
+            List<(double, double)> result = new List<(double, double)>();
+            var duration = signal.Points.Count / signal.SamplingFrequency;
+            var pointCount = duration * frequency;
             double time = signal.Begin;
             for (int i = 0; i < pointCount; i++)
             {
-                result.Add(ReconstructPoint(signal.Points, time, signal.SamplingFrequency));
-                time += 1/signal.SamplingFrequency;
+                result.Add((time, ReconstructPoint(signal.Points, time, signal.SamplingFrequency)));
+                time += 1/frequency;
             }
             return result;
         }

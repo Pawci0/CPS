@@ -37,13 +37,15 @@ namespace Visualization
             Sampling = new ScatterSeries()
             {
                 Fill = Brushes.Transparent,
-                StrokeThickness = 5,
+                StrokeThickness = 2,
+                MaxPointShapeDiameter = 5,
                 Stroke = Brushes.Blue
             };
             Quantisation = new StepLineSeries()
             {
                 Fill = Brushes.Transparent,
-                StrokeThickness = 5,
+                StrokeThickness = 2,
+                PointGeometrySize = 5,
                 Stroke = Brushes.Blue
             };
             SamplingCollection = new SeriesCollection

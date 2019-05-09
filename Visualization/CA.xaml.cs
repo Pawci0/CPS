@@ -30,6 +30,8 @@ namespace Visualization
         public Series Interpolation { get; set; }
         public Series Sinc { get; set; }
         public Series OriginalSignal { get; set; }
+        public Series OriginalSignal2 { get; set; }
+
 
         public CA()
         {
@@ -37,10 +39,17 @@ namespace Visualization
             base.DataContext = this;
             OriginalSignal = new LineSeries()
             {
-                PointGeometrySize = 5,
+                PointGeometry = null,
                 Fill = Brushes.Transparent,
                 StrokeThickness = 4,
-                Stroke = Brushes.Blue
+                Stroke = Brushes.LightBlue,
+            };
+            OriginalSignal2 = new LineSeries()
+            {
+                PointGeometry = null,
+                Fill = Brushes.Transparent,
+                StrokeThickness = 4,
+                Stroke = Brushes.LightBlue,
             };
             Interpolation = new LineSeries()
             {
@@ -57,12 +66,14 @@ namespace Visualization
             };
             InterpolationCollection = new SeriesCollection
             {
-                Interpolation
+                Interpolation,
+                OriginalSignal
             };
             SincCollection = new SeriesCollection
             {
-                Sinc
-            };
+                Sinc,
+                OriginalSignal2
+        };
         }
 
         public CA(RealSignal signal) : this()
@@ -94,9 +105,10 @@ namespace Visualization
                 sincPoints.Add(new ObservablePoint(x, y));
             }
 
-            OriginalSignal.Values = new ChartValues<ObservablePoint>(originalPoints);
             Interpolation.Values = new ChartValues<ObservablePoint>(interpolationPoints);
             Sinc.Values = new ChartValues<ObservablePoint>(sincPoints);
+            OriginalSignal.Values = new ChartValues<ObservablePoint>(originalPoints);
+            OriginalSignal2.Values = new ChartValues<ObservablePoint>(originalPoints);
         }
 
 

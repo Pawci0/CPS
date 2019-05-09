@@ -92,7 +92,7 @@ namespace Visualization
             var sincPoints = new List<ObservablePoint>();
 
             List<(double x, double y)> signalPoints = newSignal.ToDrawGraph();
-            List<(double x, double y)> reconstructedPoints = ACUtils.SincReconstruction(newSignal, SignalVariables.RecFreq);
+            List<(double x, double y)> reconstructedPoints = ACUtils.SincReconstruction(newSignal, SignalVariables.RecFreq, SignalVariables.NOfSamples);
 
             foreach(var (x, y) in signalPoints)
             {

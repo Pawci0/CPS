@@ -47,6 +47,8 @@ namespace Visualization
 
         public SignalEnum SelectedSignal { get; set; }
 
+        public static int NOfSamples { set; get; } = 4;
+
         public SignalVariables()
         {
             DataContext = this;

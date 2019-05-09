@@ -8,9 +8,7 @@ namespace Lib
 {
     public static class ACUtils
     {
-        public static int N_OF_POINTS = 2;
-
-        public static List<(double, double)> SincReconstruction(RealSignal signal, double frequency)
+        public static List<(double, double)> SincReconstruction(RealSignal signal, double frequency, int nOfSamples)
         {
             List<(double, double)> result = new List<(double, double)>();
             var duration = signal.Points.Count / signal.SamplingFrequency;
@@ -18,7 +16,7 @@ namespace Lib
             double time = signal.Begin;
             for (int i = 0; i < pointCount; i++)
             {
-                List<(int i, double y)> sampledPoints = signal.GetPointsNear(time, N_OF_POINTS);
+                List<(int i, double y)> sampledPoints = signal.GetPointsNear(time, nOfSamples);
                 (double time, double value) item = (time: time, ReconstructPoint(sampledPoints, time, signal.SamplingFrequency));
                 result.Add(item);
                 time += 1/frequency;

@@ -31,61 +31,67 @@
 
             <!--<Label Content="Basic:" FontWeight="Bold"/>-->
 
-            <Label Content="Amplitude" Margin="5" />
-            <TextBox Name="amplitude" Margin="5"
+            <Label Content="Amplitude" Margin="2" />
+            <TextBox Name="amplitude" Margin="2"
                             Text="{Binding Amplitude, Mode=TwoWay}"/>
 
-            <Label Content="Begin At" Margin="5" />
-            <TextBox Name="beginsAt" Margin="5"
+            <Label Content="Begin At" Margin="2" />
+            <TextBox Name="beginsAt" Margin="2"
                      Text="{Binding BeginsAt, Mode=TwoWay}"/>
 
-            <Label Content="Duration" Margin="5" />
-            <TextBox Name="duration" Margin="5"
+            <Label Content="Duration" Margin="2" />
+            <TextBox Name="duration" Margin="2"
                      Text="{Binding Duration, Mode=TwoWay}"/>
 
-            <Label Content="Sampling frequency" Margin="5" />
-            <TextBox Name="samplingFrequency" Margin="5"
+            <Label Content="Sampling frequency" Margin="2" />
+            <TextBox Name="samplingFrequency" Margin="2"
                      Text="{Binding SamplingFrequency, Mode=TwoWay}"/>
 
             <Separator/>
 
             <!--<Label Content="Periodic:" FontWeight="Bold"/>-->
 
-            <Label Content="Period" Margin="5" />
-            <TextBox Name="period" Margin="5"
+            <Label Content="Period" Margin="2" />
+            <TextBox Name="period" Margin="2"
                      Text="{Binding Period, Mode=TwoWay}"/>
 
-            <Label Content="Fill factor" Margin="5" />
-            <TextBox Name="fillFactor" Margin="5"
+            <Label Content="Fill factor" Margin="2" />
+            <TextBox Name="fillFactor" Margin="2"
                      Text="{Binding FillFactor, Mode=TwoWay}"/>
 
             <Separator/>
 
             <!--<Label Content="Discreet:" FontWeight="Bold"/>-->
 
-            <Label Content="Jump" Margin="5" />
-            <TextBox Name="jump" Margin="5"
+            <Label Content="Jump" Margin="2" />
+            <TextBox Name="jump" Margin="2"
                      Text="{Binding Jump, Mode=TwoWay}"/>
 
             <Label Content="Probability"/>
-            <TextBox Name="probability" Margin="5"
+            <TextBox Name="probability" Margin="2"
                      Text="{Binding Probability, Mode=TwoWay}"/>
 
             <Separator/>
 
             <!--<Label Content="Histogram:" FontWeight="Bold"/>-->
 
-            <Label Content="Quantization Freq" Margin="5" />
-            <TextBox Name="quantizationFreq" Margin="5"
+            <Label Content="Sampling frequency (A/C sampling)" Margin="2" />
+            <TextBox Name="quantizationFreq" Margin="2"
                      Text="{Binding QuantizationFreq, Mode=TwoWay}"/>
 
-            <Label Content="Reconstruction Freq" Margin="5" />
-            <TextBox Name="recFreq" Margin="5"
+            <Label Content="Quantization Level" Margin="2" />
+            <TextBox Name="quantLvl" Margin="2"
+                     Text="{Binding QuantizationLevel, Mode=TwoWay}"/>
+
+            <Separator/>
+
+            <Label Content="Sampling frequency (Reconstruction)" Margin="2" />
+            <TextBox Name="recFreq" Margin="2"
                      Text="{Binding RecFreq, Mode=TwoWay}"/>
 
-            <Label Content="Quantization Level" Margin="5" />
-            <TextBox Name="quantLvl" Margin="5"
-                     Text="{Binding QuantizationLevel, Mode=TwoWay}"/>
+            <Label Content="Samples for reconstruction" Margin="2" />
+            <TextBox Name="nOfPoints" Margin="2"
+                     Text="{Binding NOfSamples, Mode=TwoWay}"/>
 
         </StackPanel>
     </Grid>

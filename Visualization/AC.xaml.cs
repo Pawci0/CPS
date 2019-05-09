@@ -29,11 +29,27 @@ namespace Visualization
         public SeriesCollection QuantisationCollection { get; set; }
         public Series Sampling { get; set; }
         public Series Quantisation { get; set; }
+        public Series OriginalSignal { get; set; }
+        public Series OriginalSignal2 { get; set; }
 
         public AC()
         {
             InitializeComponent();
             base.DataContext = this;
+            OriginalSignal = new LineSeries()
+            {
+                PointGeometry = null,
+                Fill = Brushes.Transparent,
+                StrokeThickness = 4,
+                Stroke = Brushes.LightBlue,
+            };
+            OriginalSignal2 = new LineSeries()
+            {
+                PointGeometry = null,
+                Fill = Brushes.Transparent,
+                StrokeThickness = 4,
+                Stroke = Brushes.LightBlue,
+            };
             Sampling = new ScatterSeries()
             {
                 Fill = Brushes.Transparent,
@@ -50,11 +66,13 @@ namespace Visualization
             };
             SamplingCollection = new SeriesCollection
             {
-                Sampling
+                Sampling,
+                OriginalSignal
             };
             QuantisationCollection = new SeriesCollection
             {
-                Quantisation
+                Quantisation,
+                OriginalSignal2
             };
         }
 
@@ -85,6 +103,7 @@ namespace Visualization
             var step = SignalVariables.SamplingFrequency / SignalVariables.QuantizationFreq;
             var points = new List<ObservablePoint>();
             var realPoints = new List<ObservablePoint>();
+            var originalPoints = new List<ObservablePoint>();
             var values = new List<double>();
             for (int i = 0; i<newSignal.Points.Count(); i+= (int)step)
             {
@@ -95,10 +114,15 @@ namespace Visualization
                 values.Add(closest);
                 
             }
+            foreach(var (x, y) in newSignal.ToDrawGraph())
+            {
+                originalPoints.Add(new ObservablePoint(x, y));
+            }
+
             Sampling.Values = new ChartValues<ObservablePoint>(realPoints);
             Quantisation.Values = new ChartValues<ObservablePoint>(points);
-            Signals.quantized = new RealSignal(values);
-
+            OriginalSignal.Values = new ChartValues<ObservablePoint>(originalPoints);
+            OriginalSignal2.Values = new ChartValues<ObservablePoint>(originalPoints);
         }
     }
 }

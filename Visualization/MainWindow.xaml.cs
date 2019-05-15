@@ -40,12 +40,12 @@ namespace Visualization
 
         public void toAC(object sender, RoutedEventArgs e)
         {
-            chart.Content = new AC(Signal);
+            chart.Content = new AC(Signal, (signalOneVariables.Content as SignalVariables));
         }
 
         public void toCA(object sender, RoutedEventArgs e)
         {
-            chart.Content = new CA(Signal);
+            chart.Content = new CA(Signal, (signalOneVariables.Content as SignalVariables));
         }
 
         public void save(object sender, RoutedEventArgs e)
@@ -138,7 +138,7 @@ namespace Visualization
             try
             {
                 var s1 = (signalOneVariables.Content as SignalVariables);
-                ShowSignal(s1.GetSignal(), s1.SelectedSignal);
+                ShowSignal(s1.GetSignal(), s1);
             }
             catch (Exception exception)
             {
@@ -149,12 +149,12 @@ namespace Visualization
         public void ShowSecond(object sender, RoutedEventArgs e)
         {
             var s2 = (signalTwoVariables.Content as SignalVariables);
-            ShowSignal(s2.GetSignal(), s2.SelectedSignal);
+            ShowSignal(s2.GetSignal(), s2);
         }
 
-        public void UpdateGraph()
+        public void UpdateGraph(SignalVariables sv)
         {
-            (chart.Content as SignalPage).Update(Signal, ConnectPoints);
+            (chart.Content as SignalPage).Update(Signal, sv, ConnectPoints);
             //if (chartSwitch)
             //{
             //    chart.Content = new Chart(Signal, ConnectPoints);
@@ -176,7 +176,7 @@ namespace Visualization
                 {
                     Signal = EnumConverter.Operation(SelectedOperation, Signal, s2.GetSignal());
                 }
-                ShowSignal(Signal, s1.SelectedSignal);
+                ShowSignal(Signal, s1);
             }
             catch (Exception ex)
             {
@@ -184,12 +184,13 @@ namespace Visualization
             }
         }
 
-        public void ShowSignal(RealSignal signal, SignalEnum signalType)
+        public void ShowSignal(RealSignal signal, SignalVariables sv)
         {
             Signal = signal;
             real = Signal;
-            ConnectPoints = (signalType != SignalEnum.KroneckerDelta && signalType != SignalEnum.ImpulsiveNoise);
-            UpdateGraph();
+            ConnectPoints = (sv.SelectedSignal != SignalEnum.KroneckerDelta && sv.SelectedSignal != SignalEnum.ImpulsiveNoise);
+            //ConnectPoints = false;
+            UpdateGraph(sv);
         }
 
         public void moreInfo(object sender, RoutedEventArgs e)

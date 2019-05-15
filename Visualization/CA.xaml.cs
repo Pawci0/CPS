@@ -66,23 +66,23 @@ namespace Visualization
             };
             InterpolationCollection = new SeriesCollection
             {
-                Interpolation,
-                OriginalSignal
+                OriginalSignal,
+                Interpolation
             };
             SincCollection = new SeriesCollection
             {
-                Sinc,
-                OriginalSignal2
+                OriginalSignal2,
+                Sinc
         };
         }
 
-        public CA(RealSignal signal) : this()
+        public CA(RealSignal signal, SignalVariables sv) : this()
         {
             Signal = signal;
-            Update(signal);
+            Update(signal, sv);
         }
 
-        public override void Update(RealSignal newSignal, bool connectPoints = false)
+        public override void Update(RealSignal newSignal, SignalVariables sv, bool connectPoints = false)
         {
             //if (newSignal == null || SignalVariables.SamplingFrequency % SignalVariables.RecFreq != 0)
             //    return;
@@ -92,14 +92,19 @@ namespace Visualization
             var sincPoints = new List<ObservablePoint>();
 
             List<(double x, double y)> signalPoints = newSignal.ToDrawGraph();
-            List<(double x, double y)> reconstructedPoints = ACUtils.SincReconstruction(newSignal, SignalVariables.RecFreq, SignalVariables.NOfSamples);
+            var signal = EnumConverter.ConvertTo(sv.SelectedSignal, sv.Amplitude, newSignal.Begin,
+                                                    sv.Duration, sv.RecFreq, sv.Period,
+                                                    sv.FillFactor, sv.Jump, sv.Probability);
+            List<(double x, double y)> reconstructedPoints = ACUtils.SincReconstruction(newSignal, sv.RecFreq, sv.NOfSamples);
 
             foreach(var (x, y) in signalPoints)
             {
                 originalPoints.Add(new ObservablePoint(x, y));
+            }
+            foreach(var (x, y) in signal.ToDrawGraph())
+            {
                 interpolationPoints.Add(new ObservablePoint(x, y));
             }
-
             foreach (var (x, y) in reconstructedPoints)
             {
                 sincPoints.Add(new ObservablePoint(x, y));

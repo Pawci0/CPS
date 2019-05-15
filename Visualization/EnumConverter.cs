@@ -50,6 +50,8 @@ namespace Visualization
                     return SignalOperations.MultiplySignals(one, two);
                 case OperationEnum.Divide:
                     return SignalOperations.DivideSignals(one, two);
+                case OperationEnum.Convolution:
+                    return SignalOperations.Convolution(one, two);
                 case OperationEnum.None:
                 default:
                     return one;

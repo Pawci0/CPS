@@ -40,10 +40,10 @@ namespace Visualization
         public Chart(RealSignal signal, bool connectPoints) : this()
         {
             Signal = signal;
-            Update(signal, connectPoints);
+            Update(signal, null, connectPoints);
         }
 
-        public override void Update(RealSignal newSignal, bool connectPoints)
+        public override void Update(RealSignal newSignal, SignalVariables sv, bool connectPoints)
         {
             TruncateSeries();
             if (connectPoints)
@@ -61,7 +61,8 @@ namespace Visualization
                 {
                     Fill = Brushes.Transparent,
                     StrokeThickness = 5,
-                    Stroke = Brushes.Blue
+                    Stroke = Brushes.Blue,
+                    MaxPointShapeDiameter = 5
                 };
             }
             var points = new List<ObservablePoint>();

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lib.Filter.Pass
 {
-    public interface IPass
+    class MidPass
     {
-        List<double> Generate(int M, double K);
     }
 }

@@ -8,7 +8,7 @@ namespace Lib.Filter.Window
 {
     class HanningWindow : IWindow
     {
-        public List<double> Create(int n, int M)
+        public List<double> Generate(int n, int M)
         {
             var result = new List<double>();
 

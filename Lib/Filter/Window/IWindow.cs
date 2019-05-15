@@ -8,6 +8,6 @@ namespace Lib.Filter.Window
 {
     public interface IWindow
     {
-        List<double> Create(int n, int M);
+        List<double> Generate(int n, int M);
     }
 }

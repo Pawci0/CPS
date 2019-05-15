@@ -8,11 +8,11 @@ namespace Lib.Filter.Window
 {
     class HanningWindow : IWindow
     {
-        public List<double> Create(int M)
+        public List<double> Create(int n, int M)
         {
             var result = new List<double>();
 
-            for (var i = 0; i < M-1; i++)
+            for (var i = 0; i < n; i++)
             {
                 result.Add(0.5 - (0.5 * Math.Cos((2 * Math.PI * i) / M)));
             }

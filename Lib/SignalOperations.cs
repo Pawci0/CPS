@@ -261,6 +261,63 @@ namespace Lib
 
             return result;
         }
+
+        public static RealSignal Convolution(RealSignal one, RealSignal two)
+        {
+            var first = one.Points;
+            var second = two.Points;
+
+            var resultPoints = new List<double>();
+            int resultLength = first.Count + second.Count - 1;
+
+            for (int n = 0; n < resultLength; n++)
+            {
+                double sum = 0;
+                int kmin = (n >= second.Count - 1) ? n - (second.Count - 1) : 0;
+                int kmax = (n < first.Count - 1) ? n : first.Count - 1;
+
+                for (int k = kmin; k <= kmax; k++)
+                {
+                    sum += first[k] * second[n - k];
+                }
+                resultPoints.Add(sum);
+            }
+
+            RealSignal result = new RealSignal(resultPoints);
+
+            return result;
+        }
+
+        public static List<double> Correlation(RealSignal one, RealSignal two)
+        {
+            var first = one.Points;
+            var second = two.Points;
+
+            var result = new List<double>();
+            var resultLength = first.Count + second.Count - 1;
+
+            for (var n = 0; n < resultLength; n++)
+            {
+                var sum = 0d;
+                var k1Min = (n >= second.Count - 1) ? n - (second.Count - 1) : 0;
+                var k1Max = (n < first.Count - 1) ? n : first.Count - 1;
+                var k2Min = (n <= second.Count - 1) ? second.Count - 1 - n : 0;
+
+                for (int k1 = k1Min, k2 = k2Min; k1 <= k1Max; k1++, k2++)
+                {
+                    sum += first[k1] * second[k2];
+                }
+                result.Add(sum);
+            }
+
+            return result;
+        }
+
+        public static List<double> CorrelationUsingConvolution(RealSignal one, RealSignal two)
+        {
+            one.Points.Reverse();
+            return Convolution(one, two).Points;
+        }
     }
 
 }

@@ -45,6 +45,16 @@
     <Compile Include="ACUtils.cs" />
     <Compile Include="Antenna.cs" />
     <Compile Include="AntennaParameters.cs" />
+    <Compile Include="Filter\Filter.cs" />
+    <Compile Include="Filter\Pass\HighPass.cs" />
+    <Compile Include="Filter\Pass\IPass.cs" />
+    <Compile Include="Filter\Pass\LowPass.cs" />
+    <Compile Include="Filter\Pass\MidPass.cs" />
+    <Compile Include="Filter\Window\BlackmanWindow.cs" />
+    <Compile Include="Filter\Window\HammingWindow.cs" />
+    <Compile Include="Filter\Window\HanningWindow.cs" />
+    <Compile Include="Filter\Window\IWindow.cs" />
+    <Compile Include="Filter\Window\RectangularWindow.cs" />
     <Compile Include="RealSignal.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="SignalGenerator.cs" />
@@ -55,5 +65,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

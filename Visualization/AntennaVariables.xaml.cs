@@ -17,26 +17,27 @@ using System.Windows.Shapes;
 namespace Visualization
 {
     /// <summary>
-    /// Logika interakcji dla klasy signalVariables.xaml
+    /// Logika interakcji dla klasy AntennaVariables.xaml
     /// </summary>
     public partial class AntennaVariables : Page
     {
-        public double PeriodOfTheProbeSignal { get; }
+        public double PeriodOfTheProbeSignal { get; set; }
 
-        public double SamplingFrequencyOfTheProbeAndFeedbackSignal { get; }
+        public double SamplingFrequencyOfTheProbeAndFeedbackSignal { get; set; }
 
-        public int LengthOfBuffersOfDiscreteSignals { get; }
+        public int LengthOfBuffersOfDiscreteSignals { get; set; }
 
-        public double ReportingPeriodOfDistance { get; }
+        public double ReportingPeriodOfDistance { get; set; }
 
-        public double SimulatorTimeUnit { get; }
+        public double SimulatorTimeUnit { get; set; }
 
-        public double RealSpeedOfTheObject { get; }
+        public double RealSpeedOfTheObject { get; set; }
 
-        public double SpeedOfSignalPropagationInEnvironment { get; }
+        public double SpeedOfSignalPropagationInEnvironment { get; set; }
 
         public AntennaVariables()
         {
+            InitializeComponent();
             DataContext = this;
     
         }

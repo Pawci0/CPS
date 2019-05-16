@@ -27,7 +27,7 @@ namespace Visualization
 
         public double Duration { get; set; } = 2.0;
 
-        public double SamplingFrequency { get; set; } = 100.0;
+        public double SamplingFrequency { get; set; }
 
         public double Period { get; set; } = 0.5;
 
@@ -51,10 +51,9 @@ namespace Visualization
 
         public SignalVariables()
         {
-            DataContext = this;
-            SamplingFrequency = 1.0;
             InitializeComponent();
-     
+            DataContext = this;
+            SamplingFrequency = 100.0;
         }
 
         public RealSignal GetSignal()

@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACUtils.cs" />
+    <Compile Include="Antenna.cs" />
+    <Compile Include="AntennaParameters.cs" />
     <Compile Include="RealSignal.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="SignalGenerator.cs" />

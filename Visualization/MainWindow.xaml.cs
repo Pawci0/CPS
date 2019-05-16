@@ -17,6 +17,8 @@ namespace Visualization
         public OperationEnum SelectedOperation { get; set; }
         public bool ConnectPoints { get; set; } = false;
 
+        private bool antennaSwitch = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -76,6 +78,15 @@ namespace Visualization
             }
         }
 
+        public void antenna(Object sender, RoutedEventArgs e)
+        {
+            if (!antennaSwitch)
+            {
+                antennaSwitch = true;
+                signalOneVariables.Content = new AntennaVariables();
+                signalTwoVariables.Content = null;
+            }
+        }
         public void load(object sender, RoutedEventArgs e)
         {
             var fileContent = string.Empty;

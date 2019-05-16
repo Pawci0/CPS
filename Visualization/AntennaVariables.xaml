@@ -31,6 +31,10 @@
 
             <!--<Label Content="Basic:" FontWeight="Bold"/>-->
 
+            <Label Content="Number of basic signals" Margin="2" />
+            <TextBox Name="numberOfBasicSignals" Margin="2"
+                     Text="{Binding NumberOfBasicSignals, Mode=TwoWay}"/>
+
             <Label Content="Period Of The Probe Signal" Margin="2" />
             <TextBox Name="periodOfTheProbeSignal" Margin="2"
                             Text="{Binding PeriodOfTheProbeSignal, Mode=TwoWay}"/>
@@ -58,7 +62,19 @@
             <Label Content="Speed Of Signal Propagation In Environment" Margin="2" />
             <TextBox Name="speedOfSignalPropagationInEnvironment" Margin="2"
                      Text="{Binding SpeedOfSignalPropagationInEnvironment, Mode=TwoWay}"/>
-        
+
+            <Button Click="antennaInfo">
+                <Image Source="icon.png" RenderTransformOrigin="0.5,0.5" Height="57" Width="91">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.001"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>
 
         </StackPanel>
     </Grid>

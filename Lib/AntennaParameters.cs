@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lib
 {
-    class AntennaParameters
+    public class AntennaParameters
     {
         public double PeriodOfTheProbeSignal { get; }
 

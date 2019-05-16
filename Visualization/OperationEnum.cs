@@ -11,7 +11,7 @@ namespace Visualization
         None,
         Add,
         Subtract,
-        Mulltiply,
+        Multiply,
         Divide,
         Convolution
     }

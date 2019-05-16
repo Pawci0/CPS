@@ -14,7 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static Lib.AntennaParameters;
+using Lib.Antenna;
+using static Lib.Antenna.AntennaParameters;
 
 namespace Visualization
 {
@@ -38,29 +39,25 @@ namespace Visualization
 
         public double SpeedOfSignalPropagationInEnvironment { get; set; } = 3000;
 
-        private AntennaParameters parameters { get; set; }
+        private AntennaParameters Parameters { get; set; }
 
         public AntennaVariables()
         {
             InitializeComponent();
-            DataContext = this;
-
-
+            DataContext = this;       
         }
 
         public void antennaInfo(object sender, RoutedEventArgs e)
         {
-            parameters = new AntennaParameters(PeriodOfTheProbeSignal, SamplingFrequencyOfTheProbeAndFeedbackSignal,
+            Parameters = new AntennaParameters(PeriodOfTheProbeSignal, SamplingFrequencyOfTheProbeAndFeedbackSignal,
                 LengthOfBuffersOfDiscreteSignals, ReportingPeriodOfDistance,
                 SimulatorTimeUnit, RealSpeedOfTheObject, SpeedOfSignalPropagationInEnvironment);
-            var result = Antenna.CalculateAntenna(NumberOfBasicSignals, 0, parameters);
-            string s = "";
+            var result = Antenna.CalculateAntenna(NumberOfBasicSignals, 0, Parameters);
+            string s = "Real distance \t Calculated distance \t delta\n";
             foreach (var val in result)
             {
-                s += val +"\n";
-
+                s += val.Item1 +"\t\t"+val.Item2+"\t\t\t"+(val.Item1-val.Item2)+ "\n";
             }
-
             MessageBox.Show(s, "Info");
         }
     }

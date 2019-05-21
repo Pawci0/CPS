@@ -31,42 +31,43 @@ namespace Visualization
         public Antennas(RealSignal fb,RealSignal prb,RealSignal cnv)
         {
             InitializeComponent();
-            var Original1 = new LineSeries()
+            DataContext = this;
+            var _feedback = new LineSeries()
             {
-                PointGeometry = null,
                 Fill = Brushes.Transparent,
-                StrokeThickness = 4,
-                Stroke = Brushes.LightBlue,
+                PointGeometrySize = 5,
+                Stroke = Brushes.Blue,
+                Values = new ChartValues<ObservablePoint>(toValues(fb))
             };
-            var Original2 = new LineSeries()
+            var _probe = new LineSeries()
             {
-                PointGeometry = null,
                 Fill = Brushes.Transparent,
-                StrokeThickness = 4,
-                Stroke = Brushes.LightBlue,
+                PointGeometrySize = 5,
+                Stroke = Brushes.Blue,
+                Values = new ChartValues<ObservablePoint>(toValues(prb))
             };
-            var Original3 = new LineSeries()
+            var _conv = new LineSeries()
             {
-                PointGeometry = null,
                 Fill = Brushes.Transparent,
-                StrokeThickness = 4,
-                Stroke = Brushes.LightBlue,
+                PointGeometrySize = 5,
+                Stroke = Brushes.Blue,
+                Values = new ChartValues<ObservablePoint>(toValues(cnv))
             };
-            Original1.Values = new ChartValues<ObservablePoint>(toValues(fb));
-            Original2.Values = new ChartValues<ObservablePoint>(toValues(prb));
-            Original3.Values = new ChartValues<ObservablePoint>(toValues(cnv));
-            feedback = new SeriesCollection
+
+            feedback = new SeriesCollection()
             {
-                Original1
+                _feedback
             };
-            probe = new SeriesCollection
+            probe = new SeriesCollection()
             {
-                Original2
+                _probe
             };
-            conv = new SeriesCollection
+            conv = new SeriesCollection()
             {
-                Original3
+                _conv
             };
+
+
 
         }
 

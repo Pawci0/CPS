@@ -85,14 +85,10 @@ namespace Visualization
                 antennaSwitch = true;
                 signalOneVariables.Content = new AntennaVariables(ref chart);
                 signalTwoVariables.Content = null;
-               
-            
             }
         }
         public void load(object sender, RoutedEventArgs e)
         {
-            var filePath = string.Empty;
-
             try
             {
                 // Open the text file using a stream reader.
@@ -104,7 +100,6 @@ namespace Visualization
                 if ((bool) openFileDialog.ShowDialog())
                 {
                     //Get the path of specified file
-                    filePath = openFileDialog.FileName;
 
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();

@@ -8,7 +8,7 @@ namespace Lib.Antenna
     {
         private static readonly Random _random = new Random();
 
-        public static List<(double, double)> CalculateAntenna(int howManyBasicSignals, double startDistance, AntennaParameters antennaParameters)
+        public static List<(double, double)> CalculateAntenna(int howManyBasicSignals, double startDistance, AntennaParameters antennaParameters, out RealSignal probing, out RealSignal feedback, out RealSignal correlationS )
         {
             var result = new List<(double, double)>();
             var amplitudes = new List<double>();
@@ -34,6 +34,13 @@ namespace Lib.Antenna
                     SignalOperations.CorrelationUsingConvolution(probingSignal, feedbackSignal);
                 result.Add((realDistance, CalculateDistance(correlation, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal, antennaParameters.SpeedOfSignalPropagationInEnvironment)));
             }
+
+            probing = CreateSignal(amplitudes, periods, 0 - duration, duration,
+                antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
+            feedback = CreateSignal(amplitudes, periods, 0 - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
+            correlationS = new RealSignal(0 - duration, null,
+                antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal,
+                SignalOperations.CorrelationUsingConvolution(probing, feedback));
             return result;
         }
 

@@ -83,8 +83,10 @@ namespace Visualization
             if (!antennaSwitch)
             {
                 antennaSwitch = true;
-                signalOneVariables.Content = new AntennaVariables();
+                signalOneVariables.Content = new AntennaVariables(ref chart);
                 signalTwoVariables.Content = null;
+               
+            
             }
         }
         public void load(object sender, RoutedEventArgs e)

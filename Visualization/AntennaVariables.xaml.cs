@@ -41,10 +41,13 @@ namespace Visualization
 
         private AntennaParameters Parameters { get; set; }
 
-        public AntennaVariables()
+        private Frame chart;
+
+        public AntennaVariables(ref Frame chart)
         {
             InitializeComponent();
-            DataContext = this;       
+            DataContext = this;
+            this.chart = chart;
         }
 
         public void antennaInfo(object sender, RoutedEventArgs e)
@@ -52,7 +55,8 @@ namespace Visualization
             Parameters = new AntennaParameters(PeriodOfTheProbeSignal, SamplingFrequencyOfTheProbeAndFeedbackSignal,
                 LengthOfBuffersOfDiscreteSignals, ReportingPeriodOfDistance,
                 SimulatorTimeUnit, RealSpeedOfTheObject, SpeedOfSignalPropagationInEnvironment);
-            var result = Antenna.CalculateAntenna(NumberOfBasicSignals, 0, Parameters);
+            var result = Antenna.CalculateAntenna(NumberOfBasicSignals, 0, Parameters, out var realSignal, out var signal, out var correlationS);
+            chart.Content = new Antennas(realSignal, signal, correlationS);
             string s = "Real distance \t Calculated distance \t delta\n";
             foreach (var val in result)
             {

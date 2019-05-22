@@ -84,15 +84,12 @@ namespace Visualization
             if (!antennaSwitch)
             {
                 antennaSwitch = true;
-                signalOneVariables.Content = new AntennaVariables();
+                signalOneVariables.Content = new AntennaVariables(ref chart);
                 signalTwoVariables.Content = null;
             }
         }
         public void load(object sender, RoutedEventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
-
             try
             {
                 // Open the text file using a stream reader.
@@ -104,7 +101,6 @@ namespace Visualization
                 if ((bool) openFileDialog.ShowDialog())
                 {
                     //Get the path of specified file
-                    filePath = openFileDialog.FileName;
 
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
@@ -161,20 +157,12 @@ namespace Visualization
         public void ShowSecond(object sender, RoutedEventArgs e)
         {
             var s2 = (signalTwoVariables.Content as SignalVariables);
-            ShowSignal(s2.GetSignal(), s2);
+            ShowSignal(s2?.GetSignal(), s2);
         }
 
         public void UpdateGraph(SignalVariables sv)
         {
-            (chart.Content as SignalPage).Update(Signal, sv, ConnectPoints);
-            //if (chartSwitch)
-            //{
-            //    chart.Content = new Chart(Signal, ConnectPoints);
-            //}
-            //else
-            //{
-            //    chart.Content = new Histogram(Signal);
-            //}
+            (chart.Content as SignalPage)?.Update(Signal, sv, ConnectPoints);
         }
 
         private void ShowResult(object sender, RoutedEventArgs e)
@@ -183,7 +171,7 @@ namespace Visualization
             var s2 = (signalTwoVariables.Content as SignalVariables);
             try
             {
-                Signal = s1.GetSignal();
+                Signal = s1?.GetSignal();
                 if (s2.IsValid())
                 {
                     Signal = EnumConverter.Operation(SelectedOperation, Signal, s2.GetSignal());
@@ -201,7 +189,6 @@ namespace Visualization
             Signal = signal;
             real = Signal;
             ConnectPoints = (sv.SelectedSignal != SignalEnum.KroneckerDelta && sv.SelectedSignal != SignalEnum.ImpulsiveNoise);
-            //ConnectPoints = false;
             UpdateGraph(sv);
         }
 

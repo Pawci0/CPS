@@ -43,8 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACUtils.cs" />
-    <Compile Include="Antenna.cs" />
-    <Compile Include="AntennaParameters.cs" />
+    <Compile Include="Antenna\Antenna.cs" />
+    <Compile Include="Antenna\AntennaParameters.cs" />
     <Compile Include="Filter\Filter.cs" />
     <Compile Include="Filter\Pass\HighPass.cs" />
     <Compile Include="Filter\Pass\IPass.cs" />

@@ -49,7 +49,7 @@ namespace Visualization
                     return SignalOperations.AddSignals(one, two);
                 case OperationEnum.Subtract:
                     return SignalOperations.SubtractSignals(one, two);
-                case OperationEnum.Mulltiply:
+                case OperationEnum.Multiply:
                     return SignalOperations.MultiplySignals(one, two);
                 case OperationEnum.Divide:
                     return SignalOperations.DivideSignals(one, two);

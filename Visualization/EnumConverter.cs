@@ -1,4 +1,7 @@
 ﻿using Lib;
+using Lib.Filter;
+using Lib.Filter.Pass;
+using Lib.Filter.Window;
 using System;
 using System.Collections.Generic;
 using Visualization;
@@ -55,6 +58,38 @@ namespace Visualization
                 case OperationEnum.None:
                 default:
                     return one;
+            }
+        }
+
+        public static IWindow ConvertTo(WindowEnum value)
+        {
+            switch (value)
+            {
+                case WindowEnum.BlackmanWindow:
+                    return new BlackmanWindow();
+                case WindowEnum.HammingWindow:
+                    return new HammingWindow();
+                case WindowEnum.HanningWindow:
+                    return new HanningWindow();
+                case WindowEnum.RectangularWindow:
+                    return new RectangularWindow();
+                default:
+                    return null;
+            }
+        }
+
+        public static IPass ConvertTo(PassEnum value)
+        {
+            switch (value)
+            {
+                case PassEnum.HighPass:
+                    return new HighPass();
+                case PassEnum.MidPass:
+                    return new MidPass();
+                case PassEnum.LowPass:
+                    return new LowPass();
+                default:
+                    return null;
             }
         }
     }

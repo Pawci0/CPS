@@ -6,6 +6,7 @@ using System.Windows;
 using Microsoft.Win32;
 using static Lib.SignalOperations;
 using static Lib.Signals;
+using System.Threading.Tasks;
 
 namespace Visualization
 {
@@ -224,6 +225,12 @@ namespace Visualization
                     PeakSignalToNoiseRatio(Signal, quantized), MaximumDifference(Signal, quantized), EffectiveNumberOfBits(Signal, quantized));
                 MessageBox.Show(s, "Info");
             }
+        }
+
+        public void filters(object sender, RoutedEventArgs e)
+        {
+            Window window = new FilterWindow();
+            window.Show();
         }
     }
 }

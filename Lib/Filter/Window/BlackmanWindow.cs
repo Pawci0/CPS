@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lib.Filter.Window
 {
-    class BlackmanWindow : IWindow
+    public class BlackmanWindow : IWindow
     {
         public List<double> Generate(int n, int M)
         {

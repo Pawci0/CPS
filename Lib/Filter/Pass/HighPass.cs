@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lib.Filter.Pass
 {
-    class HighPass : IPass
+    public class HighPass : IPass
     {
         public double CalculateK(double f0, double fp)
         {

@@ -45,6 +45,8 @@ namespace Visualization
 
         public override void Update(RealSignal newSignal, SignalVariables sv, bool connectPoints)
         {
+            if (newSignal == null)
+                return;;
             TruncateSeries();
             if (connectPoints)
             {

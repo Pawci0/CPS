@@ -20,6 +20,7 @@
 
         <Frame Grid.Column="0" x:Name="signalVariables"/>
         <Frame Grid.Column="1" x:Name="filterVariables"/>
-        <Button Grid.Row="1" Name="res" Content="Show result" Click="result"/>
+        <Button Grid.Row="1" Name="res" Content="Show result" Click="showResult"/>
+        <Frame Grid.Column="2" x:Name="chart"/>
     </Grid>
 </Window>

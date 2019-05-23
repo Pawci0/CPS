@@ -23,8 +23,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Page.Resources>
-    <    Margin="10 5 10 5" Foreground="Black" Header=" Filtr " >
-        <Grid>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -56,5 +55,4 @@
             <Button Click="calculateK" Content="Calculate K" Margin="50 7 50 7"/>
         </StackPanel>
     </Grid>
-    </>
 </Page>

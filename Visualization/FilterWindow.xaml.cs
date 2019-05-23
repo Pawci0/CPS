@@ -24,10 +24,17 @@ namespace Visualization
             InitializeComponent();
             signalVariables.Content = new SignalVariables();
             filterVariables.Content = new FilterVariables();
+            chart.Content = new FilterPage();
             DataContext = this;
         }
 
-        private void result(object sender, RoutedEventArgs e) { }
+        private void showResult(object sender, RoutedEventArgs e)
+        {
+            var signal = (signalVariables.Content as SignalVariables).GetSignal();
 
+            var filter = (filterVariables.Content as FilterVariables).GetFilter();
+
+            (chart.Content as FilterPage).Update(signal, filter);
+        }
     }
 }

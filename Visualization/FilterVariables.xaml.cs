@@ -26,7 +26,7 @@ namespace Visualization
 
         public PassEnum SelectedPass { get; set; }
 
-        public double M { get; set; }
+        public int M { get; set; }
 
         public double K { get; set; }
 
@@ -55,7 +55,7 @@ namespace Visualization
         {
             var pass = EnumConverter.ConvertTo(SelectedPass);
             var window = EnumConverter.ConvertTo(SelectedWindow);
-            return new Filter(pass, window);
+            return new Filter(pass, window, M, K);
         }
 
         private void calculateK(object sender, RoutedEventArgs e)

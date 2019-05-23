@@ -23,7 +23,6 @@ namespace Visualization
         {
             InitializeComponent();
             antenaVariables.Content = new AntennaVariables(ref chart);
-            chart.Content = new AntennaPage();
             DataContext = this;
         }
 

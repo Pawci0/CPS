@@ -31,14 +31,22 @@ Celem ćwiczenia jest zaimplementowanie:
 \section{Wstęp teoretyczny}
 
 Program z zadania 1 i 2 został rozszerzony o dodadtkowe funkcjonalnosci. Wykresy generowane są przy użyciu biblioteki LiveCharts \cite{lv}. GUI aplikacji zostało stworzone przy użyciu biblioteki WPF \cite{wpf}.
-\\Interfejs został rozszerzony o interfejs anteny:
+\\Interfejs został rozszerzony o interfejs anteny oraz o interfejs filtrów:
 \begin{figure}[H]
  \centering
- \includegraphics[width=15cm]{images/gui1.PNG}
+ \includegraphics[width=15cm]{images/antenaWindow.PNG}
  \vspace{-0.3cm}
  \caption{Interfejs graficzny anteny}
  \label{gui}
 \end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=15cm]{images/filterWindow.PNG}
+ \vspace{-0.3cm}
+ \caption{Interfejs graficzny filtracji}
+ \label{gui}
+\end{figure}
+
 
 Aby wygenerować sygnały należy w lewej kolumnie wypełnić parametry i nacisnąć przycisk "i". 
 \section{Eksperymenty i wyniki}
@@ -48,11 +56,86 @@ Aby wygenerować sygnały należy w lewej kolumnie wypełnić parametry i nacisn
 % PODROZDZIAŁ PT. EKSPERYMENT NR 1 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Do zaprezentowania możliwosci korelacyjnego czujnika odległosci przedstawimy eksperyment w którym dokonamy pomiarów dla 3 sygnałów, każdy z innymi parametrami sygnałów.
-
 \subsection{Eksperyment nr 1 }
+\subsubsection{Filtracja sygnałów}
+Celem tego eksperymentu zaprezentowanie możliwosci programu do wykonania filtracji sygnałów
+
+\subsubsection{Rezultat}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=14cm]{images/lowham.PNG}
+ \vspace{-0.3cm}
+ \caption{Filtracja dolnoprzepustowa z oknem Hamminga}
+ \label{gui}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=14cm]{images/midhan.PNG}
+ \vspace{-0.3cm}
+ \caption{Filtracja srodkowoprzepustowa z oknem prostokątnym}
+ \label{gui}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=14cm]{images/midrect.PNG}
+ \vspace{-0.3cm}
+ \caption{Filtracja srodkowoprzepustowa z oknem Hanninga}
+ \label{gui}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=14cm]{images/highblack.PNG}
+ \vspace{-0.3cm}
+ \caption{Filtracja górnoprzepustowa z oknem Blackmana}
+ \label{gui}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PODROZDZIAŁ PT. EKSPERYMENT NR 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Eksperyment nr 2 }
+\subsubsection{Operacja splotu i korelacji}
+Celem tego eksperymentu było zaprezenotwanie możliwosći programu do wykonania operacji splotu i korelacji
+
+\subsubsection{Rezultat}
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=14cm]{images/conv.PNG}
+ \vspace{-0.3cm}
+ \caption{Wykres wyniku operacji splotu}
+ \label{gui}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=14cm]{images/corel.PNG}
+ \vspace{-0.3cm}
+ \caption{Wykres wyniku operacji korelacji}
+ \label{gui}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=14cm]{images/corelconv.PNG}
+ \vspace{-0.3cm}
+ \caption{Wykres wyniku operacji korelacji wyliczonej za pomocą operacji splotu}
+ \label{gui}
+\end{figure}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PODROZDZIAŁ PT. EKSPERYMENT NR 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\subsection{Eksperyment nr 3 }
 \subsubsection{Korelacyjny czujnik odległosci}
-Celem tego eksperymentu było wygenerowanie szumu o rozkladzie jednostajnym.
+Do zaprezentowania możliwosci korelacyjnego czujnika odległosci przedstawimy eksperyment w którym dokonamy pomiarów dla 3 sygnałów, każdy z innymi parametrami sygnałów.
 
 
 \subsubsection{Rezultat}
@@ -61,7 +144,7 @@ Celem tego eksperymentu było wygenerowanie szumu o rozkladzie jednostajnym.
  \centering
  \includegraphics[width=14cm]{images/a1.PNG}
  \vspace{-0.3cm}
- \caption{Wykres szumu o rozkladzie jednostajnym}
+ \caption{Korelacyjny czujnik odległosci}
  \label{gui}
 \end{figure}
 
@@ -81,137 +164,6 @@ Celem tego eksperymentu było wygenerowanie szumu o rozkladzie jednostajnym.
  \caption{Korelacyjny czujnik odległosci}
  \label{gui}
 \end{figure}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PODROZDZIAŁ PT. EKSPERYMENT NR 2
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{Eksperyment nr 2 }
-\subsubsection{Generowanie sygnału sinusoidalnego wyprostowanego jednopołówkowo}
-Celem tego eksperymentu było wygenerowanie szumu o rozkladzie jednostajnym.
-
-
-\subsubsection{Rezultat}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/hsinline.PNG}
- \vspace{-0.3cm}
- \caption{Wykres sygnału sinusoidalnego wyprostowanego jednopołówkowo}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/hsinac.PNG}
- \vspace{-0.3cm}
- \caption{Konwersja A/C , poziom kwantyzacji = 4}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=7cm]{images/hsininfo.PNG}
- \vspace{-0.3cm}
- \caption{Wyliczone wartosci dla sygnału sinusoidalnego wyprostowanego jednopołówkowo  , poziom kwantyzacji = 4}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/hsinac1.PNG}
- \vspace{-0.3cm}
- \caption{Konwersja A/C , poziom kwantyzacji = 2}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=7cm]{images/hsininfo1.PNG}
- \vspace{-0.3cm}
- \caption{Wyliczone wartosci dla sygnału sinusoidalnego wyprostowanego jednopołówkowo  , poziom kwantyzacji = 2}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/hsinca.PNG}
- \vspace{-0.3cm}
- \caption{Konwersja C/A}
- \label{gui}
-\end{figure}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PODROZDZIAŁ PT. EKSPERYMENT NR 3
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{Eksperyment nr 3 }
-\subsubsection{Różnica sygnału symetrycznego prostokątnego i sygnału sinusoidalnego}
-Celem tego eksperymentu było wygenerowanie sygnału będącego różnicą sygnału symetrycznego prostokątnego i sygnału sinusoidalnego
-
-
-\subsubsection{Rezultat}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/addline.PNG}
- \vspace{-0.3cm}
- \caption{Wykres różnicy sygnału symetrycznego prostokątnego i sygnału sinusoidalnego}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/addac.PNG}
- \vspace{-0.3cm}
- \caption{Konwersja A/C, poziom kwantyzacji = 5}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=7cm]{images/addinfo.PNG}
- \vspace{-0.3cm}
- \caption{Wyliczone wartosci dla różnicy sygnału symetrycznego prostokątnego i sygnału sinusoidalnego, poziom kwantyzacji = 5}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/addac1.PNG}
- \vspace{-0.3cm}
- \caption{Konwersja A/C, poziom kwantyzacji = 11}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=7cm]{images/addacinfo1.PNG}
- \vspace{-0.3cm}
- \caption{Wyliczone wartosci dla różnicy sygnału symetrycznego prostokątnego i sygnału sinusoidalnego, poziom kwantyzacji = 11}
- \label{gui}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/addca.PNG}
- \vspace{-0.3cm}
- \caption{Konwersja C/A}
- \label{gui}
-\end{figure}
-
-
-
-
 
 
 \newpage

@@ -16,7 +16,9 @@
 
         public double SpeedOfSignalPropagationInEnvironment { get; }
 
-        public AntennaParameters(double periodOfTheProbeSignal, double samplingFrequencyOfTheProbeAndFeedbackSignal, int lengthOfBuffersOfDiscreteSignals, double reportingPeriodOfDistance, double simulatorTimeUnit, double realSpeedOfTheObject, double speedOfSignalPropagationInEnvironment)
+        public int AmountOfMeasuringPoints { get; }
+
+        public AntennaParameters(double periodOfTheProbeSignal, double samplingFrequencyOfTheProbeAndFeedbackSignal, int lengthOfBuffersOfDiscreteSignals, double reportingPeriodOfDistance, double simulatorTimeUnit, double realSpeedOfTheObject, double speedOfSignalPropagationInEnvironment, int amountOfMeasuringPoints)
         {
             PeriodOfTheProbeSignal = periodOfTheProbeSignal;
             SamplingFrequencyOfTheProbeAndFeedbackSignal = samplingFrequencyOfTheProbeAndFeedbackSignal;
@@ -25,6 +27,8 @@
             SimulatorTimeUnit = simulatorTimeUnit;
             RealSpeedOfTheObject = realSpeedOfTheObject;
             SpeedOfSignalPropagationInEnvironment = speedOfSignalPropagationInEnvironment;
+            if(amountOfMeasuringPoints > 0)
+                AmountOfMeasuringPoints = amountOfMeasuringPoints;
         }
     }
 }

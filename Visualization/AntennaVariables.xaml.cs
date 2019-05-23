@@ -39,6 +39,8 @@ namespace Visualization
 
         public double SpeedOfSignalPropagationInEnvironment { get; set; } = 3000;
 
+        public int AmountOfMeasuringPoints { get; set; } = 12;
+
         private AntennaParameters Parameters { get; set; }
 
         private Frame chart;
@@ -54,7 +56,7 @@ namespace Visualization
         {
             Parameters = new AntennaParameters(PeriodOfTheProbeSignal, SamplingFrequencyOfTheProbeAndFeedbackSignal,
                 LengthOfBuffersOfDiscreteSignals, ReportingPeriodOfDistance,
-                SimulatorTimeUnit, RealSpeedOfTheObject, SpeedOfSignalPropagationInEnvironment);
+                SimulatorTimeUnit, RealSpeedOfTheObject, SpeedOfSignalPropagationInEnvironment, AmountOfMeasuringPoints);
             var result = Antenna.CalculateAntenna(NumberOfBasicSignals, 0, Parameters, out var realSignal, out var signal, out var correlationS);
             chart.Content = new AntennaPage(realSignal, signal, correlationS);
             string s = "Real distance \t Calculated distance \t delta\n";

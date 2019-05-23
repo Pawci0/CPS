@@ -13,6 +13,8 @@ namespace Visualization
         Subtract,
         Multiply,
         Divide,
-        Convolution
+        Convolution,
+        Correlation,
+        CorrelationUsingConvolution
     }
 }

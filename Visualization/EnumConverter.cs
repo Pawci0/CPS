@@ -55,6 +55,10 @@ namespace Visualization
                     return SignalOperations.DivideSignals(one, two);
                 case OperationEnum.Convolution:
                     return SignalOperations.Convolution(one, two);
+                case OperationEnum.Correlation:
+                    return new RealSignal(SignalOperations.Correlation(one, two));
+                case OperationEnum.CorrelationUsingConvolution:
+                    return new RealSignal(SignalOperations.CorrelationUsingConvolution(one, two));
                 case OperationEnum.None:
                 default:
                     return one;

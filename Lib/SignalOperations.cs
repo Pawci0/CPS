@@ -262,26 +262,32 @@ namespace Lib
             return result;
         }
 
+        public static List<double> Convolution(List<double> one, List<double> two)
+        {
+            var resultPoints = new List<double>();
+            int resultLength = one.Count + two.Count - 1;
+
+            for (int n = 0; n < resultLength; n++)
+            {
+                double sum = 0;
+                int kmin = (n >= two.Count - 1) ? n - (two.Count - 1) : 0;
+                int kmax = (n < one.Count - 1) ? n : one.Count - 1;
+
+                for (int k = kmin; k <= kmax; k++)
+                {
+                    sum += one[k] * two[n - k];
+                }
+                resultPoints.Add(sum);
+            }
+            return resultPoints;
+        }
+
         public static RealSignal Convolution(RealSignal one, RealSignal two)
         {
             var first = one.Points;
             var second = two.Points;
 
-            var resultPoints = new List<double>();
-            int resultLength = first.Count + second.Count - 1;
-
-            for (int n = 0; n < resultLength; n++)
-            {
-                double sum = 0;
-                int kmin = (n >= second.Count - 1) ? n - (second.Count - 1) : 0;
-                int kmax = (n < first.Count - 1) ? n : first.Count - 1;
-
-                for (int k = kmin; k <= kmax; k++)
-                {
-                    sum += first[k] * second[n - k];
-                }
-                resultPoints.Add(sum);
-            }
+            var resultPoints = Convolution(first, second);
 
             RealSignal result = new RealSignal(resultPoints);
 

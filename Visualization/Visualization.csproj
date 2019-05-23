@@ -65,8 +65,11 @@
     <Compile Include="AC.xaml.cs">
       <DependentUpon>AC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Antennas.xaml.cs">
-      <DependentUpon>Antennas.xaml</DependentUpon>
+    <Compile Include="AntennaWindow.xaml.cs">
+      <DependentUpon>AntennaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AntennaPage.xaml.cs">
+      <DependentUpon>AntennaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AntennaVariables.xaml.cs">
       <DependentUpon>AntennaVariables.xaml</DependentUpon>
@@ -101,7 +104,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Antennas.xaml">
+    <Page Include="AntennaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AntennaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -22,13 +22,15 @@ namespace Visualization
     /// <summary>
     /// Interaction logic for Antennas.xaml
     /// </summary>
-    public partial class Antennas : Page
+    public partial class AntennaPage : Page
     {
         public SeriesCollection feedback { get; set; }
         public SeriesCollection probe { get; set; }
         public SeriesCollection conv { get; set; }
 
-        public Antennas(RealSignal fb,RealSignal prb,RealSignal cnv)
+        public AntennaPage() { }
+
+        public AntennaPage(RealSignal fb,RealSignal prb,RealSignal cnv)
         {
             InitializeComponent();
             DataContext = this;

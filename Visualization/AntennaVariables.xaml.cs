@@ -56,7 +56,7 @@ namespace Visualization
                 LengthOfBuffersOfDiscreteSignals, ReportingPeriodOfDistance,
                 SimulatorTimeUnit, RealSpeedOfTheObject, SpeedOfSignalPropagationInEnvironment);
             var result = Antenna.CalculateAntenna(NumberOfBasicSignals, 0, Parameters, out var realSignal, out var signal, out var correlationS);
-            chart.Content = new Antennas(realSignal, signal, correlationS);
+            chart.Content = new AntennaPage(realSignal, signal, correlationS);
             string s = "Real distance \t Calculated distance \t delta\n";
             foreach (var val in result)
             {

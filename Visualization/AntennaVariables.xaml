@@ -20,14 +20,9 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
             <RowDefinition Height="18*"/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
-        <ComboBox Grid.Row="0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
-                    SelectedItem="{Binding Path=SelectedSignal}" VerticalContentAlignment="Center">
-        </ComboBox>
-        <StackPanel Grid.Row="1" Margin="0,0,0,-273" Grid.RowSpan="2" >
+        <StackPanel Grid.Row="0" Margin="0,0,0,-273" Grid.RowSpan="2" >
 
             <!--<Label Content="Basic:" FontWeight="Bold"/>-->
 
@@ -63,7 +58,7 @@
             <TextBox Name="speedOfSignalPropagationInEnvironment" Margin="2"
                      Text="{Binding SpeedOfSignalPropagationInEnvironment, Mode=TwoWay}"/>
 
-            <Button Click="antennaInfo">
+            <!--<Button Click="antennaInfo">
                 <Image Source="icon.png" RenderTransformOrigin="0.5,0.5" Height="57" Width="91">
                     <Image.RenderTransform>
                         <TransformGroup>
@@ -74,7 +69,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-            </Button>
+            </Button>-->
 
         </StackPanel>
     </Grid>

@@ -81,12 +81,14 @@ namespace Visualization
 
         public void antenna(Object sender, RoutedEventArgs e)
         {
-            if (!antennaSwitch)
-            {
-                antennaSwitch = true;
-                signalOneVariables.Content = new AntennaVariables(ref chart);
-                signalTwoVariables.Content = null;
-            }
+            Window window = new AntennaWindow();
+            window.Show();
+            //if (!antennaSwitch)
+            //{
+            //    antennaSwitch = true;
+            //    signalOneVariables.Content = new AntennaVariables(ref chart);
+            //    signalTwoVariables.Content = null;
+            //}
         }
         public void load(object sender, RoutedEventArgs e)
         {

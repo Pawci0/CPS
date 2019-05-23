@@ -18,7 +18,7 @@ namespace Lib.Filter.Pass
             List<double> result = new List<double>();
             int center = (M - 1) / 2;
 
-            for (int i = 1; i <= M; i++)
+            for (int i = 0; i < M; i++)
             {
                 double value;
                 if (i == center)

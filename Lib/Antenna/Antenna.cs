@@ -24,7 +24,7 @@ namespace Lib.Antenna
             var duration = antennaParameters.LengthOfBuffersOfDiscreteSignals /
                            antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal;
 
-            for (var i = 0.0; i < 12.0 * antennaParameters.ReportingPeriodOfDistance; i += antennaParameters.ReportingPeriodOfDistance)
+            for (var i = 0.0; i < antennaParameters.AmountOfMeasuringPoints * antennaParameters.ReportingPeriodOfDistance; i += antennaParameters.ReportingPeriodOfDistance)
             {
                 var realDistance = startDistance + i * antennaParameters.RealSpeedOfTheObject;
                 var propagationTimeToAndFromObject = 2 * (realDistance / antennaParameters.SpeedOfSignalPropagationInEnvironment);

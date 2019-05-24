@@ -58,6 +58,10 @@
             <TextBox Name="speedOfSignalPropagationInEnvironment" Margin="2"
                      Text="{Binding SpeedOfSignalPropagationInEnvironment, Mode=TwoWay}"/>
 
+            <Label Content="Amount of measuring points" Margin="2" />
+            <TextBox Name="amountOfMeasuringPoints" Margin="2"
+                     Text="{Binding AmountOfMeasuringPoints, Mode=TwoWay}"/>
+
             <!--<Button Click="antennaInfo">
                 <Image Source="icon.png" RenderTransformOrigin="0.5,0.5" Height="57" Width="91">
                     <Image.RenderTransform>

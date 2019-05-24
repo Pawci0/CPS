@@ -93,6 +93,10 @@ namespace Visualization
             Filter.Values = toChartValues(filterPoints);
             Result.Values = toChartValues(resultPoints);
         }
+        public void UpdateSignal(RealSignal signal)
+        {
+            Signal.Values = toChartValues(signal.ToDrawGraph());
+        }
 
         private static ChartValues<ObservablePoint> toChartValues(List<(double x, double y)> list)
         {
@@ -104,5 +108,6 @@ namespace Visualization
 
             return new ChartValues<ObservablePoint>(result);
         }
+
     }
 }

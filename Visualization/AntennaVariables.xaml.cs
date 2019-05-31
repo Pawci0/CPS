@@ -41,15 +41,22 @@ namespace Visualization
 
         public int AmountOfMeasuringPoints { get; set; } = 12;
 
+        public int Index { get; set; } = 0;
+
+
         private AntennaParameters Parameters { get; set; }
 
         private Frame chart;
 
+        private Random seed;
+        private Antenna antenna;
         public AntennaVariables(ref Frame chart)
         {
             InitializeComponent();
             DataContext = this;
             this.chart = chart;
+            seed = new Random();
+            antenna = new Antenna(seed);
         }
 
         public void antennaInfo(object sender, RoutedEventArgs e)
@@ -57,8 +64,9 @@ namespace Visualization
             Parameters = new AntennaParameters(PeriodOfTheProbeSignal, SamplingFrequencyOfTheProbeAndFeedbackSignal,
                 LengthOfBuffersOfDiscreteSignals, ReportingPeriodOfDistance,
                 SimulatorTimeUnit, RealSpeedOfTheObject, SpeedOfSignalPropagationInEnvironment, AmountOfMeasuringPoints);
-            var result = Antenna.CalculateAntenna(NumberOfBasicSignals, 0, Parameters, out var realSignal, out var signal, out var correlationS);
-            chart.Content = new AntennaPage(realSignal, signal, correlationS);
+
+            var result = antenna.CalculateAntenna(NumberOfBasicSignals, 0, Parameters, out var realSignal, out var signal, out var correlationS);
+            chart.Content = new AntennaPage(realSignal, Antenna.probedSingals[Index], correlationS);
             string s = "Real distance \t Calculated distance \t delta\n";
             foreach (var val in result)
             {

@@ -62,6 +62,10 @@
             <TextBox Name="amountOfMeasuringPoints" Margin="2"
                      Text="{Binding AmountOfMeasuringPoints, Mode=TwoWay}"/>
 
+            <Label Content="Probed index" Margin="2" />
+            <TextBox Name="index" Margin="2"
+                     Text="{Binding Index, Mode=TwoWay}"/>
+
             <!--<Button Click="antennaInfo">
                 <Image Source="icon.png" RenderTransformOrigin="0.5,0.5" Height="57" Width="91">
                     <Image.RenderTransform>

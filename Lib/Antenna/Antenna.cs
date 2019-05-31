@@ -6,18 +6,27 @@ namespace Lib.Antenna
 {
     public class Antenna
     {
-        private static readonly Random _random = new Random();
-
-        public static List<(double, double)> CalculateAntenna(int howManyBasicSignals, double startDistance, AntennaParameters antennaParameters, out RealSignal probing, out RealSignal feedback, out RealSignal correlationS )
+        public static List<RealSignal> probedSingals;
+        public Antenna(Random seed)
         {
+            _random = seed;
+            randomized = new List<double>();
+            for (int i = 0; i < 12 * 2; i++)
+                randomized.Add(_random.NextDouble());
+        }
+        private static Random _random;
+        private List<double> randomized;
+        public List<(double, double)> CalculateAntenna(int howManyBasicSignals, double startDistance, AntennaParameters antennaParameters, out RealSignal probing, out RealSignal feedback, out RealSignal correlationS )
+        {
+            probedSingals = new List<RealSignal>();
             var result = new List<(double, double)>();
             var amplitudes = new List<double>();
             var periods = new List<double>();
 
             for(var k = 0; k<howManyBasicSignals; k++)
             {
-                periods.Add(_random.NextDouble() * (antennaParameters.PeriodOfTheProbeSignal - 1e-10) + 1e-10);
-                amplitudes.Add(_random.NextDouble() * 50.0 + 1.0);
+                periods.Add(randomized[k]*(antennaParameters.PeriodOfTheProbeSignal - 1e-10) + 1e-10);
+                amplitudes.Add(randomized[2*k] * 50.0 + 1.0);
             } 
 
             periods[0] = antennaParameters.PeriodOfTheProbeSignal;
@@ -29,6 +38,7 @@ namespace Lib.Antenna
                 var realDistance = startDistance + i * antennaParameters.RealSpeedOfTheObject;
                 var propagationTimeToAndFromObject = 2 * (realDistance / antennaParameters.SpeedOfSignalPropagationInEnvironment);
                 var probingSignal = CreateSignal(amplitudes, periods, i - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
+                probedSingals.Add(probingSignal);
                 var feedbackSignal = CreateSignal(amplitudes, periods, i - propagationTimeToAndFromObject - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
                 var correlation =
                     SignalOperations.CorrelationUsingConvolution(probingSignal, feedbackSignal);

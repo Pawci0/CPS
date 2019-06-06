@@ -6,7 +6,6 @@ namespace Lib.Antenna
 {
     public class Antenna
     {
-        public static List<RealSignal> probedSingals;
         public Antenna(Random seed)
         {
             _random = seed;
@@ -16,9 +15,10 @@ namespace Lib.Antenna
         }
         private static Random _random;
         private List<double> randomized;
-        public List<(double, double)> CalculateAntenna(int howManyBasicSignals, double startDistance, AntennaParameters antennaParameters, out RealSignal probing, out RealSignal feedback, out RealSignal correlationS )
+        public List<(double, double)> CalculateAntenna(int howManyBasicSignals, double startDistance, AntennaParameters antennaParameters, out RealSignal probed, out List<RealSignal> probingSignals, out List<RealSignal> correlationSignals)
         {
-            probedSingals = new List<RealSignal>();
+            probingSignals = new List<RealSignal>();
+            correlationSignals = new List<RealSignal>();
             var result = new List<(double, double)>();
             var amplitudes = new List<double>();
             var periods = new List<double>();
@@ -38,19 +38,21 @@ namespace Lib.Antenna
                 var realDistance = startDistance + i * antennaParameters.RealSpeedOfTheObject;
                 var propagationTimeToAndFromObject = 2 * (realDistance / antennaParameters.SpeedOfSignalPropagationInEnvironment);
                 var probingSignal = CreateSignal(amplitudes, periods, i - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
-                probedSingals.Add(probingSignal);
+
                 var feedbackSignal = CreateSignal(amplitudes, periods, i - propagationTimeToAndFromObject - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
+                probingSignals.Add(feedbackSignal);
                 var correlation =
                     SignalOperations.CorrelationUsingConvolution(probingSignal, feedbackSignal);
+                var correlationS = new RealSignal(0 - duration, null,
+                    antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal,
+                    SignalOperations.CorrelationUsingConvolution(probingSignal, feedbackSignal));
+                correlationSignals.Add(correlationS);
                 result.Add((realDistance, CalculateDistance(correlation, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal, antennaParameters.SpeedOfSignalPropagationInEnvironment)));
             }
 
-            probing = CreateSignal(amplitudes, periods, 0 - duration, duration,
+            probed = CreateSignal(amplitudes, periods, 0 - duration, duration,
                 antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
-            feedback = CreateSignal(amplitudes, periods, 0 - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
-            correlationS = new RealSignal(0 - duration, null,
-                antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal,
-                SignalOperations.CorrelationUsingConvolution(probing, feedback));
+
             return result;
         }
 

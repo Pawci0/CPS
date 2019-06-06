@@ -76,17 +76,17 @@ namespace Visualization
             };
         }
 
-        public AC(RealSignal signal) : this()
+        public AC(RealSignal signal, SignalVariables sv) : this()
         {
             Signal = signal;
-            Update(signal);
+            Update(signal, sv);
         }
 
-        public override void Update(RealSignal newSignal, bool connectPoints = false)
+        public override void Update(RealSignal newSignal, SignalVariables sv, bool connectPoints = false)
         {
-            if (newSignal == null ||   Math.Abs(SignalVariables.SamplingFrequency % SignalVariables.QuantizationFreq) > 0.00001)
+            if (newSignal == null ||   Math.Abs(sv.SamplingFrequency % sv.QuantizationFreq) > 0.00001)
                 return;
-            int level = SignalVariables.QuantizationLevel;
+            int level = sv.QuantizationLevel;
             List<double> qvalues= new List<double>();
             qvalues.Add(newSignal.Points.Max<double>());
             qvalues.Add(newSignal.Points.Min<double>());
@@ -101,7 +101,7 @@ namespace Visualization
             }
 
 
-            var step = SignalVariables.SamplingFrequency / SignalVariables.QuantizationFreq;
+            var step = sv.SamplingFrequency / sv.QuantizationFreq;
             var points = new List<ObservablePoint>();
             var realPoints = new List<ObservablePoint>();
             var originalPoints = new List<ObservablePoint>();

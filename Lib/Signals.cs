@@ -4,6 +4,5 @@
     {
         public static RealSignal quantized;
         public static RealSignal real;
-
     }
 }

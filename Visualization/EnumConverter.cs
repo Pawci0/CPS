@@ -1,4 +1,7 @@
 ﻿using Lib;
+using Lib.Filter;
+using Lib.Filter.Pass;
+using Lib.Filter.Window;
 using System;
 using System.Collections.Generic;
 using Visualization;
@@ -46,13 +49,51 @@ namespace Visualization
                     return SignalOperations.AddSignals(one, two);
                 case OperationEnum.Subtract:
                     return SignalOperations.SubtractSignals(one, two);
-                case OperationEnum.Mulltiply:
+                case OperationEnum.Multiply:
                     return SignalOperations.MultiplySignals(one, two);
                 case OperationEnum.Divide:
                     return SignalOperations.DivideSignals(one, two);
+                case OperationEnum.Convolution:
+                    return SignalOperations.Convolution(one, two);
+                case OperationEnum.Correlation:
+                    return new RealSignal(SignalOperations.Correlation(one, two));
+                case OperationEnum.CorrelationUsingConvolution:
+                    return new RealSignal(SignalOperations.CorrelationUsingConvolution(one, two));
                 case OperationEnum.None:
                 default:
                     return one;
+            }
+        }
+
+        public static IWindow ConvertTo(WindowEnum value)
+        {
+            switch (value)
+            {
+                case WindowEnum.BlackmanWindow:
+                    return new BlackmanWindow();
+                case WindowEnum.HammingWindow:
+                    return new HammingWindow();
+                case WindowEnum.HanningWindow:
+                    return new HanningWindow();
+                case WindowEnum.RectangularWindow:
+                    return new RectangularWindow();
+                default:
+                    return null;
+            }
+        }
+
+        public static IPass ConvertTo(PassEnum value)
+        {
+            switch (value)
+            {
+                case PassEnum.HighPass:
+                    return new HighPass();
+                case PassEnum.MidPass:
+                    return new MidPass();
+                case PassEnum.LowPass:
+                    return new LowPass();
+                default:
+                    return null;
             }
         }
     }

@@ -29,7 +29,11 @@ namespace Lib
         public List<(double x, double y)> ToDrawGraph()
         {
             var x = Begin;
-            var span = 1.0 / SamplingFrequency;
+            double span = 1;
+            if (SamplingFrequency != 0)
+            {
+                span = 1.0 / SamplingFrequency;
+            }
             var result = new List<(double x, double y)>();
 
             foreach (var y in Points)

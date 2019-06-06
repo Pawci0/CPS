@@ -30,11 +30,11 @@ namespace Visualization
             if (signal != null)
             {
                 base.Signal = signal;
-                Update(signal);
+                Update(signal, null);
             }
         }
 
-        public override void Update(RealSignal newSignal, bool connectPoints=false)
+        public override void Update(RealSignal newSignal, SignalVariables sv, bool connectPoints=false)
         {
             var points = newSignal.ToDrawHistogram(newSignal.Interval);
             Series.Values = new ChartValues<int>(points.Select(x => x.value));

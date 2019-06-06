@@ -65,11 +65,31 @@
     <Compile Include="AC.xaml.cs">
       <DependentUpon>AC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AntennaWindow.xaml.cs">
+      <DependentUpon>AntennaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AntennaPage.xaml.cs">
+      <DependentUpon>AntennaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AntennaVariables.xaml.cs">
+      <DependentUpon>AntennaVariables.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CA.xaml.cs">
       <DependentUpon>CA.xaml</DependentUpon>
     </Compile>
     <Compile Include="Chart.xaml.cs">
       <DependentUpon>Chart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilterPage.xaml.cs">
+      <DependentUpon>FilterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PassEnum.cs" />
+    <Compile Include="WindowEnum.cs" />
+    <Compile Include="FilterVariables.xaml.cs">
+      <DependentUpon>FilterVariables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilterWindow.xaml.cs">
+      <DependentUpon>FilterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Histogram.xaml.cs">
       <DependentUpon>Histogram.xaml</DependentUpon>
@@ -84,11 +104,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AntennaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AntennaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AntennaVariables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Chart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilterVariables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,84 @@
+﻿<Page x:Class="Visualization.AntennaVariables"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Visualization"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="signalVariables">
+
+    <Page.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:SignalEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="0,0,0,-273" Grid.RowSpan="2" >
+
+            <!--<Label Content="Basic:" FontWeight="Bold"/>-->
+
+            <Label Content="Number of basic signals" Margin="2" />
+            <TextBox Name="numberOfBasicSignals" Margin="2"
+                     Text="{Binding NumberOfBasicSignals, Mode=TwoWay}"/>
+
+            <Label Content="Period Of The Probe Signal" Margin="2" />
+            <TextBox Name="periodOfTheProbeSignal" Margin="2"
+                            Text="{Binding PeriodOfTheProbeSignal, Mode=TwoWay}"/>
+
+            <Label Content="Sampling Frequency Of The Probe And Feedback Signal" Margin="2" />
+            <TextBox Name="samplingFrequencyOfTheProbeAndFeedbackSignal" Margin="2"
+                     Text="{Binding SamplingFrequencyOfTheProbeAndFeedbackSignal, Mode=TwoWay}"/>
+
+            <Label Content="Length Of Buffers Of Discrete Signals" Margin="2" />
+            <TextBox Name="lengthOfBuffersOfDiscreteSignals" Margin="2"
+                     Text="{Binding LengthOfBuffersOfDiscreteSignals, Mode=TwoWay}"/>
+
+            <Label Content="Reporting Period Of Distance" Margin="2" />
+            <TextBox Name="reportingPeriodOfDistance" Margin="2"
+                     Text="{Binding ReportingPeriodOfDistance, Mode=TwoWay}"/>
+
+            <Label Content="Simulator Time Unit" Margin="2" />
+            <TextBox Name="simulatorTimeUnit" Margin="2"
+                     Text="{Binding SimulatorTimeUnit, Mode=TwoWay}"/>
+
+            <Label Content="Real Speed Of The Object" Margin="2" />
+            <TextBox Name="realSpeedOfTheObject" Margin="2"
+                     Text="{Binding RealSpeedOfTheObject, Mode=TwoWay}"/>
+
+            <Label Content="Speed Of Signal Propagation In Environment" Margin="2" />
+            <TextBox Name="speedOfSignalPropagationInEnvironment" Margin="2"
+                     Text="{Binding SpeedOfSignalPropagationInEnvironment, Mode=TwoWay}"/>
+
+            <Label Content="Amount of measuring points" Margin="2" />
+            <TextBox Name="amountOfMeasuringPoints" Margin="2"
+                     Text="{Binding AmountOfMeasuringPoints, Mode=TwoWay}"/>
+
+            <Label Content="Probed index" Margin="2" />
+            <TextBox Name="index" Margin="2"
+                     Text="{Binding Index, Mode=TwoWay}"/>
+
+            <!--<Button Click="antennaInfo">
+                <Image Source="icon.png" RenderTransformOrigin="0.5,0.5" Height="57" Width="91">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.001"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>-->
+
+        </StackPanel>
+    </Grid>
+</Page>

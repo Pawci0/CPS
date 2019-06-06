@@ -36,6 +36,8 @@ namespace Visualization
                     return SignalGenerator.KroneckerDelta(amplitude, beginsAt, duration, samplingFrequency, jump);
                 case SignalEnum.ImpulsiveNoise:
                     return SignalGenerator.ImpulsiveNoise(amplitude, beginsAt, duration, samplingFrequency, probability);
+                case SignalEnum.S1Signal:
+                    return SignalGenerator.S1Signal(amplitude, beginsAt, duration, samplingFrequency, probability);
                 default:
                     return null;
             }

@@ -216,5 +216,17 @@ namespace Lib
 
             return new RealSignal(beginsAt, null, samplingFrequency, points);
         }
+
+        public static RealSignal S1Signal(double amplitude, double beginsAt, double duration, double samplingFrequency, double probability)
+        {
+            var points = new List<Double>();
+            var period = 1.0 / samplingFrequency;
+            for (var i = beginsAt; i < duration; i += period)
+            {
+                points.Add(2 * Math.Sin(Math.PI * i + Math.PI / 2) + 5 * Math.Sin(4 * Math.PI * i + Math.PI / 2));
+            }
+
+            return new RealSignal(beginsAt,null, samplingFrequency, points);
+        }
     }
 }

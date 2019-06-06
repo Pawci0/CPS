@@ -12,6 +12,7 @@
         Triangular,
         HeavisideStep,
         KroneckerDelta,
-        ImpulsiveNoise
+        ImpulsiveNoise,
+        S1Signal
     }
 }

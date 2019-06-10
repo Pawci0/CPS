@@ -9,7 +9,7 @@ namespace Lib
 
         public double SamplingFrequency { get; protected set; }
 
-        public List<T> Points { get; protected set; }
+        public List<T> Points { get;  set; }
 
         public double? Period { get; protected set; }
 

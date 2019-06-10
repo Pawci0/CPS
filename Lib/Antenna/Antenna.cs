@@ -40,12 +40,15 @@ namespace Lib.Antenna
                 var probingSignal = CreateSignal(amplitudes, periods, i - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
 
                 var feedbackSignal = CreateSignal(amplitudes, periods, i - propagationTimeToAndFromObject - duration, duration, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal);
+
                 probingSignals.Add(feedbackSignal);
                 var correlation =
                     SignalOperations.CorrelationUsingConvolution(probingSignal, feedbackSignal);
+                var reverseFeedback = feedbackSignal;
+                reverseFeedback.Points.Reverse();
                 var correlationS = new RealSignal(0 - duration, null,
                     antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal,
-                    SignalOperations.CorrelationUsingConvolution(probingSignal, feedbackSignal));
+                    SignalOperations.Correlation(probingSignal, reverseFeedback));
                 correlationSignals.Add(correlationS);
                 result.Add((realDistance, CalculateDistance(correlation, antennaParameters.SamplingFrequencyOfTheProbeAndFeedbackSignal, antennaParameters.SpeedOfSignalPropagationInEnvironment)));
             }

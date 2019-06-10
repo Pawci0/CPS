@@ -13,6 +13,7 @@ namespace Visualization
     public partial class MainWindow : Window
     {
         private RealSignal Signal { get; set; }
+        private RealSignal SecondSignal { get; set; }
         private bool chartSwitch = true;
         private int Interval { get; set; }
         public OperationEnum SelectedOperation { get; set; }
@@ -142,6 +143,58 @@ namespace Visualization
                 MessageBox.Show(error.Message);
             }
         }
+        public void load2(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Open the text file using a stream reader.
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+
+                openFileDialog.Filter = "sign (*.sign)|*.sign";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+                if ((bool)openFileDialog.ShowDialog())
+                {
+                    //Get the path of specified file
+
+                    //Read the contents of the file into a stream
+                    var fileStream = openFileDialog.OpenFile();
+
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        reader.ReadLine();
+                        var begins = Convert.ToDouble(reader.ReadLine());
+                        var periodStr = reader.ReadLine();
+                        double? period = null;
+                        if (periodStr != String.Empty)
+                            period = Convert.ToDouble(periodStr);
+                        var samplingFreq = Convert.ToDouble(reader.ReadLine());
+                        var pointsLine = reader.ReadLine();
+                        var points = pointsLine.Split(' ');
+                        List<double> pts = new List<double>();
+                        foreach (var point in points)
+                        {
+                            if (point != String.Empty)
+                                pts.Add(Convert.ToDouble(point));
+                        }
+
+                        SecondSignal = new RealSignal(begins, period, samplingFreq, pts);
+                        if (chartSwitch)
+                        {
+                            chart.Content = new Chart(Signal, ConnectPoints);
+                        }
+                        else
+                        {
+                            chart.Content = new Histogram(Signal);
+                        }
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
 
         public void ShowFirst(object sender, RoutedEventArgs e)
         {
@@ -177,6 +230,10 @@ namespace Visualization
                 if (s2.IsValid())
                 {
                     Signal = EnumConverter.Operation(SelectedOperation, Signal, s2.GetSignal());
+                }
+                else if (SecondSignal != null)
+                {
+                    Signal = EnumConverter.Operation(SelectedOperation, Signal, SecondSignal);
                 }
                 ShowSignal(Signal, s1);
             }

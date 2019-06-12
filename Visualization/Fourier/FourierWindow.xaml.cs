@@ -60,7 +60,6 @@ namespace Visualization
                                     pts.Add(new Complex(Convert.ToDouble(value[0]), Convert.ToDouble(value[1])));
 
                         signal = new ComplexSignal(beginsComplex, period, samplingFreq, pts);
-                        //(chart.Content as FilterPage).UpdateSignal(signal);
                     }
                 }
             }
@@ -75,6 +74,37 @@ namespace Visualization
             var s1sig = (variables.Content as FourierVariables).GetSignal();
 
             (chart.Content as FourierPage).Update(s1sig);
+        }
+
+        private void save(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (signal == null)
+                {
+                    MessageBox.Show("First you have to generate chart");
+                }
+                else
+                {
+                    var saveFileDialog = new SaveFileDialog
+                    {
+                        AddExtension = true,
+                        Filter = "sign (*.sign)|*.sign",
+                        DefaultExt = "sign",
+                        FileName = Title
+                    };
+                    saveFileDialog.ShowDialog();
+
+                    if (saveFileDialog.FileName.Length == 0)
+                        MessageBox.Show("No files selected");
+                    else
+                        signal.SaveToFile(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error: ", exception.Message);
+            }
         }
     }
 }

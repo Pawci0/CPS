@@ -278,5 +278,11 @@ namespace Visualization
             Window window = new FilterWindow();
             window.Show();
         }
+
+        private void fourier(object sender, RoutedEventArgs e)
+        {
+            Window window = new FourierWindow();
+            window.Show();
+        }
     }
 }

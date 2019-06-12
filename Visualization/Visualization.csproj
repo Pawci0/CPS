@@ -62,68 +62,68 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AC.xaml.cs">
+    <Compile Include="ACCA\AC.xaml.cs">
       <DependentUpon>AC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AntennaWindow.xaml.cs">
+    <Compile Include="Antenna\AntennaWindow.xaml.cs">
       <DependentUpon>AntennaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AntennaPage.xaml.cs">
+    <Compile Include="Antenna\AntennaPage.xaml.cs">
       <DependentUpon>AntennaPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AntennaVariables.xaml.cs">
+    <Compile Include="Antenna\AntennaVariables.xaml.cs">
       <DependentUpon>AntennaVariables.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CA.xaml.cs">
+    <Compile Include="ACCA\CA.xaml.cs">
       <DependentUpon>CA.xaml</DependentUpon>
     </Compile>
     <Compile Include="Chart.xaml.cs">
       <DependentUpon>Chart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FilterPage.xaml.cs">
+    <Compile Include="Filter\FilterPage.xaml.cs">
       <DependentUpon>FilterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FourierPage.xaml.cs">
+    <Compile Include="Fourier\FourierPage.xaml.cs">
       <DependentUpon>FourierPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FourierWindow.xaml.cs">
+    <Compile Include="Fourier\FourierWindow.xaml.cs">
       <DependentUpon>FourierWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PassEnum.cs" />
-    <Compile Include="ViewUtils.cs" />
-    <Compile Include="WindowEnum.cs" />
-    <Compile Include="FilterVariables.xaml.cs">
+    <Compile Include="Utils\PassEnum.cs" />
+    <Compile Include="Utils\ViewUtils.cs" />
+    <Compile Include="Utils\WindowEnum.cs" />
+    <Compile Include="Filter\FilterVariables.xaml.cs">
       <DependentUpon>FilterVariables.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FilterWindow.xaml.cs">
+    <Compile Include="Filter\FilterWindow.xaml.cs">
       <DependentUpon>FilterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Histogram.xaml.cs">
       <DependentUpon>Histogram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OperationEnum.cs" />
-    <Compile Include="SignalEnum.cs" />
-    <Compile Include="SignalPage.cs" />
+    <Compile Include="Utils\OperationEnum.cs" />
+    <Compile Include="Utils\SignalEnum.cs" />
+    <Compile Include="Utils\SignalPage.cs" />
     <Compile Include="SignalVariables.xaml.cs">
       <DependentUpon>SignalVariables.xaml</DependentUpon>
     </Compile>
-    <Page Include="AC.xaml">
+    <Page Include="ACCA\AC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AntennaWindow.xaml">
+    <Page Include="Antenna\AntennaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AntennaPage.xaml">
+    <Page Include="Antenna\AntennaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AntennaVariables.xaml">
+    <Page Include="Antenna\AntennaVariables.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CA.xaml">
+    <Page Include="ACCA\CA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,23 +131,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FilterPage.xaml">
+    <Page Include="Filter\FilterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FilterVariables.xaml">
+    <Page Include="Filter\FilterVariables.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FilterWindow.xaml">
+    <Page Include="Filter\FilterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FourierPage.xaml">
+    <Page Include="Fourier\FourierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FourierWindow.xaml">
+    <Page Include="Fourier\FourierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,7 +163,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EnumConverter.cs" />
+    <Compile Include="Utils\EnumConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

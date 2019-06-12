@@ -61,7 +61,7 @@
                 <Button Click="load2" Content="Load 2" Padding="20 7 20 7" />
                 <Button Click="antenna" Content="Antenna" Padding="20 7 20 7" />
                 <Button Click="filters" Content="Filters" Padding="20 7 20 7" />
-                <Button Click="fourier" Content="Filters" Padding="20 7 20 7" />
+                <Button Click="fourier" Content="Fourier" Padding="20 7 20 7" />
             </StackPanel>
             <Frame Grid.Row="1" x:Name="chart" NavigationUIVisibility="Hidden" />
 

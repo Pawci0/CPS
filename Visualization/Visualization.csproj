@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -82,6 +83,9 @@
     </Compile>
     <Compile Include="Filter\FilterPage.xaml.cs">
       <DependentUpon>FilterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fourier\FourierVariables.xaml.cs">
+      <DependentUpon>FourierVariables.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fourier\FourierPage.xaml.cs">
       <DependentUpon>FourierPage.xaml</DependentUpon>
@@ -141,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Filter\FilterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fourier\FourierVariables.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -17,8 +17,11 @@ namespace Visualization
         {
             InitializeComponent();
             DataContext = this;
+            variables.Content = new FourierVariables();
+            chart.Content = new FourierPage();
         }
 
+        private RealSignal s1Signal { get; set; }
         private ComplexSignal signal { get; set; }
 
         private void load(object sender, RoutedEventArgs e)
@@ -69,7 +72,9 @@ namespace Visualization
 
         private void showResult(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var s1sig = (variables.Content as FourierVariables).GetSignal();
+
+            (chart.Content as FourierPage).Update(s1sig);
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using MathNet.Numerics;
 
 namespace Lib
 {
@@ -96,10 +95,10 @@ namespace Lib
             using (var sw = new StreamWriter(path))
             {
                 sw.WriteLine(nameof(ComplexSignal));
-                sw.WriteLine(Begin);
+                sw.WriteLine(BeginsAtComplex.Real + "," + BeginsAtComplex.Imaginary);
                 sw.WriteLine(Period);
                 sw.WriteLine(SamplingFrequency);
-                foreach (var y in Points) sw.Write($"{y} ");
+                foreach (var y in Points) sw.Write($"{y.Real + "," + y.Imaginary} ");
             }
         }
     }

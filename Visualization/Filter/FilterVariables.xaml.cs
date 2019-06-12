@@ -42,7 +42,7 @@ namespace Visualization
             return new Filter(pass, window, M, K);
         }
 
-        private void calculateK(object sender, RoutedEventArgs e)
+        private void CalculateK(object sender, RoutedEventArgs e)
         {
             var pass = EnumConverter.ConvertTo(SelectedPass);
             K = pass.CalculateK(F0, Fp);

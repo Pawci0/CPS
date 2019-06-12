@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using Lib;
 using Microsoft.Win32;
+using System.Numerics;
 
 namespace Visualization
 {
@@ -15,9 +16,10 @@ namespace Visualization
         public FourierWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
-        private RealSignal signal { get; set; }
+        private ComplexSignal signal { get; set; }
 
         private void load(object sender, RoutedEventArgs e)
         {
@@ -39,20 +41,22 @@ namespace Visualization
                     using (var reader = new StreamReader(fileStream))
                     {
                         reader.ReadLine();
-                        var begins = Convert.ToDouble(reader.ReadLine());
+                        var begins = reader.ReadLine().Split(',');
+                        var beginsComplex = new Complex(Convert.ToDouble(begins[0]), Convert.ToDouble(begins[1]));
                         var periodStr = reader.ReadLine();
                         double? period = null;
                         if (periodStr != string.Empty)
                             period = Convert.ToDouble(periodStr);
                         var samplingFreq = Convert.ToDouble(reader.ReadLine());
                         var pointsLine = reader.ReadLine();
-                        var points = pointsLine.Split(' ');
-                        var pts = new List<double>();
-                        foreach (var point in points)
+                        var allPoints = pointsLine.Split(' ');
+                        var pts = new List<Complex>();
+                        foreach (var point in allPoints)
                             if (point != string.Empty)
-                                pts.Add(Convert.ToDouble(point));
+                                foreach (var value in point.Split(','))                                
+                                    pts.Add(new Complex(Convert.ToDouble(value[0]), Convert.ToDouble(value[1])));
 
-                        signal = new RealSignal(begins, period, samplingFreq, pts);
+                        signal = new ComplexSignal(beginsComplex, period, samplingFreq, pts);
                         //(chart.Content as FilterPage).UpdateSignal(signal);
                     }
                 }

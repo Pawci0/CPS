@@ -14,14 +14,14 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="FirstOne" HorizontalAlignment="Center" />
+        <Label Grid.Row="0" Content="{Binding firstTitle, Mode=OneWay}" HorizontalAlignment="Center" />
         <wpf:CartesianChart Series="{Binding firstChart, Mode=OneWay}" Grid.Row="0" LegendLocation="None"
                             Margin="10,10,10,10"
                             DisableAnimations="True" IsManipulationEnabled="False" Hoverable="False"
                             DataTooltip="{x:Null}" />
 
 
-        <Label Grid.Row="1" Content="Second One" HorizontalAlignment="Center" />
+        <Label Grid.Row="1" Content="{Binding secondTitle, Mode=OneWay}" HorizontalAlignment="Center" />
         <wpf:CartesianChart Series="{Binding secondChart, Mode=OneWay}" Grid.Row="1" LegendLocation="None"
                             Margin="10,10,10,10"
                             DisableAnimations="True" IsManipulationEnabled="False" Hoverable="False"

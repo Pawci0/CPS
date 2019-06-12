@@ -50,7 +50,7 @@
 
             <Label Content="fp" Margin="2" />
             <TextBox Name="fp" Margin="2" Text="{Binding Fp, Mode=TwoWay}" />
-            <Button Click="calculateK" Content="Calculate K" Margin="50 7 50 7" />
+            <Button Click="CalculateK" Content="Calculate K" Margin="50 7 50 7" />
         </StackPanel>
     </Grid>
 </Page>

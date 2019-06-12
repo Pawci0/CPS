@@ -90,6 +90,7 @@
       <DependentUpon>FourierWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\PassEnum.cs" />
+    <Compile Include="Utils\TransformationEnum.cs" />
     <Compile Include="Utils\ViewUtils.cs" />
     <Compile Include="Utils\WindowEnum.cs" />
     <Compile Include="Filter\FilterVariables.xaml.cs">

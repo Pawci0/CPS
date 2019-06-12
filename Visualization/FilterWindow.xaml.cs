@@ -1,29 +1,17 @@
-﻿using Lib;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Lib;
+using Microsoft.Win32;
 
 namespace Visualization
 {
     /// <summary>
-    /// Logika interakcji dla klasy FilterWindow.xaml
+    ///     Logika interakcji dla klasy FilterWindow.xaml
     /// </summary>
     public partial class FilterWindow : Window
     {
-        private RealSignal signal { get; set; }
-
         public FilterWindow()
         {
             InitializeComponent();
@@ -32,9 +20,11 @@ namespace Visualization
             DataContext = this;
         }
 
+        private RealSignal signal { get; set; }
+
         private void showResult(object sender, RoutedEventArgs e)
         {
-         //   var _signal = (signalVariables.Content as SignalVariables).GetSignal();
+            //   var _signal = (signalVariables.Content as SignalVariables).GetSignal();
 
             var filter = (filterVariables.Content as FilterVariables).GetFilter();
 
@@ -46,35 +36,33 @@ namespace Visualization
             try
             {
                 // Open the text file using a stream reader.
-                OpenFileDialog openFileDialog = new OpenFileDialog();
+                var openFileDialog = new OpenFileDialog();
 
                 openFileDialog.Filter = "sign (*.sign)|*.sign";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
-                if ((bool)openFileDialog.ShowDialog())
+                if ((bool) openFileDialog.ShowDialog())
                 {
                     //Get the path of specified file
 
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
 
-                    using (StreamReader reader = new StreamReader(fileStream))
+                    using (var reader = new StreamReader(fileStream))
                     {
                         reader.ReadLine();
                         var begins = Convert.ToDouble(reader.ReadLine());
                         var periodStr = reader.ReadLine();
                         double? period = null;
-                        if (periodStr != String.Empty)
+                        if (periodStr != string.Empty)
                             period = Convert.ToDouble(periodStr);
                         var samplingFreq = Convert.ToDouble(reader.ReadLine());
                         var pointsLine = reader.ReadLine();
                         var points = pointsLine.Split(' ');
-                        List<double> pts = new List<double>();
+                        var pts = new List<double>();
                         foreach (var point in points)
-                        {
-                            if (point != String.Empty)
+                            if (point != string.Empty)
                                 pts.Add(Convert.ToDouble(point));
-                        }
 
                         signal = new RealSignal(begins, period, samplingFreq, pts);
                         (chart.Content as FilterPage).UpdateSignal(signal);

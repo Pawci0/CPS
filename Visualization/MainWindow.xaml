@@ -7,63 +7,64 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="MainWindow"
         WindowState="Maximized" d:DesignWidth="1284.55">
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
-                        ObjectType="{x:Type sys:Enum}">
+                            ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:OperationEnum"/>
+                <x:Type TypeName="local:OperationEnum" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="24*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="24*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border Grid.Column="2" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1 1 1 1"/>
+        <Border Grid.Column="2" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1 1 1 1" />
 
-        <Frame Grid.Column="0" x:Name="signalOneVariables"/>
-        <Frame Grid.Column="1" x:Name="signalTwoVariables"/>
-       
-        <Button Grid.Column="0" Grid.Row="2" Content="Show result" Click="ShowResult"/>
+        <Frame Grid.Column="0" x:Name="signalOneVariables" />
+        <Frame Grid.Column="1" x:Name="signalTwoVariables" />
+
+        <Button Grid.Column="0" Grid.Row="2" Content="Show result" Click="ShowResult" />
 
         <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
-                    SelectedItem="{Binding Path=SelectedOperation}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                  SelectedItem="{Binding Path=SelectedOperation}" VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Center" />
 
-        <Button Grid.Column="0" Grid.Row="1" Content="Show first signal" Click="ShowFirst"/>
-        <Button Grid.Column="1" Grid.Row="1" Content="Show second signal" Click="ShowSecond"/>
+        <Button Grid.Column="0" Grid.Row="1" Content="Show first signal" Click="ShowFirst" />
+        <Button Grid.Column="1" Grid.Row="1" Content="Show second signal" Click="ShowSecond" />
 
 
         <Grid Grid.Column="2" Grid.RowSpan="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="18*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="18*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button Click="moreInfo">
-                    <Image Source="icon.png" Stretch="Fill"/>
+                    <Image Source="icon.png" Stretch="Fill" />
                 </Button>
-                <Button Click="toCA" Content="C/A" Padding="20 7 20 7"/>
-                <Button Click="toAC" Content="A/C" Padding="20 7 20 7"/>
-                <Button Click="toChart" Content="Line chart" Padding="20 7 20 7"/>
-                <Button Click="toHistogram" Content="Histogram" Padding="20 7 20 7"/>
-                <Button Click="save" Content="Save To file" Padding="20 7 20 7"/>
-                <Button Click="load" Content="Load 1" Padding="20 7 20 7"/>
-                <Button Click="load2" Content="Load 2" Padding="20 7 20 7"/>
-                <Button Click="antenna" Content="Antenna" Padding="20 7 20 7"/>
-                <Button Click="filters" Content="Filters" Padding="20 7 20 7"/>
-                <Button Click="fourier" Content="Filters" Padding="20 7 20 7"/>
+                <Button Click="toCA" Content="C/A" Padding="20 7 20 7" />
+                <Button Click="toAC" Content="A/C" Padding="20 7 20 7" />
+                <Button Click="toChart" Content="Line chart" Padding="20 7 20 7" />
+                <Button Click="toHistogram" Content="Histogram" Padding="20 7 20 7" />
+                <Button Click="save" Content="Save To file" Padding="20 7 20 7" />
+                <Button Click="load" Content="Load 1" Padding="20 7 20 7" />
+                <Button Click="load2" Content="Load 2" Padding="20 7 20 7" />
+                <Button Click="antenna" Content="Antenna" Padding="20 7 20 7" />
+                <Button Click="filters" Content="Filters" Padding="20 7 20 7" />
+                <Button Click="fourier" Content="Filters" Padding="20 7 20 7" />
             </StackPanel>
             <Frame Grid.Row="1" x:Name="chart" NavigationUIVisibility="Hidden" />
-            
+
         </Grid>
     </Grid>
 

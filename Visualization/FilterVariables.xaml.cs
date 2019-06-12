@@ -1,27 +1,21 @@
-﻿using Lib.Filter;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Lib.Filter;
 
 namespace Visualization
 {
     /// <summary>
-    /// Logika interakcji dla klasy FilterVariables.xaml
+    ///     Logika interakcji dla klasy FilterVariables.xaml
     /// </summary>
     public partial class FilterVariables : Page, INotifyPropertyChanged
     {
+        public FilterVariables()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
+
         public WindowEnum SelectedWindow { get; set; }
 
         public PassEnum SelectedPass { get; set; }
@@ -34,21 +28,11 @@ namespace Visualization
 
         public double Fp { get; set; }
 
-        public FilterVariables()
-        {
-            InitializeComponent();
-            DataContext = this;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
         public Filter GetFilter()

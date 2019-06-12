@@ -1,26 +1,21 @@
-﻿using Lib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Lib;
 
 namespace Visualization
 {
     /// <summary>
-    /// Logika interakcji dla klasy signalVariables.xaml
+    ///     Logika interakcji dla klasy signalVariables.xaml
     /// </summary>
     public partial class SignalVariables : Page
     {
+        public SignalVariables()
+        {
+            InitializeComponent();
+            DataContext = this;
+            SamplingFrequency = 100.0;
+        }
+
         public double Amplitude { get; set; } = 1.0;
 
         public double BeginsAt { get; set; }
@@ -49,17 +44,11 @@ namespace Visualization
 
         public int NOfSamples { set; get; } = 4;
 
-        public SignalVariables()
-        {
-            InitializeComponent();
-            DataContext = this;
-            SamplingFrequency = 100.0;
-        }
-
         public RealSignal GetSignal()
         {
             if (!IsValid()) throw new Exception("Please check signal parameters");
-            var signal = EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency, Period, FillFactor, Jump, Probability);
+            var signal = EnumConverter.ConvertTo(SelectedSignal, Amplitude, BeginsAt, Duration, SamplingFrequency,
+                Period, FillFactor, Jump, Probability);
             signal.Interval = Interval;
             return signal;
         }
@@ -67,12 +56,11 @@ namespace Visualization
         public bool IsValid()
         {
             if (Amplitude == 0 || Duration == 0 || SamplingFrequency == 0) return false;
-            if(SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise 
-                                                          || SelectedSignal == SignalEnum.HeavisideStep || SelectedSignal == SignalEnum.KroneckerDelta
-                                                          || SelectedSignal == SignalEnum.ImpulsiveNoise)
-            {
+            if (SelectedSignal == SignalEnum.GaussianNoise || SelectedSignal == SignalEnum.UniformNoise
+                                                           || SelectedSignal == SignalEnum.HeavisideStep ||
+                                                           SelectedSignal == SignalEnum.KroneckerDelta
+                                                           || SelectedSignal == SignalEnum.ImpulsiveNoise)
                 return true;
-            }
 
             if (Period == 0) return false;
             if (SelectedSignal != SignalEnum.Triangular && SelectedSignal != SignalEnum.Rectangular) return true;

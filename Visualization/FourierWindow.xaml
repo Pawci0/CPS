@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Visualization"
         mc:Ignorable="d"
-        Title="FourierWindow" 
+        Title="FourierWindow"
         WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="24*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="24*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Frame Grid.Column="0" x:Name="filterVariables"/>
-        <Button Grid.Column="0" Grid.Row="1" Name="loadSignal" Content="Load signal" Click="load"/>
-        <Button Grid.Column="0" Grid.Row="2" Name="res" Content="Show result" Click="showResult"/>
-        <Frame Grid.Column="1" x:Name="chart"/>
+        <Frame Grid.Column="0" x:Name="filterVariables" />
+        <Button Grid.Column="0" Grid.Row="1" Name="loadSignal" Content="Load signal" Click="load" />
+        <Button Grid.Column="0" Grid.Row="2" Name="res" Content="Show result" Click="showResult" />
+        <Frame Grid.Column="1" x:Name="chart" />
     </Grid>
 </Window>

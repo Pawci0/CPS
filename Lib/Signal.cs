@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Lib
 {
@@ -9,7 +8,7 @@ namespace Lib
 
         public double SamplingFrequency { get; protected set; }
 
-        public List<T> Points { get;  set; }
+        public List<T> Points { get; set; }
 
         public double? Period { get; protected set; }
 
@@ -24,6 +23,5 @@ namespace Lib
         public double Length => EndsAt - Begin;
 
         public double EndsAt => Begin + SamplingPeriod * Points.Count;
-
     }
 }

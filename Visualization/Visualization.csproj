@@ -83,7 +83,14 @@
     <Compile Include="FilterPage.xaml.cs">
       <DependentUpon>FilterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FourierPage.xaml.cs">
+      <DependentUpon>FourierPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FourierWindow.xaml.cs">
+      <DependentUpon>FourierWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PassEnum.cs" />
+    <Compile Include="ViewUtils.cs" />
     <Compile Include="WindowEnum.cs" />
     <Compile Include="FilterVariables.xaml.cs">
       <DependentUpon>FilterVariables.xaml</DependentUpon>
@@ -133,6 +140,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FilterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FourierPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FourierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -62,6 +62,7 @@ namespace Lib.Fourier
                 temp[i] = data[i * 2];
                 temp[len - 1 - i] = data[i * 2 + 1];
             }
+
             if (len % 2 == 1)
                 temp[halfLen] = data[len - 1];
             Fft(temp);
@@ -89,11 +90,11 @@ namespace Lib.Fourier
                 data[i * 2 + 0] = temp[i].Real;
                 data[i * 2 + 1] = temp[len - 1 - i].Real;
             }
+
             if (len % 2 == 1)
                 data[len - 1] = temp[halfLen].Real;
 
             return data.ToList();
         }
-
     }
 }

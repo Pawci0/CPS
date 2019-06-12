@@ -1,64 +1,43 @@
-﻿using Lib;
+﻿using System.Collections.Generic;
+using System.Windows.Media;
+using Lib;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Visualization
 {
     /// <summary>
-    /// Logika interakcji dla klasy CA.xaml
+    ///     Logika interakcji dla klasy CA.xaml
     /// </summary>
     public partial class CA : SignalPage
     {
-        public new RealSignal Signal { get; set; }
-        public SeriesCollection InterpolationCollection { get; set; }
-        public SeriesCollection SincCollection { get; set; }
-        public Series Interpolation { get; set; }
-        public Series Sinc { get; set; }
-        public Series OriginalSignal { get; set; }
-        public Series OriginalSignal2 { get; set; }
-
-
         public CA()
         {
             InitializeComponent();
-            base.DataContext = this;
-            OriginalSignal = new LineSeries()
+            DataContext = this;
+            OriginalSignal = new LineSeries
             {
                 PointGeometry = null,
                 Fill = Brushes.Transparent,
                 StrokeThickness = 4,
-                Stroke = Brushes.LightBlue,
+                Stroke = Brushes.LightBlue
             };
-            OriginalSignal2 = new LineSeries()
+            OriginalSignal2 = new LineSeries
             {
                 PointGeometry = null,
                 Fill = Brushes.Transparent,
                 StrokeThickness = 4,
-                Stroke = Brushes.LightBlue,
+                Stroke = Brushes.LightBlue
             };
-            Interpolation = new LineSeries()
+            Interpolation = new LineSeries
             {
                 Fill = Brushes.Transparent,
                 StrokeThickness = 2,
                 Stroke = Brushes.Blue,
                 LineSmoothness = 0
             };
-            Sinc = new LineSeries()
+            Sinc = new LineSeries
             {
                 Fill = Brushes.Transparent,
                 StrokeThickness = 2,
@@ -73,7 +52,7 @@ namespace Visualization
             {
                 OriginalSignal2,
                 Sinc
-        };
+            };
         }
 
         public CA(RealSignal signal, SignalVariables sv) : this()
@@ -81,6 +60,14 @@ namespace Visualization
             Signal = signal;
             Update(signal, sv);
         }
+
+        public new RealSignal Signal { get; set; }
+        public SeriesCollection InterpolationCollection { get; set; }
+        public SeriesCollection SincCollection { get; set; }
+        public Series Interpolation { get; set; }
+        public Series Sinc { get; set; }
+        public Series OriginalSignal { get; set; }
+        public Series OriginalSignal2 { get; set; }
 
         public override void Update(RealSignal newSignal, SignalVariables sv, bool connectPoints = false)
         {
@@ -91,31 +78,21 @@ namespace Visualization
             var interpolationPoints = new List<ObservablePoint>();
             var sincPoints = new List<ObservablePoint>();
 
-            List<(double x, double y)> signalPoints = newSignal.ToDrawGraph();
+            var signalPoints = newSignal.ToDrawGraph();
             var signal = EnumConverter.ConvertTo(sv.SelectedSignal, sv.Amplitude, newSignal.Begin,
-                                                    sv.Duration, sv.RecFreq, sv.Period,
-                                                    sv.FillFactor, sv.Jump, sv.Probability);
-            List<(double x, double y)> reconstructedPoints = ACUtils.SincReconstruction(newSignal, sv.RecFreq, sv.NOfSamples);
+                sv.Duration, sv.RecFreq, sv.Period,
+                sv.FillFactor, sv.Jump, sv.Probability);
+            List<(double x, double y)> reconstructedPoints =
+                ACUtils.SincReconstruction(newSignal, sv.RecFreq, sv.NOfSamples);
 
-            foreach(var (x, y) in signalPoints)
-            {
-                originalPoints.Add(new ObservablePoint(x, y));
-            }
-            foreach(var (x, y) in signal.ToDrawGraph())
-            {
-                interpolationPoints.Add(new ObservablePoint(x, y));
-            }
-            foreach (var (x, y) in reconstructedPoints)
-            {
-                sincPoints.Add(new ObservablePoint(x, y));
-            }
+            foreach (var (x, y) in signalPoints) originalPoints.Add(new ObservablePoint(x, y));
+            foreach (var (x, y) in signal.ToDrawGraph()) interpolationPoints.Add(new ObservablePoint(x, y));
+            foreach (var (x, y) in reconstructedPoints) sincPoints.Add(new ObservablePoint(x, y));
 
             Interpolation.Values = new ChartValues<ObservablePoint>(interpolationPoints);
             Sinc.Values = new ChartValues<ObservablePoint>(sincPoints);
             OriginalSignal.Values = new ChartValues<ObservablePoint>(originalPoints);
             OriginalSignal2.Values = new ChartValues<ObservablePoint>(originalPoints);
         }
-
-
     }
 }

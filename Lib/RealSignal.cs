@@ -14,6 +14,7 @@ namespace Lib
             SamplingFrequency = samplingFrequency;
             Points = points;
         }
+
         public RealSignal(List<double> points)
         {
             Points = points;
@@ -26,14 +27,24 @@ namespace Lib
             set => Points[index] = value;
         }
 
+        public List<double> GetOnlyFullPeriods
+        {
+            get
+            {
+                if (Period == null) return Points;
+
+                var howManyPeriods = (int) (Length / Period);
+                var length = (int) (howManyPeriods * Period * SamplingFrequency);
+
+                return Points.GetRange(0, length);
+            }
+        }
+
         public List<(double x, double y)> ToDrawGraph()
         {
             var x = Begin;
             double span = 1;
-            if (SamplingFrequency != 0)
-            {
-                span = 1.0 / SamplingFrequency;
-            }
+            if (SamplingFrequency != 0) span = 1.0 / SamplingFrequency;
             var result = new List<(double x, double y)>();
 
             foreach (var y in Points)
@@ -49,53 +60,43 @@ namespace Lib
         {
             var points = ToDrawGraph();
             var left = points.Select((point, index) => (i: index, x: point.x, y: point.y))
-                            .Where(point => point.x <= time)
-                            .Reverse()
-                            .Take(nOfPoints)
-                            .Reverse()
-                            .ToList();
+                .Where(point => point.x <= time)
+                .Reverse()
+                .Take(nOfPoints)
+                .Reverse()
+                .ToList();
 
             var right = points.Select((point, index) => (i: index, x: point.x, y: point.y))
-                            .Where(point => point.x > time)
-                            .Take(nOfPoints)
-                            .ToList();
+                .Where(point => point.x > time)
+                .Take(nOfPoints)
+                .ToList();
 
             return left.Concat(right)
-                       .Select(point => (point.i, point.y))
-                       .ToList();
+                .Select(point => (point.i, point.y))
+                .ToList();
         }
 
         public List<(double begin, double end, int value)> ToDrawHistogram(int numberOfIntervals)
         {
-            List<(double, double, int)> result = new List<(double, double, int)>(numberOfIntervals);
-            double max = Points.Max();
-            double min = Points.Min();
+            var result = new List<(double, double, int)>(numberOfIntervals);
+            var max = Points.Max();
+            var min = Points.Min();
 
-            double range = max - min;
-            double interval = range / numberOfIntervals;
+            var range = max - min;
+            var interval = range / numberOfIntervals;
 
-            for (int i = 0; i < numberOfIntervals - 1; i++)
+            for (var i = 0; i < numberOfIntervals - 1; i++)
             {
-                int points = Points.Count(n => n >= min + interval * i && n < min + interval * (i + 1));
+                var points = Points.Count(n => n >= min + interval * i && n < min + interval * (i + 1));
                 result.Add((Math.Round(min + interval * i, 2), Math.Round(min + interval * (i + 1), 2), points));
             }
-            int lastPoints = Points.Count(n => n >= min + interval * (numberOfIntervals - 1) && n <= min + interval * numberOfIntervals);
-            result.Add((Math.Round(min + interval * (numberOfIntervals - 1), 2), Math.Round(min + interval * numberOfIntervals, 2), lastPoints));
+
+            var lastPoints = Points.Count(n =>
+                n >= min + interval * (numberOfIntervals - 1) && n <= min + interval * numberOfIntervals);
+            result.Add((Math.Round(min + interval * (numberOfIntervals - 1), 2),
+                Math.Round(min + interval * numberOfIntervals, 2), lastPoints));
 
             return result;
-        }
-
-        public List<double> GetOnlyFullPeriods
-        {
-            get
-            {
-                if (Period == null) return Points;
-
-                var howManyPeriods = (int)(Length / Period);
-                var length = (int)(howManyPeriods * Period * SamplingFrequency);
-
-                return Points.GetRange(0, length);
-            }
         }
 
         public void SaveToFile(string path)
@@ -106,10 +107,7 @@ namespace Lib
                 sw.WriteLine(Begin);
                 sw.WriteLine(Period);
                 sw.WriteLine(SamplingFrequency);
-                foreach (var y in Points)
-                {
-                    sw.Write($"{y} ");
-                }
+                foreach (var y in Points) sw.Write($"{y} ");
             }
         }
     }

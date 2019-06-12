@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lib.Filter.Pass
 {
@@ -16,8 +14,8 @@ namespace Lib.Filter.Pass
         public List<double> Generate(int M, double K)
         {
             return new LowPass().Generate(M, K)
-                                .Select((x, i) => x * Math.Sin(Math.PI * i / 2.0))
-                                .ToList();
+                .Select((x, i) => x * Math.Sin(Math.PI * i / 2.0))
+                .ToList();
         }
     }
 }

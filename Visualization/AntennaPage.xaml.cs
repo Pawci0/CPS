@@ -39,21 +39,21 @@ namespace Visualization
                 Fill = Brushes.Transparent,
                 PointGeometrySize = 5,
                 Stroke = Brushes.Blue,
-                Values = new ChartValues<ObservablePoint>(ToValues(fb))
+                Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(fb))
             };
             var _probe = new LineSeries()
             {
                 Fill = Brushes.Transparent,
                 PointGeometrySize = 5,
                 Stroke = Brushes.Blue,
-                Values = new ChartValues<ObservablePoint>(ToValues(prb))
+                Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(prb))
             };
             var _conv = new LineSeries()
             {
                 Fill = Brushes.Transparent,
                 PointGeometrySize = 5,
                 Stroke = Brushes.Blue,
-                Values = new ChartValues<ObservablePoint>(ToValues(cnv))
+                Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(cnv))
             };
 
             feedback = new SeriesCollection()
@@ -69,17 +69,6 @@ namespace Visualization
                 _conv
             };
 
-        }
-
-        private static IEnumerable<ObservablePoint> ToValues(RealSignal signal)
-        {
-            var result = new List<ObservablePoint>();
-            foreach (var (x, y) in signal.ToDrawGraph())
-            {
-                result.Add(new ObservablePoint(x, y));
-            }
-
-            return result;
         }
     }
 }

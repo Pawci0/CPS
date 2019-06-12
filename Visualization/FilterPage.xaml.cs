@@ -39,34 +39,34 @@ namespace Visualization
         {
             InitializeComponent();
             DataContext = this;
-            Signal = new LineSeries()
+            Signal = new LineSeries
             {
                 Fill = Brushes.Transparent,
                 PointGeometrySize = 5,
                 Stroke = Brushes.Blue,
             };
-            Filter = new LineSeries()
+            Filter = new LineSeries
             {
                 Fill = Brushes.Transparent,
                 PointGeometrySize = 5,
                 Stroke = Brushes.Blue,
             };
-            Result = new LineSeries()
+            Result = new LineSeries
             {
                 Fill = Brushes.Transparent,
                 PointGeometrySize = 5,
                 Stroke = Brushes.Blue,
             };
 
-            SignalCollection = new SeriesCollection()
+            SignalCollection = new SeriesCollection
             {
                 Signal
             };
-            FilterCollection = new SeriesCollection()
+            FilterCollection = new SeriesCollection
             {
                 Filter
             };
-            ResultCollection = new SeriesCollection()
+            ResultCollection = new SeriesCollection
             {
                 Result
             };
@@ -89,25 +89,16 @@ namespace Visualization
                                                .Select((value, i) => ((double)i, value))
                                                .ToList();
 
-            Signal.Values = toChartValues(signalPoints);
-            Filter.Values = toChartValues(filterPoints);
-            Result.Values = toChartValues(resultPoints);
+            Signal.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signalPoints));
+            Filter.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(filterPoints);
+            Result.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(resultPoints);
         }
         public void UpdateSignal(RealSignal signal)
         {
-            Signal.Values = toChartValues(signal.ToDrawGraph());
+            Signal.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signal.ToDrawGraph());
         }
 
-        private static ChartValues<ObservablePoint> toChartValues(List<(double x, double y)> list)
-        {
-            var result = new List<ObservablePoint>();
-            foreach (var (x, y) in list)
-            {
-                result.Add(new ObservablePoint(x, y));
-            }
 
-            return new ChartValues<ObservablePoint>(result);
-        }
 
     }
 }

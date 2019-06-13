@@ -101,5 +101,37 @@ namespace Lib
                 foreach (var y in Points) sw.Write($"{y.Real + "," + y.Imaginary} ");
             }
         }
+
+        public List<(double x, double y)> ToDrawMagnitudeGraph()
+        {
+            var result = new List<(double x, double y)>();
+            var x = BeginsAtComplex.Real;
+            double span = 1;
+            if (SamplingFrequency != 0) span = 1.0 / SamplingFrequency;
+
+            foreach (var point in Points)
+            {
+                result.Add((x, point.Magnitude));
+                x += span;
+            }
+
+            return result;
+        }
+
+        public List<(double x, double y)> ToDrawPhaseGraph()
+        {
+            var result = new List<(double x, double y)>();
+            var x = BeginsAtComplex.Real;
+            double span = 1;
+            if (SamplingFrequency != 0) span = 1.0 / SamplingFrequency;
+
+            foreach (var point in Points)
+            {
+                result.Add((x, point.Phase));
+                x += span;
+            }
+
+            return result;
+        }
     }
 }

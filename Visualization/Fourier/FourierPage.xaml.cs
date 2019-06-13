@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -73,8 +74,8 @@ namespace Visualization
 
             var list = EnumConverter.ConvertTo(enumValue, newSignal);
             var xd = (list as ComplexSignal); 
-            firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(xd.ToDrawRealisGraph()));
-            secondS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(xd.ToDrawImaginarisGraph()));
+            firstS.Values = ToFrequency(xd.ToDrawRealisGraph(), newSignal);
+            secondS.Values = ToFrequency(xd.ToDrawImaginarisGraph(), newSignal);
             realS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signalPoints));
         }
 
@@ -82,6 +83,19 @@ namespace Visualization
         {
 
         }
+        private ChartValues<ObservablePoint> ToFrequency(List<(double x, double y)> points, RealSignal signal)
+        {
+            var values = new ChartValues<ObservablePoint>();
+            {
+                var i = signal.Begin;
+                foreach (var p in points)
+                {
+                    values.Add(new ObservablePoint(i * signal.SamplingFrequency / signal.Points.Count, p.y));
+                    i++;
+                }
+            }
 
+            return values;
+        }
     }
 }

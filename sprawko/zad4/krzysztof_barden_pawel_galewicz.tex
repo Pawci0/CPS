@@ -23,6 +23,36 @@ Cyfrowe Przetwarzanie Sygnałów}
 
 Celem ćwiczenia jest zapoznanie się z operacjami transformacji sygnałów dyskretnych
 przy użyciu wybranych metod.
+
+
+
+\section{Wstęp teoretyczny}
+
+Program z zadania 1 ,2  i 3 został rozszerzony o dodadtkowe funkcjonalnosci. Wykresy generowane są przy użyciu biblioteki LiveCharts \cite{lv}. GUI aplikacji zostało stworzone przy użyciu biblioteki WPF \cite{wpf}.
+\\Interfejs generacji sygnałów został rozszerzony o możliwosć generacji dodatkowego sygnału o następującym wzorze:
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=15cm]{images/signal.PNG}
+ \vspace{-0.3cm}
+ \caption{Wzór sygnału S1}
+ \label{gui}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=15cm]{images/newsignal.PNG}
+ \vspace{-0.3cm}
+ \caption{Wygenerowany sygnał S1}
+ \label{gui}
+\end{figure}
+Do programu został dodany interfejs z operacjami transformacji:
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=15cm]{images/fourierWindow.PNG}
+ \vspace{-0.3cm}
+ \caption{Interfejs graficzny operacji transformacji}
+ \label{gui}
+\end{figure}
+
 Pierwszy wykres jest wykresem sygnału transformowanego.
 Możliwe są dwa tryby prezentacji wykresów. 
 \begin{itemize}
@@ -32,28 +62,15 @@ częstotliwości, a wykres dolny część urojoną;
 w funkcji częstotliwości.
  splotu.
 \end{itemize}
+Zaimplementowane zostały następujące tranformacje sygnałów:
+\begin{itemize}
+\item (F1) – dyskretna transformacja Fouriera – algorytm z definicji oraz szybka
+transformacja Fouriera z decymacją w dziedzinie czasu (DIT FFT)
+\item (T1) – transformacja kosinusowa typu drugiego (DCT II) oraz szybka transformacja
+kosinusowa (FCT II)
+\end{itemize}
 
-\section{Wstęp teoretyczny}
-
-Program z zadania 1 ,2  i 3 został rozszerzony o dodadtkowe funkcjonalnosci. Wykresy generowane są przy użyciu biblioteki LiveCharts \cite{lv}. GUI aplikacji zostało stworzone przy użyciu biblioteki WPF \cite{wpf}.
-\\Interfejs został rozszerzony o interfejs transjormacji sygnałów oraz o interfejs filtrów:
-\begin{figure}[H]
- \centering
- \includegraphics[width=15cm]{images/antenaWindow.PNG}
- \vspace{-0.3cm}
- \caption{Interfejs graficzny anteny}
- \label{gui}
-\end{figure}
-\begin{figure}[H]
- \centering
- \includegraphics[width=15cm]{images/filterWindow.PNG}
- \vspace{-0.3cm}
- \caption{Interfejs graficzny filtracji}
- \label{gui}
-\end{figure}
-
-
-Aby wygenerować sygnały należy w lewej kolumnie wypełnić parametry i nacisnąć przycisk "i". 
+Interfejs ten pozwala na zapisanie sygnału transformowanego, zapisanie i wczytanie sygnału w postaci zespolonej. Górny przycisk pozwala na przęłączenie pomiędzy trybami prezentacji wykresów.
 \section{Eksperymenty i wyniki}
 
 
@@ -62,36 +79,23 @@ Aby wygenerować sygnały należy w lewej kolumnie wypełnić parametry i nacisn
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Eksperyment nr 1 }
-\subsubsection{Filtracja sygnałów}
-Celem tego eksperymentu zaprezentowanie możliwosci programu do wykonania filtracji sygnałów
+\subsubsection{Dyskretna transformacja Fouriera}
+Celem tego eksperymentu zaprezentowanie możliwosci programu do wykonania dyskretnej transformacji Fouriera.
+Czas wykonania operacji: 157ms.
 
 \subsubsection{Rezultat}
 \begin{figure}[H]
  \centering
- \includegraphics[width=14cm]{images/lowham.PNG}
+ \includegraphics[width=14cm]{images/dftw1.PNG}
  \vspace{-0.3cm}
- \caption{Filtracja dolnoprzepustowa z oknem Hamminga}
+ \caption{DFT W1}
  \label{gui}
 \end{figure}
 \begin{figure}[H]
  \centering
- \includegraphics[width=14cm]{images/midhan.PNG}
+ \includegraphics[width=14cm]{images/dftw2.PNG}
  \vspace{-0.3cm}
- \caption{Filtracja srodkowoprzepustowa z oknem prostokątnym}
- \label{gui}
-\end{figure}
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/midrect.PNG}
- \vspace{-0.3cm}
- \caption{Filtracja srodkowoprzepustowa z oknem Hanninga}
- \label{gui}
-\end{figure}
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/highblack.PNG}
- \vspace{-0.3cm}
- \caption{Filtracja górnoprzepustowa z oknem Blackmana}
+ \caption{DFT W2}
  \label{gui}
 \end{figure}
 
@@ -100,30 +104,23 @@ Celem tego eksperymentu zaprezentowanie możliwosci programu do wykonania filtra
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Eksperyment nr 2 }
-\subsubsection{Operacja splotu i korelacji}
-Celem tego eksperymentu było zaprezenotwanie możliwosći programu do wykonania operacji splotu i korelacji
+\subsubsection{Szybka transformacja Fouriera  z decymacją w dziedzinie czasu}
+Celem tego eksperymentu zaprezentowanie możliwosci programu do wykonania szybkiej transformacji Fouriera z decymacją w dziedzinie czasu.
+Czas wykonania operacji: 33ms.
 
 \subsubsection{Rezultat}
-
 \begin{figure}[H]
  \centering
- \includegraphics[width=14cm]{images/conv.PNG}
+ \includegraphics[width=14cm]{images/fftw1.PNG}
  \vspace{-0.3cm}
- \caption{Wykres wyniku operacji splotu}
+ \caption{FFT W1}
  \label{gui}
 \end{figure}
 \begin{figure}[H]
  \centering
- \includegraphics[width=14cm]{images/corel.PNG}
+ \includegraphics[width=14cm]{images/fftw2.PNG}
  \vspace{-0.3cm}
- \caption{Wykres wyniku operacji korelacji}
- \label{gui}
-\end{figure}
-\begin{figure}[H]
- \centering
- \includegraphics[width=14cm]{images/corelconv.PNG}
- \vspace{-0.3cm}
- \caption{Wykres wyniku operacji korelacji wyliczonej za pomocą operacji splotu}
+ \caption{FFT W2}
  \label{gui}
 \end{figure}
 
@@ -175,9 +172,8 @@ Do zaprezentowania możliwosci korelacyjnego czujnika odległosci przedstawimy e
 
 \section{Wnioski}
 
-Aplikacja została napisania zgodnie z instrukcją zadania \cite{zad}. Aplikacja pozwala na rozszerzanie jej o kolejne funkcjonalnosci na potrzeby kolejnych zadań. 
-
-Dla korelacyjnego czujnika odłegłosci kluczowe jest dobranie odpowiednio dużej częstotliwosci próbkowania, inaczej odległosć jest obliczana z dużym błędem.
+Aplikacja została napisania zgodnie z instrukcją zadania \cite{zad}. Aplikacja pozwala na rozszerzanie jej o kolejne funkcjonalnosci na potrzeby kolejnych zadań.
+Szybka transformacja fouriera ma zauważalnie krótszy czas wykonania.
 
 
 
@@ -192,7 +188,7 @@ Dla korelacyjnego czujnika odłegłosci kluczowe jest dobranie odpowiednio duże
 TUGboat Vol.~9,, No.~1 ('88)
 \bibitem{lv} Biblioteka LiveCharts. https://lvcharts.net
 \bibitem{wpf} Windows Presentation Foundation. https://docs.microsoft.com/plpl/dotnet/framework/wpf/getting-started/walkthrough-my-frst-wpfdesktop-application
-\bibitem{zad} https://ftims.edu.p.lodz.pl/pluginfile.php/13449/mod\_resource/content/0/zadanie3.pdf
+\bibitem{zad} https://ftims.edu.p.lodz.pl/pluginfile.php/13449/mod\_resource/content/0/zadanie4.pdf
 \end{thebibliography}
 
 \end{document}

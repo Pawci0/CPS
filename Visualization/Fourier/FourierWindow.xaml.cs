@@ -106,5 +106,10 @@ namespace Visualization
                 MessageBox.Show("Error: ", exception.Message);
             }
         }
+        private void generateS1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

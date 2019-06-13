@@ -1,6 +1,9 @@
 ﻿using Lib;
 using Lib.Filter.Pass;
 using Lib.Filter.Window;
+using Lib.Fourier;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Visualization
 {
@@ -97,6 +100,25 @@ namespace Visualization
                     return new LowPass();
                 default:
                     return null;
+            }
+        }
+
+        public static object ConvertTo(TransformationEnum value, RealSignal signal)
+        {
+            var pointsArray = signal.Points.ToArray();
+            switch (value)
+            {
+                case TransformationEnum.Dct:
+                    return new RealSignal(Transforms.Dct(pointsArray).ToList());
+                case TransformationEnum.Dft:
+                    return new ComplexSignal(Transforms.Dft(pointsArray).ToList());
+                case TransformationEnum.Fct:
+                    return new RealSignal(Transforms.Fct(pointsArray).ToList());
+                case TransformationEnum.Fft:
+                    return new ComplexSignal(Transforms.Fft(pointsArray).ToList());
+                default:
+                    return null;
+                  
             }
         }
     }

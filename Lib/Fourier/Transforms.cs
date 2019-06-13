@@ -10,10 +10,17 @@ namespace Lib.Fourier
 {
     public static class Transforms
     {
-        public static Complex[] Fft(Complex[] data)
+        public static List<Complex> Fft(double[] data)
+        {
+            var convertedData = data.Select((v) => new Complex(v, 0))
+                                    .ToList()
+                                    .ToArray();
+            return Fft(convertedData);
+        }
+        public static List<Complex> Fft(Complex[] data)
         {
             FourierTransform2.FFT(data, FourierTransform.Direction.Forward);
-            return data;
+            return data.ToList();
         }
 
         public static Complex[] Ifft(Complex[] data)
@@ -22,11 +29,19 @@ namespace Lib.Fourier
             return data;
         }
 
-        public static Complex[] Dft(Complex[] data)
+        public static List<Complex> Dft(double[] data)
+        {
+            var convertedData = data.Select((v) => new Complex(v, 0))
+                                    .ToList()
+                                    .ToArray();
+            return Dft(convertedData);
+        }
+
+        public static List<Complex> Dft(Complex[] data)
         {
             FourierTransform2.DFT(data, FourierTransform.Direction.Forward);
 
-            return data;
+            return data.ToList();
         }
 
         public static Complex[] Idft(Complex[] data)

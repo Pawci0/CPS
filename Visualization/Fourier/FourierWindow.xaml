@@ -17,12 +17,15 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Frame Grid.Column="0" x:Name="variables" />
-        <Button Grid.Column="0" Grid.Row="1" Name="loadSignal" Content="Load signal" Click="load" />
-        <Button Grid.Column="0" Grid.Row="2" Name="saveSignal" Content="Save Signal" Click="save" />
-        <Button Grid.Column="0" Grid.Row="3" Name="res" Content="Show result" Click="showResult" />
-        <Frame Grid.Column="1" x:Name="chart" />
+        <Button Grid.Column="0" Grid.Row="1" Name="geneateS1" Content="Senerate S1" Click="generateS1" />
+        <Button Grid.Column="0" Grid.Row="3" Name="loadSignal" Content="Load signal" Click="load" />
+        <Button Grid.Column="0" Grid.Row="4" Name="saveSignal" Content="Save Signal" Click="save" />
+        <Button Grid.Column="0" Grid.Row="5" Name="res" Content="Show result" Click="showResult" />
+        <Frame Grid.Column="1" x:Name="chart" Grid.RowSpan="6" />
     </Grid>
 </Window>

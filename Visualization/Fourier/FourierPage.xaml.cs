@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Lib;
@@ -6,13 +8,14 @@ using Lib.Filter;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using Visualization.Fourier;
 
 namespace Visualization
 {
     /// <summary>
     ///     Interaction logic for FourierPage.xaml
     /// </summary>
-    public partial class FourierPage : Page
+    public partial class FourierPage : TransformPage
     {
         public SeriesCollection firstChart { get; set; }
         public SeriesCollection secondChart { get; set; }
@@ -64,11 +67,19 @@ namespace Visualization
         public Series firstS { get; set; }
         public Series secondS { get; set; }
 
-        public void Update(RealSignal newSignal)
+        public override void Update(RealSignal newSignal)
         {
             var signalPoints = newSignal.ToDrawGraph();
 
+            var list = EnumConverter.ConvertTo(TransformationEnum.Dct, newSignal);
+
             realS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signalPoints));
         }
+
+        public void SwitchView(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

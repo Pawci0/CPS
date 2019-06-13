@@ -109,11 +109,11 @@ namespace Visualization
             switch (value)
             {
                 case TransformationEnum.Dct:
-                    return new RealSignal(Transforms.Dct(pointsArray).ToList());
+                    return new RealSignal(signal.Begin, signal.Period, signal.SamplingFrequency, Transforms.Dct(pointsArray).ToList());
                 case TransformationEnum.Dft:
                     return new ComplexSignal(signal.Begin,signal.Period, signal.SamplingFrequency, Transforms.Dft(pointsArray).ToList());
                 case TransformationEnum.Fct:
-                    return new RealSignal(Transforms.Fct(pointsArray).ToList());
+                    return new RealSignal(signal.Begin, signal.Period, signal.SamplingFrequency, Transforms.Fct(pointsArray).ToList());
                 case TransformationEnum.Fft:
                     return new ComplexSignal(signal.Begin, signal.Period, signal.SamplingFrequency, Transforms.Fft(pointsArray).ToList());
                 default:

@@ -74,6 +74,7 @@ namespace Visualization
 
         private bool _switch;
         private ComplexSignal complex;
+        private RealSignal sig;
 
         public override void Update(RealSignal newSignal, TransformationEnum enumValue)
         {
@@ -84,20 +85,23 @@ namespace Visualization
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             Trace.WriteLine("Elapsed Time " + enumValue.ToString() + ": " + elapsedMs);
+
+            sig = newSignal;
             realS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signalPoints));
 
             if (output is ComplexSignal)
             {
                 switchView.IsEnabled = true;
                 complex = (output as ComplexSignal); 
-                firstS.Values = ToFrequency(complex.ToDrawRealisGraph(), newSignal);
-                secondS.Values = ToFrequency(complex.ToDrawImaginarisGraph(), newSignal);
+                firstS.Values = ToFrequency(complex.ToDrawRealisGraph(), sig);
+                secondS.Values = ToFrequency(complex.ToDrawImaginarisGraph(), sig);
             }
             else if (output is RealSignal)
             {
                 switchView.IsEnabled = false;
                 var real = (output as RealSignal);
-                firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(real.ToDrawGraph()));
+                firstS.Values = ToFrequency(real.ToDrawGraph(), sig);
+                secondS.Values = null;
             }
 
         }
@@ -106,8 +110,8 @@ namespace Visualization
         {
             if (_switch) //W1
             {
-                firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawRealisGraph()));
-                secondS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawImaginarisGraph()));
+                firstS.Values = ToFrequency(complex.ToDrawRealisGraph(), sig);
+                secondS.Values = ToFrequency(complex.ToDrawImaginarisGraph(), sig);
                 _switch = false;
             }
             else  //W2

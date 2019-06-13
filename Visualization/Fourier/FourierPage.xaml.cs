@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Windows;
@@ -75,23 +76,26 @@ namespace Visualization
         {
             _switch = false;
             var signalPoints = newSignal.ToDrawGraph();
-
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             var list = EnumConverter.ConvertTo(enumValue, newSignal);
-            var xd = (list as ComplexSignal); 
-            firstS.Values = ToFrequency(xd.ToDrawRealisGraph(), newSignal);
-            secondS.Values = ToFrequency(xd.ToDrawImaginarisGraph(), newSignal);
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Trace.WriteLine("Elapsed Time " + enumValue.ToString() + ": " + elapsedMs);
+            complex = (list as ComplexSignal); 
+            firstS.Values = ToFrequency(complex.ToDrawRealisGraph(), newSignal);
+            secondS.Values = ToFrequency(complex.ToDrawImaginarisGraph(), newSignal);
             realS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signalPoints));
         }
 
         public void SwitchView(object sender, RoutedEventArgs e)
         {
-            if (_switch)
+            if (_switch) //W1
             {
                 firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawRealisGraph()));
                 secondS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawImaginarisGraph()));
                 _switch = false;
             }
-            else
+            else  //W2
             {
                 firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawMagnitudeGraph()));
                 secondS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawPhaseGraph()));

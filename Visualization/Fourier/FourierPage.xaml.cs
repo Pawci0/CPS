@@ -77,14 +77,26 @@ namespace Visualization
             _switch = false;
             var signalPoints = newSignal.ToDrawGraph();
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            var list = EnumConverter.ConvertTo(enumValue, newSignal);
+            var output = EnumConverter.ConvertTo(enumValue, newSignal);
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             Trace.WriteLine("Elapsed Time " + enumValue.ToString() + ": " + elapsedMs);
-            complex = (list as ComplexSignal); 
-            firstS.Values = ToFrequency(complex.ToDrawRealisGraph(), newSignal);
-            secondS.Values = ToFrequency(complex.ToDrawImaginarisGraph(), newSignal);
             realS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signalPoints));
+
+            if (output is ComplexSignal)
+            {
+                switchView.IsEnabled = true;
+                complex = (output as ComplexSignal); 
+                firstS.Values = ToFrequency(complex.ToDrawRealisGraph(), newSignal);
+                secondS.Values = ToFrequency(complex.ToDrawImaginarisGraph(), newSignal);
+            }
+            else if (output is RealSignal)
+            {
+                switchView.IsEnabled = false;
+                var real = (output as RealSignal);
+                firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(real.ToDrawGraph()));
+            }
+
         }
 
         public void SwitchView(object sender, RoutedEventArgs e)

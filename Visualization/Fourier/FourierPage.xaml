@@ -18,7 +18,7 @@
             <RowDefinition Height="10*" />
         </Grid.RowDefinitions>
 
-        <Button Margin="400 0 400 0" Content="Switch view" Grid.Row="0" Click="SwitchView"/>
+        <Button Margin="400 0 400 0" Content="Switch view" Grid.Row="0" Click="SwitchView" Name="switchView"/>
         <Label Grid.Row="1" Content="Signal" HorizontalAlignment="Center" />
         <wpf:CartesianChart Series="{Binding realSignal, Mode=OneWay}" Grid.Row="1" LegendLocation="None"
                             Margin="10,10,10,10"

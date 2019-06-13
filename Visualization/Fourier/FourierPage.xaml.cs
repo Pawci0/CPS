@@ -68,8 +68,12 @@ namespace Visualization
         public Series firstS { get; set; }
         public Series secondS { get; set; }
 
+        private bool _switch;
+        private ComplexSignal complex;
+
         public override void Update(RealSignal newSignal, TransformationEnum enumValue)
         {
+            _switch = false;
             var signalPoints = newSignal.ToDrawGraph();
 
             var list = EnumConverter.ConvertTo(enumValue, newSignal);
@@ -81,7 +85,18 @@ namespace Visualization
 
         public void SwitchView(object sender, RoutedEventArgs e)
         {
-
+            if (_switch)
+            {
+                firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawRealisGraph()));
+                secondS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawImaginarisGraph()));
+                _switch = false;
+            }
+            else
+            {
+                firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawMagnitudeGraph()));
+                secondS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(complex?.ToDrawPhaseGraph()));
+                _switch = true;
+            }
         }
         private ChartValues<ObservablePoint> ToFrequency(List<(double x, double y)> points, RealSignal signal)
         {

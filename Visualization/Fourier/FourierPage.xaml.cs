@@ -32,22 +32,25 @@ namespace Visualization
             secondTtitle = "";
             InitializeComponent();
             DataContext = this;
-            realS = new LineSeries
+            realS = new ScatterSeries
             {
                 Fill = Brushes.Transparent,
-                PointGeometrySize = 5,
+                StrokeThickness = 2,
+                MaxPointShapeDiameter = 5,
                 Stroke = Brushes.Blue
             };
-            firstS = new LineSeries
+            firstS = new ScatterSeries
             {
                 Fill = Brushes.Transparent,
-                PointGeometrySize = 5,
+                StrokeThickness = 2,
+                MaxPointShapeDiameter = 5,
                 Stroke = Brushes.Blue
             };
-            secondS = new LineSeries
+            secondS = new ScatterSeries
             {
                 Fill = Brushes.Transparent,
-                PointGeometrySize = 5,
+                StrokeThickness = 2,
+                MaxPointShapeDiameter = 5,
                 Stroke = Brushes.Blue
             };
 

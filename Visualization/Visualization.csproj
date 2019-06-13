@@ -93,10 +93,10 @@
     <Compile Include="Fourier\FourierWindow.xaml.cs">
       <DependentUpon>FourierWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\PassEnum.cs" />
-    <Compile Include="Enums\TransformationEnum.cs" />
-    <Compile Include="Enums\ViewUtils.cs" />
-    <Compile Include="Enums\WindowEnum.cs" />
+    <Compile Include="Utils\PassEnum.cs" />
+    <Compile Include="Utils\TransformationEnum.cs" />
+    <Compile Include="Utils\ViewUtils.cs" />
+    <Compile Include="Utils\WindowEnum.cs" />
     <Compile Include="Filter\FilterVariables.xaml.cs">
       <DependentUpon>FilterVariables.xaml</DependentUpon>
     </Compile>
@@ -107,8 +107,8 @@
     <Compile Include="Histogram.xaml.cs">
       <DependentUpon>Histogram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\OperationEnum.cs" />
-    <Compile Include="Enums\SignalEnum.cs" />
+    <Compile Include="Utils\OperationEnum.cs" />
+    <Compile Include="Utils\SignalEnum.cs" />
     <Compile Include="SignalPage.cs" />
     <Compile Include="SignalVariables.xaml.cs">
       <DependentUpon>SignalVariables.xaml</DependentUpon>
@@ -173,7 +173,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Enums\EnumConverter.cs" />
+    <Compile Include="Utils\EnumConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -10,6 +10,6 @@ namespace Visualization.Fourier
 {
     public abstract class TransformPage : Page
     {
-        public abstract void Update(RealSignal signal);
+        public abstract void Update(RealSignal signal, TransformationEnum enumValue);
     }
 }

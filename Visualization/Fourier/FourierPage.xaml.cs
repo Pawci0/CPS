@@ -67,12 +67,14 @@ namespace Visualization
         public Series firstS { get; set; }
         public Series secondS { get; set; }
 
-        public override void Update(RealSignal newSignal)
+        public override void Update(RealSignal newSignal, TransformationEnum enumValue)
         {
             var signalPoints = newSignal.ToDrawGraph();
 
-            var list = EnumConverter.ConvertTo(TransformationEnum.Dct, newSignal);
-
+            var list = EnumConverter.ConvertTo(enumValue, newSignal);
+            var xd = (list as ComplexSignal); 
+            firstS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(xd.ToDrawRealisGraph()));
+            secondS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(xd.ToDrawImaginarisGraph()));
             realS.Values = new ChartValues<ObservablePoint>(ViewUtils.ToValues(signalPoints));
         }
 

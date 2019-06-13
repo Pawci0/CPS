@@ -22,9 +22,10 @@
         </Grid.RowDefinitions>
 
         <Frame Grid.Column="0" x:Name="variables" />
-        <Button Grid.Column="0" Grid.Row="1" Name="geneateS1" Content="Senerate S1" Click="generateS1" />
-        <Button Grid.Column="0" Grid.Row="3" Name="loadSignal" Content="Load signal" Click="load" />
-        <Button Grid.Column="0" Grid.Row="4" Name="saveSignal" Content="Save Signal" Click="save" />
+        <Button Grid.Column="0" Grid.Row="1" Name="GeneateS1" Content="Generate S1" Click="generateS1" />
+        <Button Grid.Column="0" Grid.Row="2" Name="Load" Content="Load signal" Click="load" />
+        <Button Grid.Column="0" Grid.Row="3" Name="LoadComplex" Content="Load complex" Click="loadComplex" />
+        <Button Grid.Column="0" Grid.Row="4" Name="SaveComplex" Content="Save complex" Click="saveComplex" />
         <Button Grid.Column="0" Grid.Row="5" Name="res" Content="Show result" Click="showResult" />
         <Frame Grid.Column="1" x:Name="chart" Grid.RowSpan="6" />
     </Grid>
